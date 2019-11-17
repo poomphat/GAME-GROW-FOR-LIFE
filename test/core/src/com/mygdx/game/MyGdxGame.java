@@ -24,6 +24,7 @@ import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 
 import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
@@ -107,6 +108,7 @@ public class MyGdxGame extends ApplicationAdapter {
         
         if (Gdx.input.isKeyPressed(Keys.LEFT)) {
             sprite.x -= 200 * Gdx.graphics.getDeltaTime();
+            
         }
         if (Gdx.input.isKeyPressed(Keys.RIGHT)) {
             sprite.x += 200 * Gdx.graphics.getDeltaTime();
