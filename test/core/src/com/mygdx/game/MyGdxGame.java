@@ -100,15 +100,15 @@ public class MyGdxGame extends ApplicationAdapter {
     public void render() {
         Gdx.gl.glClearColor(.5f, .7f, .9f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-
-        // Update the camera and render
-        batch.setProjectionMatrix(camera.combined);
-        batch.begin();
-        batch.draw(spriteimage, sprite.x, sprite.y);
+        camera.position.set(sprite.getX(), sprite.getY(), 0);
         camera.update();
         renderer.setView(camera);
+	renderer.render();
+        batch.begin();
+        batch.draw(spriteimage, sprite.x, sprite.y,sprite.width,sprite.height);
         batch.end();
-        renderer.render();
+        batch.setProjectionMatrix(camera.combined);
+        
         if (Gdx.input.isKeyPressed(Keys.LEFT)) {
             sprite.x -= 200 * Gdx.graphics.getDeltaTime();
         }
@@ -121,8 +121,7 @@ public class MyGdxGame extends ApplicationAdapter {
         if (Gdx.input.isKeyPressed(Keys.UP)) {
             sprite.y += 200 * Gdx.graphics.getDeltaTime();
         }
-        camera.position.set(sprite.getX(), sprite.getY(), 0);
-        camera.update();
+    
     }
 
     @Override
