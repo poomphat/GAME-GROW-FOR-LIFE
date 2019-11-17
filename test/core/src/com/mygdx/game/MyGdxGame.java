@@ -1,105 +1,134 @@
 package com.mygdx.game;
 
-import com.badlogic.gdx.ApplicationAdapter;
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import java.util.Iterator;
 
-import com.badlogic.gdx.ApplicationAdapter;
+import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
-import com.badlogic.gdx.InputProcessor;
+import com.badlogic.gdx.Input.Keys;
+import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.MathUtils;
+import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.math.Vector3;
+import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.*;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapRenderer;
+import com.badlogic.gdx.maps.tiled.TiledMapTile;
+import com.badlogic.gdx.maps.tiled.TiledMapTileSet;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 
-public class MyGdxGame extends ApplicationAdapter implements InputProcessor {
-    Texture img;
-    TiledMap tiledMap;
-    OrthographicCamera camera;
-    TiledMapRenderer tiledMapRenderer;
-    SpriteBatch sb;
-    Texture texture;
-    Sprite sprite;
-    
-    @Override public void create () {
-        float w = Gdx.graphics.getWidth();
-        float h = Gdx.graphics.getHeight();
+import com.badlogic.gdx.assets.AssetManager;
 
-        camera = new OrthographicCamera();
-        camera.setToOrtho(false,w,h);
-        camera.update();
-        tiledMap = new TmxMapLoader().load("map.tmx");
-        tiledMapRenderer = new OrthogonalTiledMapRenderer(tiledMap);
-        Gdx.input.setInputProcessor(this);
+import com.badlogic.gdx.ApplicationAdapter;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.maps.MapProperties;
+import com.badlogic.gdx.maps.tiled.TiledMap;
+import com.badlogic.gdx.maps.tiled.TmxMapLoader;
+import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 
-        sb = new SpriteBatch();
-        texture = new Texture(Gdx.files.internal("char.tmx"));
-        sprite = new Sprite(texture);
+/**
+ * Simple example about how to render a tiled map with libGDX.
+ *
+ * @author pixnbgames
+ */
+public class MyGdxGame extends ApplicationAdapter {
+
+    // Map
+    private TiledMap map;
+    private AssetManager manager;
+
+    // Map properties
+    private int tileWidth, tileHeight,
+            mapWidthInTiles, mapHeightInTiles,
+            mapWidthInPixels, mapHeightInPixels;
+
+    // Camera and render
+    private OrthographicCamera camera;
+    private OrthogonalTiledMapRenderer renderer;
+
+    Texture dropImage;
+    Texture spriteimage;
+    Sound dropSound;
+    Music rainMusic;
+    SpriteBatch batch;
+    Rectangle sprite;
+    Array<Rectangle> raindrops;
+    long lastDropTime;
+
+    @Override
+    public void create() {
+        // Map loading
+        manager = new AssetManager();
+        manager.setLoader(TiledMap.class, new TmxMapLoader());
+        manager.load("map.tmx", TiledMap.class);
+        manager.finishLoading();
+        map = manager.get("map.tmx", TiledMap.class);
+
+        // Read properties
+        MapProperties properties = map.getProperties();
+        tileWidth = properties.get("tilewidth", Integer.class);
+        tileHeight = properties.get("tileheight", Integer.class);
+        mapWidthInTiles = properties.get("width", Integer.class);
+        mapHeightInTiles = properties.get("height", Integer.class);
+        mapWidthInPixels = mapWidthInTiles * tileWidth;
+        mapHeightInPixels = mapHeightInTiles * tileHeight;
+        spriteimage = new Texture(Gdx.files.internal("char1.png"));
+        batch = new SpriteBatch();
+        sprite = new Rectangle();
+        sprite.x = 800 / 2 - 64 / 2; // ตั้งค่ากึ่งกลาง
+        sprite.y = 20;
+        sprite.width = 30;
+        sprite.height = 25;
+        // Set up the camera
+        camera = new OrthographicCamera(600.f, 300.f);
+        camera.position.x = mapWidthInPixels * .5f;
+        camera.position.y = mapHeightInPixels * .35f;
+        renderer = new OrthogonalTiledMapRenderer(map);
+
     }
 
-    @Override public void render () {
-        Gdx.gl.glClearColor(1, 0, 0, 1);
-        Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
+    @Override
+    public void render() {
+        Gdx.gl.glClearColor(.5f, .7f, .9f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+
+        // Update the camera and render
+        batch.setProjectionMatrix(camera.combined);
+        batch.begin();
+        batch.draw(spriteimage, sprite.x, sprite.y);
         camera.update();
-        tiledMapRenderer.setView(camera);
-        tiledMapRenderer.render();
-        sb.begin();
-        sprite.draw(sb);
-        sb.end();
+        renderer.setView(camera);
+        batch.end();
+        renderer.render();
+        if (Gdx.input.isKeyPressed(Keys.LEFT)) {
+            sprite.x -= 200 * Gdx.graphics.getDeltaTime();
+        }
+        if (Gdx.input.isKeyPressed(Keys.RIGHT)) {
+            sprite.x += 200 * Gdx.graphics.getDeltaTime();
+        }
+        if (Gdx.input.isKeyPressed(Keys.DOWN)) {
+            sprite.y -= 200 * Gdx.graphics.getDeltaTime();
+        }
+        if (Gdx.input.isKeyPressed(Keys.UP)) {
+            sprite.y += 200 * Gdx.graphics.getDeltaTime();
+        }
+        camera.position.set(sprite.getX(), sprite.getY(), 0);
+        camera.update();
     }
 
-    @Override public boolean keyDown(int keycode) {
-        return false;
-    }
-
-    @Override public boolean keyUp(int keycode) {
-        if(keycode == Input.Keys.LEFT)
-            camera.translate(-32,0);
-        if(keycode == Input.Keys.RIGHT)
-            camera.translate(32,0);
-        if(keycode == Input.Keys.UP)
-            camera.translate(0,32);
-        if(keycode == Input.Keys.DOWN)
-            camera.translate(0,-32);
-        if(keycode == Input.Keys.NUM_1)
-            tiledMap.getLayers().get(0).setVisible(!tiledMap.getLayers().get(0).isVisible());
-        if(keycode == Input.Keys.NUM_2)
-            tiledMap.getLayers().get(1).setVisible(!tiledMap.getLayers().get(1).isVisible());
-        return false;
-    }
-
-    @Override public boolean keyTyped(char character) {
-
-        return false;
-    }
-
-    @Override public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-        return false;
-    }
-
-    @Override public boolean touchUp(int screenX, int screenY, int pointer, int button) {
-        return false;
-    }
-
-    @Override public boolean touchDragged(int screenX, int screenY, int pointer) {
-        return false;
-    }
-
-    @Override public boolean mouseMoved(int screenX, int screenY) {
-        return false;
-    }
-
-    @Override public boolean scrolled(int amount) {
-        return false;
+    @Override
+    public void dispose() {
+        // Free resources
+        spriteimage.dispose();
+        manager.dispose();
     }
 }
- 
