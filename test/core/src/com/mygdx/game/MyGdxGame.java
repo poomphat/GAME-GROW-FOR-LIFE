@@ -57,7 +57,7 @@ public class MyGdxGame extends ApplicationAdapter {
     private OrthogonalTiledMapRenderer renderer;
 
     Texture dropImage;
-    Texture spriteimage;
+    Texture spriteimage, spriteimage2, spriteimage3, spriteimage4;
     Sound dropSound;
     Music rainMusic;
     SpriteBatch batch;
@@ -81,10 +81,13 @@ public class MyGdxGame extends ApplicationAdapter {
         spriteimage = new Texture(Gdx.files.internal("char1.png"));
         batch = new SpriteBatch();
         sprite = new Rectangle();
-        sprite.x = 800 / 2 - 64 / 2; 
+        sprite.x = 800 / 2 - 64 / 2;
         sprite.y = 20;
         sprite.width = 30;
         sprite.height = 25;
+        spriteimage2 = new Texture(Gdx.files.internal("right.png"));
+        spriteimage3 = new Texture(Gdx.files.internal("left.png"));
+        spriteimage4 = new Texture(Gdx.files.internal("up.png"));
         // Set up the camera
         camera = new OrthographicCamera(600.f, 300.f);
         camera.position.x = mapWidthInPixels * .5f;
@@ -100,26 +103,28 @@ public class MyGdxGame extends ApplicationAdapter {
         camera.position.set(sprite.getX(), sprite.getY(), 0);
         camera.update();
         renderer.setView(camera);
-	renderer.render();
+        renderer.render();
         batch.begin();
-        batch.draw(spriteimage, sprite.x, sprite.y,sprite.width,sprite.height);
-        batch.end();
-        batch.setProjectionMatrix(camera.combined);
-        
         if (Gdx.input.isKeyPressed(Keys.LEFT)) {
             sprite.x -= 200 * Gdx.graphics.getDeltaTime();
-            
+            batch.draw(spriteimage3, sprite.x, sprite.y, sprite.width, sprite.height);
         }
-        if (Gdx.input.isKeyPressed(Keys.RIGHT)) {
+        else if (Gdx.input.isKeyPressed(Keys.RIGHT)) {
             sprite.x += 200 * Gdx.graphics.getDeltaTime();
+            batch.draw(spriteimage2, sprite.x, sprite.y, sprite.width, sprite.height);
         }
-        if (Gdx.input.isKeyPressed(Keys.DOWN)) {
+        else if (Gdx.input.isKeyPressed(Keys.DOWN)) {
             sprite.y -= 200 * Gdx.graphics.getDeltaTime();
+            batch.draw(spriteimage, sprite.x, sprite.y, sprite.width, sprite.height);
         }
-        if (Gdx.input.isKeyPressed(Keys.UP)) {
+        else if (Gdx.input.isKeyPressed(Keys.UP)) {
             sprite.y += 200 * Gdx.graphics.getDeltaTime();
+            batch.draw(spriteimage4, sprite.x, sprite.y, sprite.width, sprite.height);
+        }else{
+            batch.draw(spriteimage, sprite.x, sprite.y, sprite.width, sprite.height);
         }
-    
+        batch.end();
+        batch.setProjectionMatrix(camera.combined);
     }
 
     @Override
