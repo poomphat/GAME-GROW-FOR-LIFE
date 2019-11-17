@@ -35,7 +35,11 @@ import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-
+import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
+import com.badlogic.gdx.maps.MapObjects;
+import com.badlogic.gdx.maps.objects.RectangleMapObject;
+import com.badlogic.gdx.math.Intersector;
+import com.badlogic.gdx.scenes.scene2d.Stage;
 /**
  * Simple example about how to render a tiled map with libGDX.
  *
@@ -46,29 +50,25 @@ public class MyGdxGame extends ApplicationAdapter {
     // Map
     private TiledMap map;
     private TmxMapLoader manager;
-
+    private din dun;
     // Map properties
     private int tileWidth, tileHeight,
             mapWidthInTiles, mapHeightInTiles,
             mapWidthInPixels, mapHeightInPixels;
-
+    private Stage stage;
     // Camera and render
     private OrthographicCamera camera;
     private OrthogonalTiledMapRenderer renderer;
 
-    Texture dropImage;
-    Texture spriteimage, spriteimage2, spriteimage3, spriteimage4;
-    Sound dropSound;
-    Music rainMusic;
-    SpriteBatch batch;
-    Rectangle sprite;
-    Array<Rectangle> raindrops;
-    long lastDropTime;
+    private Texture spriteimage, spriteimage2, spriteimage3, spriteimage4,spriteimage5;
+    private SpriteBatch batch,batch1;
+    private Rectangle sprite;
 
     @Override
     public void create() {
         // Map loading
-        map = new TmxMapLoader().load("map..tmx");
+
+        map = new TmxMapLoader().load("map stardew.tmx");
 
         // Read properties
         MapProperties properties = map.getProperties();
@@ -80,6 +80,7 @@ public class MyGdxGame extends ApplicationAdapter {
         mapHeightInPixels = mapHeightInTiles * tileHeight;
         spriteimage = new Texture(Gdx.files.internal("char1.png"));
         batch = new SpriteBatch();
+        batch1 = new SpriteBatch();
         sprite = new Rectangle();
         sprite.x = 800 / 2 - 64 / 2;
         sprite.y = 20;
@@ -105,31 +106,66 @@ public class MyGdxGame extends ApplicationAdapter {
         renderer.setView(camera);
         renderer.render();
         batch.begin();
+        if (Gdx.input.isKeyPressed(Keys.Z)) {
+
+            dig(sprite.x,sprite.y);
+            stage.draw();
+            
+        }
         if (Gdx.input.isKeyPressed(Keys.LEFT)) {
-            sprite.x -= 200 * Gdx.graphics.getDeltaTime();
+
             batch.draw(spriteimage3, sprite.x, sprite.y, sprite.width, sprite.height);
-        }
-        else if (Gdx.input.isKeyPressed(Keys.RIGHT)) {
-            sprite.x += 200 * Gdx.graphics.getDeltaTime();
+            if(sprite.x <= 32){
+                 sprite.x -= 0 * Gdx.graphics.getDeltaTime();
+            }else{
+                sprite.x -= 200 * Gdx.graphics.getDeltaTime();
+            }
+        } else if (Gdx.input.isKeyPressed(Keys.RIGHT)) {
             batch.draw(spriteimage2, sprite.x, sprite.y, sprite.width, sprite.height);
-        }
-        else if (Gdx.input.isKeyPressed(Keys.DOWN)) {
-            sprite.y -= 200 * Gdx.graphics.getDeltaTime();
+             if(sprite.x >= 744 ){
+                 sprite.x += 0 * Gdx.graphics.getDeltaTime();
+            }else{
+                sprite.x += 200 * Gdx.graphics.getDeltaTime();
+            }
+        } else if (Gdx.input.isKeyPressed(Keys.DOWN)) {
+           
             batch.draw(spriteimage, sprite.x, sprite.y, sprite.width, sprite.height);
-        }
-        else if (Gdx.input.isKeyPressed(Keys.UP)) {
-            sprite.y += 200 * Gdx.graphics.getDeltaTime();
+            if(sprite.y <= 32 ){
+                 sprite.y -= 0 * Gdx.graphics.getDeltaTime();
+            }else{
+                sprite.y -= 200 * Gdx.graphics.getDeltaTime();
+            }
+        } else if (Gdx.input.isKeyPressed(Keys.UP)) {
+    
             batch.draw(spriteimage4, sprite.x, sprite.y, sprite.width, sprite.height);
-        }else{
+            if(sprite.y >= 668){
+                  sprite.y += 0 * Gdx.graphics.getDeltaTime();
+            }else{
+                sprite.y += 200 * Gdx.graphics.getDeltaTime();
+            }
+        } else {
             batch.draw(spriteimage, sprite.x, sprite.y, sprite.width, sprite.height);
         }
         batch.end();
         batch.setProjectionMatrix(camera.combined);
+        super.render();
+        
     }
 
     @Override
     public void dispose() {
         // Free resources
         spriteimage.dispose();
+        renderer.dispose();
+        stage.dispose();
     }
+    public void dig(float x,float y){
+        spriteimage5 = new Texture(Gdx.files.internal("1b.png"));
+        stage = new Stage();
+        dun = new din(spriteimage5);
+        stage.addActor(dun);
+        dun.setPosition(x-(x%16)+16,y-(y%16));
+        
+    }
+  
 }
