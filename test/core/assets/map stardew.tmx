@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.2" tiledversion="1.3.0" orientation="orthogonal" renderorder="right-down" compressionlevel="-1" width="50" height="50" tilewidth="16" tileheight="16" infinite="0" nextlayerid="10" nextobjectid="6">
+ <tileset firstgid="1" source="../../../../../../Desktop/Outdoors (Spring).tsx"/>
+ <layer id="1" name="ground" width="50" height="50">
+  <data encoding="base64" compression="zlib">
+   eJztwwEJAAAMBKHrn+YjLsdAwVVTVVVVVVVVVVXV5w+aurcb
+  </data>
+ </layer>
+ <layer id="8" name="mou2" width="50" height="50">
+  <data encoding="base64" compression="zlib">
+   eJzt0kENACAMA8ABNvAvDhV8kDCyZLlT0KaNAAAAqpxRnSDHmtUJcuzXo8suXXp0+xcAAAAAAPDPBQ7OAwg=
+  </data>
+ </layer>
+ <layer id="4" name="mou" width="50" height="50">
+  <data encoding="base64" compression="zlib">
+   eJztl8sNwjAMQFtE4cIKfCQ4MEQ5MAQcGAIOLJAjdyZgDBiDlin4zICRGsly65IDpU7kJ1mWKkXkyXYSouj/rOMWfrQBdoF4HALxOAXisQjEQ+dcFjrnstC+kkUofXUJxCMDjxzi9iVPIWaCnR+wtyfEyyFLrl3SiaIeRN8hZ4LrMoL9jSEmDvnhQV1cSFBd8pqQzgjV5VkTvmBnigtfsDPFhaIo4fO5888enb8cKThc0fvSV6cV7Pte3InYiXtLS/Xcwr66xZ2Inbi39JW4SarhsLgTsRP3lr4TtxS5SaqZdeLe0l3iZmv4IjWT3otD4mZr2Cc1o71I/69St2PMBwbWmXnF3P7SDdeM9iL2cjlPuAzrzLJibpuA9ib1cjlPuAzrzCYuz+0/oF4u5wmXYZ3Zx+W5bQvsNiAzN6j5DutMe7tWFEVRFEVRfOMN7mGXnw==
+  </data>
+ </layer>
+ <layer id="9" name="rim" width="50" height="50">
+  <data encoding="base64" compression="zlib">
+   eJztmN0JwkAQhC950DIUFLQJIVUcWMVCqlhIDf6UkGK0DK3BDXg4CL6d4Wa5gWHvLTdhP27ZMfxf40zeNSHszXfzjahuzNvmk6Oz88P8JKwHyHG086INYdny1Qg5esgxx7fX5lWmKpBjmDlHTukXHylfzn/1q+ZU6qtJEx+sEsjRE+dQyNER56h9VZawrwbiHNEJH+KED3XCR3TChzjhQ53wEZ3wIU74qPNVWarzVVnCPQMzH/K+e9r7sEohBzMfEXIw84F9xcyHOuEjwt2Z+RC4OzMfdb4qS3W+Kkt1f1WW1Mn7EZ28H/gOMvOBfcXMR52vypI64SM64UOc8IF9dbLz2XwhrFfYXyWzarr7C1KGz6c=
+  </data>
+ </layer>
+ <objectgroup id="3" name="mou">
+  <object id="5" x="32.6667" y="432">
+   <polygon points="0,0 28.6667,3.33333 47.3333,18.6667 158,18 172.667,32 234,32.6667 254.667,49.3333 300,48 318,66 366,64.6667 382.667,78.6667 442.667,83.3333 465.333,96.6667 672.667,99.3333 690,83.3333 734.667,81.3333 736,142 687.333,141.333 686.667,159.333 448.667,156.667 445.333,140 368.667,142.667 366,124.667 304.667,124.667 302,111.333 242,111.333 236.667,94 160.667,94.6667 158,76.6667 34,78.6667 28.6667,59.3333 -0.666667,60.6667"/>
+  </object>
+ </objectgroup>
+</map>
