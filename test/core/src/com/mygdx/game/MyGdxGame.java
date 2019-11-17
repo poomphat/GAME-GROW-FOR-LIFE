@@ -44,7 +44,7 @@ public class MyGdxGame extends ApplicationAdapter {
 
     // Map
     private TiledMap map;
-    private AssetManager manager;
+    private TmxMapLoader manager;
 
     // Map properties
     private int tileWidth, tileHeight,
@@ -67,11 +67,7 @@ public class MyGdxGame extends ApplicationAdapter {
     @Override
     public void create() {
         // Map loading
-        manager = new AssetManager();
-        manager.setLoader(TiledMap.class, new TmxMapLoader());
-        manager.load("map.tmx", TiledMap.class);
-        manager.finishLoading();
-        map = manager.get("map.tmx", TiledMap.class);
+        map = new TmxMapLoader().load("map..tmx");
 
         // Read properties
         MapProperties properties = map.getProperties();
@@ -84,7 +80,7 @@ public class MyGdxGame extends ApplicationAdapter {
         spriteimage = new Texture(Gdx.files.internal("char1.png"));
         batch = new SpriteBatch();
         sprite = new Rectangle();
-        sprite.x = 800 / 2 - 64 / 2; // ตั้งค่ากึ่งกลาง
+        sprite.x = 800 / 2 - 64 / 2; 
         sprite.y = 20;
         sprite.width = 30;
         sprite.height = 25;
@@ -128,6 +124,5 @@ public class MyGdxGame extends ApplicationAdapter {
     public void dispose() {
         // Free resources
         spriteimage.dispose();
-        manager.dispose();
     }
 }
