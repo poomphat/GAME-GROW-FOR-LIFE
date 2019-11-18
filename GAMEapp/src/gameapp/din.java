@@ -12,7 +12,7 @@ import javax.swing.*;
 public class din {
 
     Image din = new ImageIcon("asset/1b.png").getImage();
-    int[] dx = new int[9999], dy = new int[999], ddx = new int[1000], ddy = new int[1000];
+    int[] dx = new int[9999], dy = new int[9999], ddx = new int[10000], ddy = new int[10000];
     int remove;
 
     public Image getimage() {
