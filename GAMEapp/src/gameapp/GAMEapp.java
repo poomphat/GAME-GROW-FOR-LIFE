@@ -32,7 +32,7 @@ public class GAMEapp extends JPanel implements KeyListener {
     int indexdin = 0, indexdins = 0;
     int acceleration = 1;
     boolean havedin = false;
-    int daycount;
+    int daycount = 1;
     din Din = new din();
     Image sleepimage = new ImageIcon("asset/sleep.png").getImage();
     Image currentImage = new ImageIcon("asset/char1.png").getImage();
@@ -45,7 +45,7 @@ public class GAMEapp extends JPanel implements KeyListener {
     public GAMEapp() {
     }
     public Graphics renderFrame(Graphics g){
-
+            
         return g;
 
     }   
@@ -109,7 +109,7 @@ public class GAMEapp extends JPanel implements KeyListener {
     public void keyPressed(KeyEvent ke) {
         int key = ke.getKeyCode();
         if (key == KeyEvent.VK_A) {
-            if (((px >=  512) && (px <= 528)) && ((py >= 448) && (py <= 464))) {
+            if (((px >=  512) && (px <= 528)) && ((py >= 448) && (py <= 484))) {
                 daycount += 1;
                 sleep = 1;
      
@@ -145,7 +145,16 @@ public class GAMEapp extends JPanel implements KeyListener {
             speedx = -4;
             if (px <= 432) {
                 speedx = 0;
-            } else {
+                px+=5;
+            }
+            else if (py <= 464) {
+              speedy = 0;
+              py+=5;
+            }
+            else if (py >= 1184) {
+                speedy = 0;
+                py-=5;
+            }else {
                 speedx = -4;
             }
             currentImage = imgleft;
@@ -154,7 +163,16 @@ public class GAMEapp extends JPanel implements KeyListener {
             speedx = 4;
             if (px >= 1168) {
                 speedx = 0;
-            } else {
+                px-=5;
+            } 
+            else if (py <= 464){
+              speedy = 0;
+              py+=5;
+            }
+            else if (py >= 1184) {
+                speedy = 0;
+                py-=5;
+            }else {
                 speedx = 4;
             }
             currentImage = imgright;
@@ -163,7 +181,16 @@ public class GAMEapp extends JPanel implements KeyListener {
             speedy = -4;
             if (py <= 464) {
                 speedy = 0;
-            } else {
+                py+=5;
+            }
+            else if (px <= 432) {
+                speedx = 0;
+                px+=5;
+            }
+            else if (px >= 1168) {
+                speedx = 0;
+                px-=5;
+            }else {
                 speed = -4;
             }
             currentImage = imgup;
@@ -172,7 +199,16 @@ public class GAMEapp extends JPanel implements KeyListener {
             speedy = 4;
             if (py >= 1184) {
                 speedy = 0;
-            } else {
+                py-=5;
+            }
+            else  if (px <= 432) {
+                speedx = 0;
+                px+=5;
+            }
+            else if (px >= 1168) {
+                speedx = 0;
+                px-=5;
+            }else {
                 speed = 4;
             }
             currentImage = imgdown;

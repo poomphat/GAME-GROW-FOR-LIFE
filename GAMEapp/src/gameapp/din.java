@@ -17,7 +17,7 @@ public class din {
     Image carrot3 = new ImageIcon("asset/crop/carrot3.png").getImage();
     Image current;
     int[] dx = new int[9999], dy = new int[9999], ddx = new int[10000], ddy = new int[10000],vetstage = new int[10000],countday = new int[10000];
-    int remove,count;
+    int remove = 99999,count;
 
     public Image getimage(int[] vet,int i) {
         if(vet[i] == 0){
@@ -30,6 +30,9 @@ public class din {
             current = carrot2;
         }
         if(vet[i] == 1 && vetstage[i] == 3){
+            current = carrot3;
+        }
+        if(vet[i] == 1 && vetstage[i] > 3){
             current = carrot3;
         }
         return current;
@@ -69,9 +72,10 @@ public class din {
             }
             if (j == remove){
                 dx[j] = dx[j+1];
-                dy[j] = dy[j+1];
-            } 
-       
+                dy[j] = dy[j+1];              
+            }
+            
+      
 
             
 
