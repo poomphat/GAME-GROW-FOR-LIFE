@@ -68,7 +68,7 @@ public class MyGdxGame extends ApplicationAdapter {
     public void create() {
         // Map loading
 
-        map = new TmxMapLoader().load("map stardew.tmx");
+        map = new TmxMapLoader().load("starmap.tmx");
 
         // Read properties
         MapProperties properties = map.getProperties();

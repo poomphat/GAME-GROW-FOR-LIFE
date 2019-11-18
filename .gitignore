@@ -11,3 +11,7 @@
 /go/dist/
 /GAME/.nb-gradle/
 /test/.nb-gradle/
+/GAME/nbproject/private/
+/GAME/build/
+/GAMEapp/nbproject/private/
+/GAMEapp/build/
