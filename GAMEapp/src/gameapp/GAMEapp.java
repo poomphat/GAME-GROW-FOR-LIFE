@@ -52,7 +52,7 @@ public class GAMEapp extends JPanel implements KeyListener {
 
     public static void main(String[] args) {
         GAMEapp p = new GAMEapp();
-        JFrame fr = new JFrame();
+        JFrame fr = new JFrame("Stradew 69");
         fr.setSize(1200, 700);
         fr.add(p);
         fr.addKeyListener(p);
@@ -127,6 +127,14 @@ public class GAMEapp extends JPanel implements KeyListener {
             Din.setvet(indexdin);
             havedin = true;
             carrot[indexdin] = 1;
+            indexdin += 1;
+        }
+         if (key == KeyEvent.VK_D) {
+            Din.setpositiondinX(indexdin, (int) this.px - (this.px % 16) + 16);
+            Din.setpositiondinY(indexdin, (int) this.py - (this.py % 16) + 16);
+            Din.setvet(indexdin);
+            havedin = true;
+            carrot[indexdin] = 2;
             indexdin += 1;
         }
         if (key == KeyEvent.VK_Z) {
