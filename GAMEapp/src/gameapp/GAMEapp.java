@@ -18,18 +18,17 @@ import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-
 public class GAMEapp extends JPanel implements KeyListener {
 
-    private int px = 800, py = 800, width = 24, height = 24; 
+    private int px = 800, py = 800, width = 24, height = 24;
     private double speedx = 0, speedy = 0;
     private int mapwidth = 800, mapheight = 800;
     private int camX;
-    private int camY;
+    private int camY, select = 70;
     private double zoom = 3.0;
-    int maxspeed = 5,vet,chadis=0;
+    int maxspeed = 5, vet, chadis = 0;
     int speed = 1, sleep = 0;
-    int[] dx, dy,carrot = new int[9999];
+    int[] dx, dy, carrot = new int[9999];
     int indexdin = 0, indexdins = 0;
     int acceleration = 1;
     boolean havedin = false;
@@ -46,17 +45,18 @@ public class GAMEapp extends JPanel implements KeyListener {
 
     public GAMEapp() {
     }
-    public Graphics renderFrame(Graphics g){
-            
+
+    public Graphics renderFrame(Graphics g) {
+
         return g;
 
-    }   
+    }
 
     public static void main(String[] args) {
         GAMEapp p = new GAMEapp();
         JFrame fr = new JFrame("Stradew 69");
         fr.setSize(1600, 900);
-        fr.setResizable(false); 
+        fr.setResizable(false);
         fr.add(p);
         fr.addKeyListener(p);
         fr.setVisible(true);
@@ -72,47 +72,60 @@ public class GAMEapp extends JPanel implements KeyListener {
         g.setColor(Color.BLACK);
         g.fillRect(0, 0, 9999, 9999);
         g1.setColor(Color.orange);
-        Font myFont = new Font ("Courier New", 1, 17);
+        Font myFont = new Font("Courier New", 1, 10);
         Image img1 = new ImageIcon("asset/Holetown.png").getImage();
         camX = (int) (mapwidth / 2) - (px);
         camY = (int) (mapheight / 2) - (py);
-        g.setFont (myFont);
+        g.setFont(myFont);
         g2D.scale(zoom, zoom);
-        g.translate(camX - 100, camY - 200);
+        g.translate(camX - 140, camY - 230);
         g.drawImage(img1, 0, 0, null);
-        
+
         if (havedin) {
             for (int i = 0; indexdin > i; i++) {
-                g2D.drawImage(Din.getimage(carrot,i), Din.getX(i), Din.getY(i), 16, 16, null);
+                g2D.drawImage(Din.getimage(carrot, i), Din.getX(i), Din.getY(i), 16, 16, null);
             }
             indexdins += 1;
         }
-        g1.fillRect(this.px+180,this.py - 170,90,30);
-        g1.fillRect(this.px-235,this.py - 170,90,30);
+        g1.fillRect(this.px + 205, this.py - 165, 60, 25);
         g1.setColor(Color.BLACK);
         g.drawImage(point, this.px - (this.px % 16) + 16, (int) this.py - (this.py % 16) + 16, 16, 16, null);
         g2D.drawImage(sleepimage, 33 * 16, 30 * 16, 16, 16, null);
-        g.drawRect(this.px+180,this.py - 170,90,30);
-        g.drawRect(this.px-235,this.py - 170,90,30);
+        g.drawRect(this.px + 205, this.py - 165, 60, 25);
+        g.drawRect(this.px - 70, this.py + 80, 160, 16);
+
+        g.drawImage(cha.getimage(1), this.px - 70, this.py + 80, 16, 16, null);
+        g.drawImage(cha.getimage(2), this.px - 54, this.py + 80, 16, 16, null);
+        g.drawImage(cha.getimage(3), this.px - 38, this.py + 80, 16, 16, null);
+        g.drawImage(cha.getimage(4), this.px - 22, this.py + 80, 16, 16, null);
+        g.drawImage(cha.getimage(5), this.px - 6, this.py + 80, 16, 16, null);
+        g.drawImage(cha.getimage(6), this.px + 10, this.py + 80, 16, 16, null);
+        g.drawImage(cha.getimage(7), this.px + 26, this.py + 80, 16, 16, null);
+        g.drawImage(cha.getimage(8), this.px + 42, this.py + 80, 16, 16, null);
+        g.drawImage(cha.getimage(9), this.px + 58, this.py + 80, 16, 16, null);
+        g.drawImage(cha.getimage(10), this.px + 74, this.py + 80, 16, 16, null);
+
+        g1.setColor(Color.orange);
+        g.drawRect(this.px - select, this.py + 80, 16, 16);
+        g1.setColor(Color.BLACK);
         g.drawImage(currentImage, this.px, this.py, width, height, null);
-        g.drawString("Day " + daycount, this.px + 200, this.py - 150);
-        g.drawString(cha.getchaniddis(chadis), this.px - 220, this.py - 150);
-        
-        
+        g.drawString("Day " + daycount, this.px + 220, this.py - 150);
+        g.drawString(cha.getchaniddis(chadis), this.px - 5, this.py + 110);
+
         if (sleep == 1) {
             g.fillRect(0, 0, 9999, 9999);
             Din.grow();
             sleep = 0;
             try {
                 TimeUnit.SECONDS.sleep(1);
-                
+
             } catch (InterruptedException ex) {
                 Logger.getLogger(GAMEapp.class.getName()).log(Level.SEVERE, null, ex);
             }
-            
+
         }
-        if (((px >=  512) && (px <= 528)) && ((py >= 448) && (py <= 484))) {
-            g.drawString("SLEEP HERE", this.px-50, this.py - 150);
+        if (((px >= 512) && (px <= 528)) && ((py >= 448) && (py <= 484))) {
+            g.drawString("SLEEP HERE", this.px - 50, this.py - 150);
         }
         update();
     }
@@ -123,35 +136,66 @@ public class GAMEapp extends JPanel implements KeyListener {
     public void keyPressed(KeyEvent ke) {
         int key = ke.getKeyCode();
         if (key == KeyEvent.VK_A) {
-            if (((px >=  512) && (px <= 528)) && ((py >= 448) && (py <= 484))) {
+            if (((px >= 512) && (px <= 528)) && ((py >= 448) && (py <= 484))) {
                 daycount += 1;
                 sleep = 1;
-     
+
                 try {
                     TimeUnit.SECONDS.sleep(1);
-                    
+
                 } catch (InterruptedException ex) {
                     Logger.getLogger(GAMEapp.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
-        } 
+        }
         if (key == KeyEvent.VK_S) {
             Din.setpositiondinX(indexdin, (int) this.px - (this.px % 16) + 16);
             Din.setpositiondinY(indexdin, (int) this.py - (this.py % 16) + 16);
             Din.setvet(indexdin);
             havedin = true;
-            if(chadis == 0)
+            if (chadis == 0) {
                 carrot[indexdin] = 1;
-            if(chadis == 1)
+            }
+            if (chadis == 1) {
                 carrot[indexdin] = 2;
-            if(chadis == 2)
+            }
+            if (chadis == 2) {
                 carrot[indexdin] = 3;
+            }
+            if (chadis == 3) {
+                carrot[indexdin] = 4;
+            }
+            if (chadis == 4) {
+                carrot[indexdin] = 5;
+            }
+            if (chadis == 5) {
+                carrot[indexdin] = 6;
+            }
+            if (chadis == 6) {
+                carrot[indexdin] = 7;
+            }
+            if (chadis == 7) {
+                carrot[indexdin] = 8;
+            }
+            if (chadis == 8) {
+                carrot[indexdin] = 9;
+            }
+            if (chadis == 9) {
+                carrot[indexdin] = 10;
+            }
+
             indexdin += 1;
         }
         if (key == KeyEvent.VK_Z) {
             chadis++;
-            if(chadis == 3){
+            if (chadis == 10) {
                 chadis = 0;
+            }
+
+            if (select <= -74) {
+                select = 70;
+            } else {
+                select -= 16;
             }
         }
         if (key == KeyEvent.VK_X) {
@@ -162,16 +206,14 @@ public class GAMEapp extends JPanel implements KeyListener {
             speedx = -4;
             if (px <= 432) {
                 speedx = 0;
-                px+=5;
-            }
-            else if (py <= 464) {
-              speedy = 0;
-              py+=5;
-            }
-            else if (py >= 1184) {
+                px += 5;
+            } else if (py <= 464) {
                 speedy = 0;
-                py-=5;
-            }else {
+                py += 5;
+            } else if (py >= 1184) {
+                speedy = 0;
+                py -= 5;
+            } else {
                 setspeedx(-4);
             }
             currentImage = imgleft;
@@ -180,16 +222,14 @@ public class GAMEapp extends JPanel implements KeyListener {
             speedx = 4;
             if (px >= 1168) {
                 speedx = 0;
-                px-=5;
-            } 
-            else if (py <= 464){
-              speedy = 0;
-              py+=5;
-            }
-            else if (py >= 1184) {
+                px -= 5;
+            } else if (py <= 464) {
                 speedy = 0;
-                py-=5;
-            }else {
+                py += 5;
+            } else if (py >= 1184) {
+                speedy = 0;
+                py -= 5;
+            } else {
                 setspeedx(4);
             }
             currentImage = imgright;
@@ -198,16 +238,14 @@ public class GAMEapp extends JPanel implements KeyListener {
             speedy = -4;
             if (py <= 464) {
                 speedy = 0;
-                py+=5;
-            }
-            else if (px <= 432) {
+                py += 5;
+            } else if (px <= 432) {
                 speedx = 0;
-                px+=5;
-            }
-            else if (px >= 1168) {
+                px += 5;
+            } else if (px >= 1168) {
                 speedx = 0;
-                px-=5;
-            }else {
+                px -= 5;
+            } else {
                 setspeedy(-4);
             }
             currentImage = imgup;
@@ -216,16 +254,14 @@ public class GAMEapp extends JPanel implements KeyListener {
             speedy = 4;
             if (py >= 1184) {
                 speedy = 0;
-                py-=5;
-            }
-            else  if (px <= 432) {
+                py -= 5;
+            } else if (px <= 432) {
                 speedx = 0;
-                px+=5;
-            }
-            else if (px >= 1168) {
+                px += 5;
+            } else if (px >= 1168) {
                 speedx = 0;
-                px-=5;
-            }else {
+                px -= 5;
+            } else {
                 setspeedy(4);
             }
             currentImage = imgdown;
@@ -257,9 +293,13 @@ public class GAMEapp extends JPanel implements KeyListener {
         }
         repaint();
     }
-    public void setspeedx(double speedx){
-    this.speedx = speedx;}
-    public void setspeedy(double speedy){
-    this.speedy = speedy;}
+
+    public void setspeedx(double speedx) {
+        this.speedx = speedx;
+    }
+
+    public void setspeedy(double speedy) {
+        this.speedy = speedy;
+    }
 
 }

@@ -20,7 +20,27 @@ public class din {
     Image melon1 = new ImageIcon("asset/crop/melon1.png").getImage();
     Image melon2 = new ImageIcon("asset/crop/melon2.png").getImage();
     Image melon3 = new ImageIcon("asset/crop/melon3.png").getImage();
-
+    Image staw1 = new ImageIcon("asset/crop/staw1.png").getImage();
+    Image staw2 = new ImageIcon("asset/crop/staw2.png").getImage();
+    Image staw3 = new ImageIcon("asset/crop/staw3.png").getImage();
+    Image beet1 = new ImageIcon("asset/crop/beet1.png").getImage();
+    Image beet2 = new ImageIcon("asset/crop/beet2.png").getImage();
+    Image beet3 = new ImageIcon("asset/crop/beet3.png").getImage();
+    Image sweet1 = new ImageIcon("asset/crop/sweet1.png").getImage();
+    Image sweet2 = new ImageIcon("asset/crop/sweet2.png").getImage();
+    Image sweet3 = new ImageIcon("asset/crop/sweet3.png").getImage();
+    Image radish1 = new ImageIcon("asset/crop/radish1.png").getImage();
+    Image radish2 = new ImageIcon("asset/crop/radish2.png").getImage();
+    Image radish3 = new ImageIcon("asset/crop/radish3.png").getImage();
+    Image cran1 = new ImageIcon("asset/crop/cran1.png").getImage();
+    Image cran2 = new ImageIcon("asset/crop/cran2.png").getImage();
+    Image cran3 = new ImageIcon("asset/crop/cran3.png").getImage();
+    Image gar1 = new ImageIcon("asset/crop/garlic1.png").getImage();
+    Image gar2 = new ImageIcon("asset/crop/garlic2.png").getImage();
+    Image gar3 = new ImageIcon("asset/crop/garlic3.png").getImage();
+    Image potato1 = new ImageIcon("asset/crop/potato1.png").getImage();
+    Image potato2 = new ImageIcon("asset/crop/potato2.png").getImage();
+    Image potato3 = new ImageIcon("asset/crop/potato3.png").getImage();
     Image current;
     int[] dx = new int[9999], dy = new int[9999], ddx = new int[10000], ddy = new int[10000], vetstage = new int[10000], countday = new int[10000], chanid = new int[10000];
     int remove = 99999, count;
@@ -65,6 +85,72 @@ public class din {
         }
         if (chanid[i] == 3 && vetstage[i] > 5) {
             current = melon3;
+        }
+        if (chanid[i] == 4 && (vetstage[i] == 1)) {
+            current = staw1;
+        }
+        if (chanid[i] == 4 && (vetstage[i] == 3 || vetstage[i] == 4 || vetstage[i] == 2)) {
+            current = staw2;
+        }
+        if (chanid[i] == 4 && vetstage[i] == 5) {
+            current = staw3;
+        }
+        if (chanid[i] == 4 && vetstage[i] > 5) {
+            current = staw3;
+        }
+        if (chanid[i] == 5 && vetstage[i] == 1) {
+            current = beet1;
+        }
+        if (chanid[i] == 5 && vetstage[i] == 2) {
+            current = beet2;
+        }
+        if (chanid[i] == 5 && vetstage[i] == 3) {
+            current = beet3;
+        }
+        if (chanid[i] == 6 && (vetstage[i] == 1 || vetstage[i] == 2)) {
+            current = sweet1;
+        }
+        if (chanid[i] == 6 && (vetstage[i] == 3 || vetstage[i] == 4 || vetstage[i] == 5)) {
+            current = sweet2;
+        }
+        if (chanid[i] == 6 && vetstage[i] >= 6) {
+            current = sweet3;
+        }
+        if (chanid[i] == 7 && vetstage[i] == 1) {
+            current = radish1;
+        }
+        if (chanid[i] == 7 && vetstage[i] == 2) {
+            current = radish2;
+        }
+        if (chanid[i] == 7 && vetstage[i] >= 3) {
+            current = radish3;
+        }
+        if (chanid[i] == 8 && (vetstage[i] == 1 || vetstage[i] == 2)) {
+            current = cran1;
+        }
+        if (chanid[i] == 8 && (vetstage[i] == 3 || vetstage[i] == 4)) {
+            current = cran2;
+        }
+        if (chanid[i] == 8 && vetstage[i] >= 5) {
+            current = cran3;
+        }
+        if (chanid[i] == 9 && (vetstage[i] == 1 || vetstage[i] == 2)) {
+            current = gar1;
+        }
+        if (chanid[i] == 9 && (vetstage[i] == 3 || vetstage[i] == 4)) {
+            current = gar2;
+        }
+        if (chanid[i] == 9 && vetstage[i] >= 5) {
+            current = gar3;
+        }
+        if (chanid[i] == 10 && vetstage[i] == 1) {
+            current = potato1;
+        }
+        if (chanid[i] == 10 && (vetstage[i] == 2 || vetstage[i] == 3)) {
+            current = potato2;
+        }
+        if (chanid[i] == 10 && vetstage[i] >= 4) {
+            current = potato3;
         }
         return current;
     }
