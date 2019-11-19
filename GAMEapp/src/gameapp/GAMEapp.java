@@ -21,11 +21,12 @@ import java.util.logging.Logger;
 
 public class GAMEapp extends JPanel implements KeyListener {
 
-    private int px = 800, py = 800, width = 24, height = 24, speedx = 0, speedy = 0;
+    private int px = 800, py = 800, width = 24, height = 24; 
+    private double speedx = 0, speedy = 0;
     private int mapwidth = 800, mapheight = 800;
     private int camX;
     private int camY;
-    private double zoom = 2.0;
+    private double zoom = 3.0;
     int maxspeed = 5,vet,chadis=0;
     int speed = 1, sleep = 0;
     int[] dx, dy,carrot = new int[9999];
@@ -54,7 +55,8 @@ public class GAMEapp extends JPanel implements KeyListener {
     public static void main(String[] args) {
         GAMEapp p = new GAMEapp();
         JFrame fr = new JFrame("Stradew 69");
-        fr.setSize(1200, 700);
+        fr.setSize(1600, 900);
+        fr.setResizable(false); 
         fr.add(p);
         fr.addKeyListener(p);
         fr.setVisible(true);
@@ -170,7 +172,7 @@ public class GAMEapp extends JPanel implements KeyListener {
                 speedy = 0;
                 py-=5;
             }else {
-                speedx = -4;
+                setspeedx(-4);
             }
             currentImage = imgleft;
             repaint();
@@ -188,7 +190,7 @@ public class GAMEapp extends JPanel implements KeyListener {
                 speedy = 0;
                 py-=5;
             }else {
-                speedx = 4;
+                setspeedx(4);
             }
             currentImage = imgright;
             repaint();
@@ -206,7 +208,7 @@ public class GAMEapp extends JPanel implements KeyListener {
                 speedx = 0;
                 px-=5;
             }else {
-                speed = -4;
+                setspeedy(-4);
             }
             currentImage = imgup;
             repaint();
@@ -224,7 +226,7 @@ public class GAMEapp extends JPanel implements KeyListener {
                 speedx = 0;
                 px-=5;
             }else {
-                speed = 4;
+                setspeedy(4);
             }
             currentImage = imgdown;
             repaint();
@@ -242,18 +244,22 @@ public class GAMEapp extends JPanel implements KeyListener {
     public void keyReleased(KeyEvent ke) {
         int key = ke.getKeyCode();
         if (key == KeyEvent.VK_LEFT) {
-            speedx = 0;
+            setspeedx(0);
         }
         if (key == KeyEvent.VK_RIGHT) {
-            speedx = 0;
+            setspeedx(0);
         }
         if (key == KeyEvent.VK_UP) {
-            speedy = 0;
+            setspeedy(0);
         }
         if (key == KeyEvent.VK_DOWN) {
-            speedy = 0;
+            setspeedy(0);
         }
         repaint();
     }
+    public void setspeedx(double speedx){
+    this.speedx = speedx;}
+    public void setspeedy(double speedy){
+    this.speedy = speedy;}
 
 }
