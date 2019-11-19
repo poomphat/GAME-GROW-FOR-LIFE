@@ -67,15 +67,17 @@ public class GAMEapp extends JPanel implements KeyListener {
         Graphics2D g2D = (Graphics2D) g;
         Graphics2D g1 = (Graphics2D) g;
         super.paintComponent(g);
+        Color customColor = new Color(29,29,29);
         renderFrame(g);
-        g2D.setColor(Color.BLACK);
-        g.setColor(Color.BLACK);
+        g2D.setColor(customColor);
+        g.setColor(customColor);
         g.fillRect(0, 0, 9999, 9999);
         g1.setColor(Color.orange);
         Font myFont = new Font("Courier New", 1, 10);
         Image img1 = new ImageIcon("asset/Holetown.png").getImage();
         camX = (int) (mapwidth / 2) - (px);
         camY = (int) (mapheight / 2) - (py);
+        
         g.setFont(myFont);
         g2D.scale(zoom, zoom);
         g.translate(camX - 140, camY - 230);
@@ -88,7 +90,7 @@ public class GAMEapp extends JPanel implements KeyListener {
             indexdins += 1;
         }
         g1.fillRect(this.px + 205, this.py - 165, 60, 25);
-        g1.setColor(Color.BLACK);
+        g1.setColor(customColor);
         g.drawImage(point, this.px - (this.px % 16) + 16, (int) this.py - (this.py % 16) + 16, 16, 16, null);
         g2D.drawImage(sleepimage, 33 * 16, 30 * 16, 16, 16, null);
         g.drawRect(this.px + 205, this.py - 165, 60, 25);
@@ -107,7 +109,7 @@ public class GAMEapp extends JPanel implements KeyListener {
 
         g1.setColor(Color.orange);
         g.drawRect(this.px - select, this.py + 80, 16, 16);
-        g1.setColor(Color.BLACK);
+        g1.setColor(customColor);
         g.drawImage(currentImage, this.px, this.py, width, height, null);
         g.drawString("Day " + daycount, this.px + 220, this.py - 150);
         g.drawString(cha.getchaniddis(chadis), this.px - 5, this.py + 110);
@@ -125,7 +127,11 @@ public class GAMEapp extends JPanel implements KeyListener {
 
         }
         if (((px >= 512) && (px <= 528)) && ((py >= 448) && (py <= 484))) {
-            g.drawString("SLEEP HERE", this.px - 50, this.py - 150);
+            g1.setColor(Color.orange);
+            g1.fillRect(this.px + -20, this.py - 160, 75, 15);
+            g1.setColor(customColor);
+            g.drawRect(this.px + -20, this.py - 160, 75, 15);
+            g.drawString("SLEEP HERE", this.px - 13, this.py - 150);
         }
         update();
     }
