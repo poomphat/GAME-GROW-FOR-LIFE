@@ -26,7 +26,7 @@ public class GAMEapp extends JPanel implements KeyListener {
     private int camX;
     private int camY;
     private double zoom = 2.0;
-    int maxspeed = 5,vet;
+    int maxspeed = 5,vet,chadis=0;
     int speed = 1, sleep = 0;
     int[] dx, dy,carrot = new int[9999];
     int indexdin = 0, indexdins = 0;
@@ -34,6 +34,7 @@ public class GAMEapp extends JPanel implements KeyListener {
     boolean havedin = false;
     int daycount = 1;
     din Din = new din();
+    chanidvet cha = new chanidvet();
     Image sleepimage = new ImageIcon("asset/sleep.png").getImage();
     Image currentImage = new ImageIcon("asset/char1.png").getImage();
     Image point = new ImageIcon("asset/pointer.png").getImage();
@@ -62,10 +63,13 @@ public class GAMEapp extends JPanel implements KeyListener {
 
     public void paintComponent(Graphics g) {
         Graphics2D g2D = (Graphics2D) g;
+        Graphics2D g1 = (Graphics2D) g;
         super.paintComponent(g);
         renderFrame(g);
         g2D.setColor(Color.BLACK);
+        g.setColor(Color.BLACK);
         g.fillRect(0, 0, 9999, 9999);
+        g1.setColor(Color.orange);
         Font myFont = new Font ("Courier New", 1, 17);
         Image img1 = new ImageIcon("asset/Holetown.png").getImage();
         camX = (int) (mapwidth / 2) - (px);
@@ -74,17 +78,25 @@ public class GAMEapp extends JPanel implements KeyListener {
         g2D.scale(zoom, zoom);
         g.translate(camX - 100, camY - 200);
         g.drawImage(img1, 0, 0, null);
-
+        
         if (havedin) {
             for (int i = 0; indexdin > i; i++) {
                 g2D.drawImage(Din.getimage(carrot,i), Din.getX(i), Din.getY(i), 16, 16, null);
             }
             indexdins += 1;
         }
+        g1.fillRect(this.px+180,this.py - 170,90,30);
+        g1.fillRect(this.px-235,this.py - 170,90,30);
+        g1.setColor(Color.BLACK);
         g.drawImage(point, this.px - (this.px % 16) + 16, (int) this.py - (this.py % 16) + 16, 16, 16, null);
         g2D.drawImage(sleepimage, 33 * 16, 30 * 16, 16, 16, null);
+        g.drawRect(this.px+180,this.py - 170,90,30);
+        g.drawRect(this.px-235,this.py - 170,90,30);
         g.drawImage(currentImage, this.px, this.py, width, height, null);
         g.drawString("Day " + daycount, this.px + 200, this.py - 150);
+        g.drawString(cha.getchaniddis(chadis), this.px - 220, this.py - 150);
+        
+        
         if (sleep == 1) {
             g.fillRect(0, 0, 9999, 9999);
             Din.grow();
@@ -126,24 +138,19 @@ public class GAMEapp extends JPanel implements KeyListener {
             Din.setpositiondinY(indexdin, (int) this.py - (this.py % 16) + 16);
             Din.setvet(indexdin);
             havedin = true;
-            carrot[indexdin] = 1;
-            indexdin += 1;
-        }
-         if (key == KeyEvent.VK_D) {
-            Din.setpositiondinX(indexdin, (int) this.px - (this.px % 16) + 16);
-            Din.setpositiondinY(indexdin, (int) this.py - (this.py % 16) + 16);
-            Din.setvet(indexdin);
-            havedin = true;
-            carrot[indexdin] = 2;
+            if(chadis == 0)
+                carrot[indexdin] = 1;
+            if(chadis == 1)
+                carrot[indexdin] = 2;
+            if(chadis == 2)
+                carrot[indexdin] = 3;
             indexdin += 1;
         }
         if (key == KeyEvent.VK_Z) {
-            Din.setpositiondinX(indexdin, (int) this.px - (this.px % 16) + 16);
-            Din.setpositiondinY(indexdin, (int) this.py - (this.py % 16) + 16);
-            havedin = true;
-            carrot[indexdin] = 0;
-            vet = 0;
-            indexdin += 1;
+            chadis++;
+            if(chadis == 3){
+                chadis = 0;
+            }
         }
         if (key == KeyEvent.VK_X) {
             Din.removedin((int) this.px - (this.px % 16) + 16, (int) this.py - (this.py % 16) + 16);

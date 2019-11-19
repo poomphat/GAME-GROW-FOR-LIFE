@@ -17,37 +17,54 @@ public class din {
     Image kalum1 = new ImageIcon("asset/crop/karlum1.png").getImage();
     Image kalum2 = new ImageIcon("asset/crop/karlum2.png").getImage();
     Image kalum3 = new ImageIcon("asset/crop/karlum3.png").getImage();
+    Image melon1 = new ImageIcon("asset/crop/melon1.png").getImage();
+    Image melon2 = new ImageIcon("asset/crop/melon2.png").getImage();
+    Image melon3 = new ImageIcon("asset/crop/melon3.png").getImage();
+
     Image current;
-    int[] dx = new int[9999], dy = new int[9999], ddx = new int[10000], ddy = new int[10000], vetstage = new int[10000], countday = new int[10000];
+    int[] dx = new int[9999], dy = new int[9999], ddx = new int[10000], ddy = new int[10000], vetstage = new int[10000], countday = new int[10000], chanid = new int[10000];
     int remove = 99999, count;
 
     public Image getimage(int[] vet, int i) {
-        if (vet[i] == 0) {
+        chanid = vet;
+        if (chanid[i] == 0) {
             current = din;
         }
-        if (vet[i] == 1 && vetstage[i] == 1) {
+        if (chanid[i] == 1 && vetstage[i] == 1) {
             current = carrot1;
         }
-        if (vet[i] == 1 && vetstage[i] == 2) {
+        if (chanid[i] == 1 && vetstage[i] == 2) {
             current = carrot2;
         }
-        if (vet[i] == 1 && vetstage[i] == 3) {
+        if (chanid[i] == 1 && vetstage[i] == 3) {
             current = carrot3;
         }
-        if (vet[i] == 1 && vetstage[i] > 3) {
+        if (chanid[i] == 1 && vetstage[i] > 3) {
             current = carrot3;
         }
-        if (vet[i] == 2 && vetstage[i] == 1) {
+        if (chanid[i] == 2 && vetstage[i] == 1) {
             current = kalum1;
         }
-        if (vet[i] == 2 && vetstage[i] == 2) {
+        if (chanid[i] == 2 && vetstage[i] == 2) {
             current = kalum2;
         }
-        if (vet[i] == 2 && vetstage[i] == 3) {
+        if (chanid[i] == 2 && vetstage[i] == 3) {
             current = kalum3;
         }
-        if (vet[i] == 2 && vetstage[i] > 3) {
+        if (chanid[i] == 2 && vetstage[i] > 3) {
             current = kalum3;
+        }
+        if (chanid[i] == 3 && (vetstage[i] == 1 || vetstage[i] == 2)) {
+            current = melon1;
+        }
+        if (chanid[i] == 3 && (vetstage[i] == 3 || vetstage[i] == 4)) {
+            current = melon2;
+        }
+        if (chanid[i] == 3 && vetstage[i] == 5) {
+            current = melon3;
+        }
+        if (chanid[i] == 3 && vetstage[i] > 5) {
+            current = melon3;
         }
         return current;
     }
@@ -91,6 +108,7 @@ public class din {
             if (j == remove) {
                 dx[j] = dx[j + 1];
                 dy[j] = dy[j + 1];
+                chanid[j] = chanid[j + 1];
             }
 
         }
