@@ -94,6 +94,10 @@ public class GAMEapp extends JPanel implements KeyListener {
         g.drawImage(point, this.px - (this.px % 16) + 16, (int) this.py - (this.py % 16) + 16, 16, 16, null);
         g2D.drawImage(sleepimage, 33 * 16, 30 * 16, 16, 16, null);
         g.drawRect(this.px + 205, this.py - 165, 60, 25);
+        g1.setColor(Color.orange);
+        g1.fillRect(this.px - 230, this.py - 165, 60, 25);
+        g1.setColor(customColor);
+        g.drawRect(this.px - 230, this.py - 165, 60, 25);
         g.drawRect(this.px - 70, this.py + 80, 160, 16);
 
         g.drawImage(cha.getimage(1), this.px - 70, this.py + 80, 16, 16, null);
@@ -112,6 +116,7 @@ public class GAMEapp extends JPanel implements KeyListener {
         g1.setColor(customColor);
         g.drawImage(currentImage, this.px, this.py, width, height, null);
         g.drawString("Day " + daycount, this.px + 220, this.py - 150);
+        g.drawString("Money " + Din.getmoney(indexdin), this.px - 220, this.py - 150);
         g.drawString(cha.getchaniddis(chadis), this.px - 5, this.py + 110);
 
         if (sleep == 1) {
