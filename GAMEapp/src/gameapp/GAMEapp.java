@@ -210,8 +210,9 @@ public class GAMEapp extends JPanel implements KeyListener {
             }
         }
         if (key == KeyEvent.VK_X) {
-            Din.removedin((int) this.px - (this.px % 16) + 16, (int) this.py - (this.py % 16) + 16);
+            Din.removedin(indexdin,(int) this.px - (this.px % 16) + 16, (int) this.py - (this.py % 16) + 16);
             havedin = true;
+           
         }
         if (key == KeyEvent.VK_LEFT) {
             speedx = -4;
