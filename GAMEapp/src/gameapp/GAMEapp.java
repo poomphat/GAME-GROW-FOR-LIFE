@@ -250,73 +250,32 @@ public class GAMEapp extends JPanel implements KeyListener {
         if (key == KeyEvent.VK_LEFT) {
             animation = walkLeft;
             animation.start();
-            speedx = -1;
-            if (px <= 432) {
-                speedx = 0;
-                px = 433;
-            } else if (py <= 464) {
-                speedy = 0;
-                py = 465;
-            } else if (py >= 1184) {
-                speedy = 0;
-                py = 1183;
-            } else {
                 setspeedx(-1);
-            }
+            
             currentImage = imgleft;
 
         } else if (key == KeyEvent.VK_RIGHT) {
             animation = walkRight;
             animation.start();
-            speedx = 1;
-            if (px >= 1168) {
-                speedx = 0;
-                px = 1167;
-            } else if (py <= 464) {
-                speedy = 0;
-                py = 465;
-            } else if (py >= 1184) {
-                speedy = 0;
-                py = 1183;
-            } else {
+
                 setspeedx(1);
-            }
+            
             currentImage = imgright;
 
         } else if (key == KeyEvent.VK_UP) {
             animation = walkUp;
             animation.start();
-            speedy = -1;
-            if (py <= 464) {
-                speedy = 0;
-                py = 465;
-            } else if (px <= 432) {
-                speedx = 0;
-                px = 433;
-            } else if (px >= 1168) {
-                speedx = 0;
-                px = 1167;
-            } else {
+
                 setspeedy(-1);
-            }
+            
             currentImage = imgup;
 
         } else if (key == KeyEvent.VK_DOWN) {
             animation = walkDown;
             animation.start();
-            speedy = 1;
-            if (py >= 1184) {
-                speedy = 0;
-                py = 1183;
-            } else if (px <= 432) {
-                speedx = 0;
-                px = 433;
-            } else if (px >= 1168) {
-                speedx = 0;
-                px = 1167;
-            } else {
+
                 setspeedy(1);
-            }
+            
             currentImage = imgdown;
 
         }
@@ -398,6 +357,20 @@ public class GAMEapp extends JPanel implements KeyListener {
                 FPSticks = 0;
                 TPSticks = 0;
             }
+            if (px <= 432) {
+                speedx = 0;
+                px = 433;
+            }if (py <= 464) {
+                speedy = 0;
+                py = 465;
+            }if (py >= 1184) {
+                speedy = 0;
+                py = 1183;
+            }if (px >= 1168) {
+                speedx = 0;
+                px = 1167;
+            }
+            System.out.println(speedx);
         }
     }
 
