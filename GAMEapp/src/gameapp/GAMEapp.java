@@ -85,7 +85,7 @@ public class GAMEapp extends JPanel implements KeyListener {
 
         if (havedin) {
             for (int i = 0; indexdin > i; i++) {
-                g2D.drawImage(Din.getimage(carrot, i), Din.getX(i), Din.getY(i), 16, 16, null);
+                g2D.drawImage(Din.getimage(carrot, i, indexdin), Din.getX(i), Din.getY(i), 16, 16, null);
             }
             indexdins += 1;
         }
