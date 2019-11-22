@@ -10,7 +10,6 @@
  */
 package gameapp;
 
-import static com.sun.org.apache.xalan.internal.lib.ExsltDatetime.time;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
@@ -18,6 +17,7 @@ import javax.swing.*;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.awt.image.BufferedImage;
 
 public class GAMEapp extends JPanel implements KeyListener {
 
@@ -45,7 +45,22 @@ public class GAMEapp extends JPanel implements KeyListener {
     Image imgright = new ImageIcon("asset/right.png").getImage();
     int checksameposition;
     boolean checksameposition1 = false;
-    
+
+    private BufferedImage[] walkingLeft = {Sprite.getSprite(0, 1), Sprite.getSprite(2, 1)};
+    private BufferedImage[] walkingRight = {Sprite.getSprite(0, 2), Sprite.getSprite(2, 2)};
+    private BufferedImage[] walkingUp = {Sprite.getSprite(0, 3), Sprite.getSprite(2, 3)};
+    private BufferedImage[] walkingDown = {Sprite.getSprite(0, 0), Sprite.getSprite(2, 0)};
+    private BufferedImage[] standing = {Sprite.getSprite(1, 0)};
+
+// These are animation states
+    private Animation walkLeft = new Animation(walkingLeft, 20);
+    private Animation walkRight = new Animation(walkingRight, 20);
+    private Animation walkDown = new Animation(walkingDown, 20);
+    private Animation walkUp = new Animation(walkingUp, 20);
+    private Animation standing1 = new Animation(standing, 20);
+
+// This is the actual animation
+    private Animation animation = standing1;
 
     public GAMEapp() {
         Thread thread = new Thread(new Runnable() {
@@ -72,13 +87,11 @@ public class GAMEapp extends JPanel implements KeyListener {
         fr.addKeyListener(p);
         fr.setVisible(true);
         fr.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        
-        
-        
+
     }
 
     public void paintComponent(Graphics g) {
-        
+
         Graphics2D g2D = (Graphics2D) g;
         Graphics2D g1 = (Graphics2D) g;
         super.paintComponent(g);
@@ -115,6 +128,8 @@ public class GAMEapp extends JPanel implements KeyListener {
         g.drawRect(this.px - 230, this.py - 165, 60, 25);
         g.drawRect(this.px - 70, this.py + 80, 160, 16);
 
+        g.drawImage(animation.getSprite(), px, py, 24, 24, null);
+
         g.drawImage(cha.getimage(1), this.px - 70, this.py + 80, 16, 16, null);
         g.drawImage(cha.getimage(2), this.px - 54, this.py + 80, 16, 16, null);
         g.drawImage(cha.getimage(3), this.px - 38, this.py + 80, 16, 16, null);
@@ -129,7 +144,7 @@ public class GAMEapp extends JPanel implements KeyListener {
         g1.setColor(Color.orange);
         g.drawRect(this.px - select, this.py + 80, 16, 16);
         g1.setColor(customColor);
-        g.drawImage(currentImage, this.px, this.py, width, height, null);
+
         g.drawString("Day " + daycount, this.px + 220, this.py - 150);
         g.drawString("Money " + Din.getmoney(indexdin), this.px - 220, this.py - 150);
         g.drawString(cha.getchaniddis(chadis), this.px - 5, this.py + 110);
@@ -181,32 +196,23 @@ public class GAMEapp extends JPanel implements KeyListener {
             havedin = true;
             if (chadis == 0) {
                 carrot[indexdin] = 1;
-            }
-            else if (chadis == 1) {
+            } else if (chadis == 1) {
                 carrot[indexdin] = 2;
-            }
-            else if (chadis == 2) {
+            } else if (chadis == 2) {
                 carrot[indexdin] = 3;
-            }
-            else if (chadis == 3) {
+            } else if (chadis == 3) {
                 carrot[indexdin] = 4;
-            }
-            else if (chadis == 4) {
+            } else if (chadis == 4) {
                 carrot[indexdin] = 5;
-            }
-            else if (chadis == 5) {
+            } else if (chadis == 5) {
                 carrot[indexdin] = 6;
-            }
-            else if (chadis == 6) {
+            } else if (chadis == 6) {
                 carrot[indexdin] = 7;
-            }
-            else if (chadis == 7) {
+            } else if (chadis == 7) {
                 carrot[indexdin] = 8;
-            }
-            else if (chadis == 8) {
+            } else if (chadis == 8) {
                 carrot[indexdin] = 9;
-            }
-            else if (chadis == 9) {
+            } else if (chadis == 9) {
                 carrot[indexdin] = 10;
             }
             for (int l = 0; Din.getindexxy() > l; l++) {
@@ -245,13 +251,15 @@ public class GAMEapp extends JPanel implements KeyListener {
             havedin = true;
         }
         if (key == KeyEvent.VK_LEFT) {
+            animation = walkLeft;
+            animation.start();
             speedx = -1;
             if (px <= 432) {
-                speedx=0;
-                px=433;
+                speedx = 0;
+                px = 433;
             } else if (py <= 464) {
                 speedy = 0;
-                py =465;
+                py = 465;
             } else if (py >= 1184) {
                 speedy = 0;
                 py = 1183;
@@ -259,79 +267,98 @@ public class GAMEapp extends JPanel implements KeyListener {
                 setspeedx(-1);
             }
             currentImage = imgleft;
-           
+
         } else if (key == KeyEvent.VK_RIGHT) {
+            animation = walkRight;
+            animation.start();
             speedx = 1;
             if (px >= 1168) {
                 speedx = 0;
                 px = 1167;
             } else if (py <= 464) {
                 speedy = 0;
-                py =465;
+                py = 465;
             } else if (py >= 1184) {
                 speedy = 0;
-                py =1183;
+                py = 1183;
             } else {
                 setspeedx(1);
             }
             currentImage = imgright;
 
         } else if (key == KeyEvent.VK_UP) {
+            animation = walkUp;
+            animation.start();
             speedy = -1;
             if (py <= 464) {
                 speedy = 0;
-                py =465;
+                py = 465;
             } else if (px <= 432) {
                 speedx = 0;
-                px =433;
+                px = 433;
             } else if (px >= 1168) {
                 speedx = 0;
-                px =1167;
+                px = 1167;
             } else {
                 setspeedy(-1);
             }
             currentImage = imgup;
 
         } else if (key == KeyEvent.VK_DOWN) {
+            animation = walkDown;
+            animation.start();
             speedy = 1;
             if (py >= 1184) {
                 speedy = 0;
-                py =1183;
+                py = 1183;
             } else if (px <= 432) {
                 speedx = 0;
-                px =433;
+                px = 433;
             } else if (px >= 1168) {
                 speedx = 0;
-                px =1167;
+                px = 1167;
             } else {
                 setspeedy(1);
             }
             currentImage = imgdown;
 
         }
-  
+
     }
 
     public void update() {
 
         px += speedx;
         py += speedy;
+        animation.update();
 
     }
 
     public void keyReleased(KeyEvent ke) {
         int key = ke.getKeyCode();
         if (key == KeyEvent.VK_LEFT) {
+            animation.stop();
+            animation.reset();
+            animation = standing1;
             setspeedx(0);
         }
         if (key == KeyEvent.VK_RIGHT) {
+            animation.stop();
+            animation.reset();
+            animation = standing1;
             setspeedx(0);
         }
         if (key == KeyEvent.VK_UP) {
             setspeedy(0);
+            animation.stop();
+            animation.reset();
+            animation = standing1;
         }
         if (key == KeyEvent.VK_DOWN) {
             setspeedy(0);
+            animation.stop();
+            animation.reset();
+            animation = standing1;
         }
 
     }
@@ -344,29 +371,30 @@ public class GAMEapp extends JPanel implements KeyListener {
         this.speedy = speedy;
     }
 
-     long targetFPS = 60;
+    long targetFPS = 60;
     long currentFPS = targetFPS;
     long currentTPS = targetFPS;
     long FPSticks = 0;
     long TPSticks = 0;
     long oldFPSTime = time();
     long newFPSTime = oldFPSTime;
-    public void gameLoop(){
+
+    public void gameLoop() {
         long previous = time();
         long lag = 0;
-        while (true){
+        while (true) {
             long current = time();
-            long elapsed = current-previous;
+            long elapsed = current - previous;
             previous = current;
-            lag+= elapsed;
-            while (lag >= 1000/targetFPS){
+            lag += elapsed;
+            while (lag >= 1000 / targetFPS) {
                 update();
-                lag-= 1000/targetFPS;
+                lag -= 1000 / targetFPS;
                 TPSticks++;
             }
             repaint();
             newFPSTime = time();
-            if (newFPSTime > oldFPSTime + 1000){
+            if (newFPSTime > oldFPSTime + 1000) {
                 oldFPSTime = newFPSTime;
                 currentFPS = FPSticks;
                 currentTPS = TPSticks;
@@ -375,8 +403,9 @@ public class GAMEapp extends JPanel implements KeyListener {
             }
         }
     }
-     public long time(){
+
+    public long time() {
         return System.currentTimeMillis();
     }
-    
+
 }
