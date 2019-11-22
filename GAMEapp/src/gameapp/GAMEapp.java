@@ -29,7 +29,7 @@ public class GAMEapp extends JPanel implements KeyListener {
     int maxspeed = 5, vet, chadis = 0;
     int speed = 1, sleep = 0;
     int[] dx, dy, carrot = new int[9999];
-    int indexdin = 0, indexdins = 0;
+    int indexdin = 1, indexdins = 0;
     int acceleration = 1;
     boolean havedin = false;
     int daycount = 1;
@@ -42,6 +42,8 @@ public class GAMEapp extends JPanel implements KeyListener {
     Image imgdown = new ImageIcon("asset/char1.png").getImage();
     Image imgleft = new ImageIcon("asset/left.png").getImage();
     Image imgright = new ImageIcon("asset/right.png").getImage();
+    int checksameposition;
+    boolean checksameposition1 = false;
 
     public GAMEapp() {
     }
@@ -67,7 +69,7 @@ public class GAMEapp extends JPanel implements KeyListener {
         Graphics2D g2D = (Graphics2D) g;
         Graphics2D g1 = (Graphics2D) g;
         super.paintComponent(g);
-        Color customColor = new Color(29,29,29);
+        Color customColor = new Color(29, 29, 29);
         renderFrame(g);
         g2D.setColor(customColor);
         g.setColor(customColor);
@@ -77,7 +79,7 @@ public class GAMEapp extends JPanel implements KeyListener {
         Image img1 = new ImageIcon("asset/Holetown.png").getImage();
         camX = (int) (mapwidth / 2) - (px);
         camY = (int) (mapheight / 2) - (py);
-        
+
         g.setFont(myFont);
         g2D.scale(zoom, zoom);
         g.translate(camX - 140, camY - 230);
@@ -160,8 +162,7 @@ public class GAMEapp extends JPanel implements KeyListener {
             }
         }
         if (key == KeyEvent.VK_S) {
-            Din.setpositiondinX(indexdin, (int) this.px - (this.px % 16) + 16);
-            Din.setpositiondinY(indexdin, (int) this.py - (this.py % 16) + 16);
+            Din.setpositiondin(indexdin, (int) this.px - (this.px % 16) + 16, (int) this.py - (this.py % 16) + 16);
             Din.setvet(indexdin);
             havedin = true;
             if (chadis == 0) {
@@ -194,8 +195,24 @@ public class GAMEapp extends JPanel implements KeyListener {
             if (chadis == 9) {
                 carrot[indexdin] = 10;
             }
+            for (int l = 0; Din.getindexxy() > l; l++) {
+                if (indexdin != l) {
+                    if (this.px - (this.px % 16) + 16 == Din.getarrayx(l) && (int) this.py - (this.py % 16) + 16 == Din.getarrayx(l)) {
+                        checksameposition += 1;
 
-            indexdin += 1;
+                    }
+                }
+
+            }
+            if (checksameposition == 0) {
+                checksameposition1 = true;
+            }
+            if (checksameposition1) {
+                indexdin += 1;
+                checksameposition = 0;
+                checksameposition1 = false;
+            }
+            checksameposition = 0;
         }
         if (key == KeyEvent.VK_Z) {
             chadis++;
@@ -210,9 +227,8 @@ public class GAMEapp extends JPanel implements KeyListener {
             }
         }
         if (key == KeyEvent.VK_X) {
-            Din.removedin(indexdin,(int) this.px - (this.px % 16) + 16, (int) this.py - (this.py % 16) + 16);
+            Din.removedin((int) this.px - (this.px % 16) + 16, (int) this.py - (this.py % 16) + 16);
             havedin = true;
-           
         }
         if (key == KeyEvent.VK_LEFT) {
             speedx = -4;

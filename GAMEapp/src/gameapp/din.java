@@ -44,112 +44,146 @@ public class din {
     Image current;
     int[] dx = new int[9999], dy = new int[9999], ddx = new int[10000], ddy = new int[10000], vetstage = new int[10000], countday = new int[10000], chanid = new int[10000], money = new int[10000];
     int remove = 99999, count, money1;
-
+   
     public Image getimage(int[] vet, int i) {
         chanid = vet;
         if (chanid[i] == 0) {
             current = din;
-        } else if (chanid[i] == 1 && vetstage[i] == 1) {
+        }
+        if (chanid[i] == 1 && vetstage[i] == 1) {
             current = carrot1;
-            money[i] = 1;
-
-        } else if (chanid[i] == 1 && vetstage[i] == 2) {
+            money[i] = 1; 
+            
+        }
+        if (chanid[i] == 1 && vetstage[i] == 2) {
             current = carrot2;
-            money[i] = 3;
-        } else if (chanid[i] == 1 && vetstage[i] == 3) {
+            money[i] = 3; 
+        }
+        if (chanid[i] == 1 && vetstage[i] == 3) {
             current = carrot3;
-            money[i] = 10;
-        } else if (chanid[i] == 1 && vetstage[i] > 3) {
+            money[i] = 10; 
+        }
+        if (chanid[i] == 1 && vetstage[i] > 3) {
             current = carrot3;
-            money[i] = 10;
-        } else if (chanid[i] == 2 && vetstage[i] == 1) {
+            money[i] = 10; 
+        }
+        if (chanid[i] == 2 && vetstage[i] == 1) {
             current = kalum1;
-            money[i] = 1;
-        } else if (chanid[i] == 2 && vetstage[i] == 2) {
+            money[i] = 1; 
+        }
+        if (chanid[i] == 2 && vetstage[i] == 2) {
             current = kalum2;
-            money[i] = 3;
-        } else if (chanid[i] == 2 && vetstage[i] == 3) {
+            money[i] = 3; 
+        }
+        if (chanid[i] == 2 && vetstage[i] == 3) {
             current = kalum3;
-            money[i] = 10;
-        } else if (chanid[i] == 2 && vetstage[i] > 3) {
+            money[i] = 10; 
+        }
+        if (chanid[i] == 2 && vetstage[i] > 3) {
             current = kalum3;
-            money[i] = 10;
-        } else if (chanid[i] == 3 && (vetstage[i] == 1 || vetstage[i] == 2)) {
+            money[i] = 10; 
+        }
+        if (chanid[i] == 3 && (vetstage[i] == 1 || vetstage[i] == 2)) {
             current = melon1;
-            money[i] = 1;
-        } else if (chanid[i] == 3 && (vetstage[i] == 3 || vetstage[i] == 4)) {
+            money[i] = 1; 
+        }
+        if (chanid[i] == 3 && (vetstage[i] == 3 || vetstage[i] == 4)) {
             current = melon2;
-            money[i] = 3;
-        } else if (chanid[i] == 3 && vetstage[i] == 5) {
+            money[i] = 3; 
+        }
+        if (chanid[i] == 3 && vetstage[i] == 5) {
             current = melon3;
-            money[i] = 10;
-        } else if (chanid[i] == 3 && vetstage[i] > 5) {
+            money[i] = 10; 
+        }
+        if (chanid[i] == 3 && vetstage[i] > 5) {
             current = melon3;
-            money[i] = 10;
-        } else if (chanid[i] == 4 && (vetstage[i] == 1)) {
+            money[i] = 10; 
+        }
+        if (chanid[i] == 4 && (vetstage[i] == 1)) {
             current = staw1;
-            money[i] = 1;
-        } else if (chanid[i] == 4 && (vetstage[i] == 3 || vetstage[i] == 4 || vetstage[i] == 2)) {
+            money[i] = 1; 
+        }
+        if (chanid[i] == 4 && (vetstage[i] == 3 || vetstage[i] == 4 || vetstage[i] == 2)) {
             current = staw2;
-            money[i] = 3;
-        } else if (chanid[i] == 4 && vetstage[i] == 5) {
+            money[i] = 3; 
+        }
+        if (chanid[i] == 4 && vetstage[i] == 5) {
             current = staw3;
-            money[i] = 10;
-        } else if (chanid[i] == 4 && vetstage[i] > 5) {
+            money[i] = 10; 
+        }
+        if (chanid[i] == 4 && vetstage[i] > 5) {
             current = staw3;
-            money[i] = 10;
-        } else if (chanid[i] == 5 && vetstage[i] == 1) {
+            money[i] = 10; 
+        }
+        if (chanid[i] == 5 && vetstage[i] == 1) {
             current = beet1;
-            money[i] = 1;
-        } else if (chanid[i] == 5 && vetstage[i] == 2) {
+            money[i] = 1; 
+        }
+        if (chanid[i] == 5 && vetstage[i] == 2) {
             current = beet2;
-            money[i] = 3;
-        } else if (chanid[i] == 5 && vetstage[i] >= 3) {
+            money[i] = 3; 
+        }
+        if (chanid[i] == 5 && vetstage[i] >= 3) {
             current = beet3;
-            money[i] = 10;
-        } else if (chanid[i] == 6 && (vetstage[i] == 1 || vetstage[i] == 2)) {
+            money[i] = 10; 
+        }
+        if (chanid[i] == 6 && (vetstage[i] == 1 || vetstage[i] == 2)) {
             current = sweet1;
-            money[i] = 1;
-        } else if (chanid[i] == 6 && (vetstage[i] == 3 || vetstage[i] == 4 || vetstage[i] == 5)) {
+            money[i] = 1; 
+        }
+        if (chanid[i] == 6 && (vetstage[i] == 3 || vetstage[i] == 4 || vetstage[i] == 5)) {
             current = sweet2;
-            money[i] = 3;
-        } else if (chanid[i] == 6 && vetstage[i] >= 6) {
+            money[i] = 3; 
+        }
+        if (chanid[i] == 6 && vetstage[i] >= 6) {
             current = sweet3;
-            money[i] = 10;
-        } else if (chanid[i] == 7 && vetstage[i] == 1) {
+            money[i] = 10; 
+        }
+        if (chanid[i] == 7 && vetstage[i] == 1) {
             current = radish1;
-            money[i] = 1;
-        } else if (chanid[i] == 7 && vetstage[i] == 2) {
+            money[i] = 1; 
+        }
+        if (chanid[i] == 7 && vetstage[i] == 2) {
             current = radish2;
-            money[i] = 3;
-        } else if (chanid[i] == 7 && vetstage[i] >= 3) {
+            money[i] = 3; 
+        }
+        if (chanid[i] == 7 && vetstage[i] >= 3) {
             current = radish3;
-            money[i] = 10;
-        } else if (chanid[i] == 8 && (vetstage[i] == 1 || vetstage[i] == 2)) {
+            money[i] = 10; 
+        }
+        if (chanid[i] == 8 && (vetstage[i] == 1 || vetstage[i] == 2)) {
             current = cran1;
-            money[i] = 1;
-        } else if (chanid[i] == 8 && (vetstage[i] == 3 || vetstage[i] == 4)) {
+             money[i] = 1; 
+        }
+        if (chanid[i] == 8 && (vetstage[i] == 3 || vetstage[i] == 4)) {
             current = cran2;
-            money[i] = 3;
-        } else if (chanid[i] == 8 && vetstage[i] >= 5) {
+             money[i] = 3; 
+        }
+        if (chanid[i] == 8 && vetstage[i] >= 5) {
             current = cran3;
-            money[i] = 10;
-        } else if (chanid[i] == 9 && (vetstage[i] == 1 || vetstage[i] == 2)) {
+             money[i] = 10; 
+        }
+        if (chanid[i] == 9 && (vetstage[i] == 1 || vetstage[i] == 2)) {
             current = gar1;
-            money[i] = 1;
-        } else if (chanid[i] == 9 && (vetstage[i] == 3 || vetstage[i] == 4)) {
+             money[i] = 1; 
+        }
+        if (chanid[i] == 9 && (vetstage[i] == 3 || vetstage[i] == 4)) {
             current = gar2;
             money[i] = 3;
-        } else if (chanid[i] == 9 && vetstage[i] >= 5) {
+        }
+        if (chanid[i] == 9 && vetstage[i] >= 5) {
             current = gar3;
             money[i] = 10;
-        } else if (chanid[i] == 10 && vetstage[i] == 1) {
+        }
+        if (chanid[i] == 10 && vetstage[i] == 1) {
             current = potato1;
             money[i] = 1;
-        } else if (chanid[i] == 10 && (vetstage[i] == 2 || vetstage[i] == 3)) {
+        }
+        if (chanid[i] == 10 && (vetstage[i] == 2 || vetstage[i] == 3)) {
             current = potato2;
             money[i] = 3;
-        } else if (chanid[i] == 10 && vetstage[i] >= 4) {
+        }
+        if (chanid[i] == 10 && vetstage[i] >= 4) {
             current = potato3;
             money[i] = 10;
         }
@@ -174,45 +208,50 @@ public class din {
         return dy[i];
     }
 
-    public void setpositiondinX(int index, int posX) {
+    public void setpositiondin(int index, int posX,int posY) {
+        dx[0] = 1;
+        dy[0] = 1;
         this.dx[index] = posX;
-
-    }
-
-    public void setpositiondinY(int index, int posY) {
         this.dy[index] = posY;
+
     }
+
 
     public void setvet(int vet) {
         this.vetstage[vet] = 1;
     }
 
-    public void removedin(int index ,int posX, int posY) {
-        for (int j = index;  j >= 0; j--) {
+    public void removedin(int posX, int posY) {
+        for (int j = 0, k = 0; dx.length - 1 > j; j++) {
             if (posX == dx[j] && posY == dy[j]) {
                 remove = j;
-
+                
             }
             if (j == remove) {
                 dx[j] = dx[j + 1];
                 dy[j] = dy[j + 1];
                 chanid[j] = chanid[j + 1];
-                money[j] = money[j + 1];
-                setmoney(j + 1);
-                System.out.println(j);
+                money[j] =  money[j+1];
+                setmoney(j);
             }
 
         }
-
+        
     }
-
-    public void setmoney(int i) {
-        money1 += money[i];
-    }
-
-    public int getmoney(int i) {
+    public void setmoney(int i){
+            money1 += money[i];
+        }
+    public int getmoney(int i){
         return money1;
     }
-
+   public int getarrayx(int i){
+       return dx[i];
+   }
+   public int getarrayy(int i){
+       return dy[i];
+   }
+   public int getindexxy(){
+       return dx.length;
+   }
 
 }
