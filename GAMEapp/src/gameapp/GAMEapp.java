@@ -10,6 +10,7 @@
  */
 package gameapp;
 
+import static com.sun.org.apache.xalan.internal.lib.ExsltDatetime.time;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
@@ -44,8 +45,16 @@ public class GAMEapp extends JPanel implements KeyListener {
     Image imgright = new ImageIcon("asset/right.png").getImage();
     int checksameposition;
     boolean checksameposition1 = false;
+    
 
     public GAMEapp() {
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                gameLoop();
+            }
+        });
+        thread.start();
     }
 
     public Graphics renderFrame(Graphics g) {
@@ -63,9 +72,13 @@ public class GAMEapp extends JPanel implements KeyListener {
         fr.addKeyListener(p);
         fr.setVisible(true);
         fr.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        
+        
+        
     }
 
     public void paintComponent(Graphics g) {
+        
         Graphics2D g2D = (Graphics2D) g;
         Graphics2D g1 = (Graphics2D) g;
         super.paintComponent(g);
@@ -162,42 +175,43 @@ public class GAMEapp extends JPanel implements KeyListener {
             }
         }
         if (key == KeyEvent.VK_S) {
+            System.out.println(indexdin);
             Din.setpositiondin(indexdin, (int) this.px - (this.px % 16) + 16, (int) this.py - (this.py % 16) + 16);
             Din.setvet(indexdin);
             havedin = true;
             if (chadis == 0) {
                 carrot[indexdin] = 1;
             }
-            if (chadis == 1) {
+            else if (chadis == 1) {
                 carrot[indexdin] = 2;
             }
-            if (chadis == 2) {
+            else if (chadis == 2) {
                 carrot[indexdin] = 3;
             }
-            if (chadis == 3) {
+            else if (chadis == 3) {
                 carrot[indexdin] = 4;
             }
-            if (chadis == 4) {
+            else if (chadis == 4) {
                 carrot[indexdin] = 5;
             }
-            if (chadis == 5) {
+            else if (chadis == 5) {
                 carrot[indexdin] = 6;
             }
-            if (chadis == 6) {
+            else if (chadis == 6) {
                 carrot[indexdin] = 7;
             }
-            if (chadis == 7) {
+            else if (chadis == 7) {
                 carrot[indexdin] = 8;
             }
-            if (chadis == 8) {
+            else if (chadis == 8) {
                 carrot[indexdin] = 9;
             }
-            if (chadis == 9) {
+            else if (chadis == 9) {
                 carrot[indexdin] = 10;
             }
             for (int l = 0; Din.getindexxy() > l; l++) {
                 if (indexdin != l) {
-                    if (this.px - (this.px % 16) + 16 == Din.getarrayx(l) && (int) this.py - (this.py % 16) + 16 == Din.getarrayx(l)) {
+                    if (this.px - (this.px % 16) + 16 == Din.getarrayx(l) && (int) this.py - (this.py % 16) + 16 == Din.getarrayy(l)) {
                         checksameposition += 1;
 
                     }
@@ -231,71 +245,71 @@ public class GAMEapp extends JPanel implements KeyListener {
             havedin = true;
         }
         if (key == KeyEvent.VK_LEFT) {
-            speedx = -4;
+            speedx = -1;
             if (px <= 432) {
-                speedx = 0;
-                px += 5;
+                speedx=0;
+                px=433;
             } else if (py <= 464) {
                 speedy = 0;
-                py += 5;
+                py =465;
             } else if (py >= 1184) {
                 speedy = 0;
-                py -= 5;
+                py = 1183;
             } else {
-                setspeedx(-4);
+                setspeedx(-1);
             }
             currentImage = imgleft;
-            repaint();
+           
         } else if (key == KeyEvent.VK_RIGHT) {
-            speedx = 4;
+            speedx = 1;
             if (px >= 1168) {
                 speedx = 0;
-                px -= 5;
+                px = 1167;
             } else if (py <= 464) {
                 speedy = 0;
-                py += 5;
+                py =465;
             } else if (py >= 1184) {
                 speedy = 0;
-                py -= 5;
+                py =1183;
             } else {
-                setspeedx(4);
+                setspeedx(1);
             }
             currentImage = imgright;
-            repaint();
+
         } else if (key == KeyEvent.VK_UP) {
-            speedy = -4;
+            speedy = -1;
             if (py <= 464) {
                 speedy = 0;
-                py += 5;
+                py =465;
             } else if (px <= 432) {
                 speedx = 0;
-                px += 5;
+                px =433;
             } else if (px >= 1168) {
                 speedx = 0;
-                px -= 5;
+                px =1167;
             } else {
-                setspeedy(-4);
+                setspeedy(-1);
             }
             currentImage = imgup;
-            repaint();
+
         } else if (key == KeyEvent.VK_DOWN) {
-            speedy = 4;
+            speedy = 1;
             if (py >= 1184) {
                 speedy = 0;
-                py -= 5;
+                py =1183;
             } else if (px <= 432) {
                 speedx = 0;
-                px += 5;
+                px =433;
             } else if (px >= 1168) {
                 speedx = 0;
-                px -= 5;
+                px =1167;
             } else {
-                setspeedy(4);
+                setspeedy(1);
             }
             currentImage = imgdown;
-            repaint();
+
         }
-        repaint();
+  
     }
 
     public void update() {
@@ -319,7 +333,7 @@ public class GAMEapp extends JPanel implements KeyListener {
         if (key == KeyEvent.VK_DOWN) {
             setspeedy(0);
         }
-        repaint();
+
     }
 
     public void setspeedx(double speedx) {
@@ -330,4 +344,39 @@ public class GAMEapp extends JPanel implements KeyListener {
         this.speedy = speedy;
     }
 
+     long targetFPS = 60;
+    long currentFPS = targetFPS;
+    long currentTPS = targetFPS;
+    long FPSticks = 0;
+    long TPSticks = 0;
+    long oldFPSTime = time();
+    long newFPSTime = oldFPSTime;
+    public void gameLoop(){
+        long previous = time();
+        long lag = 0;
+        while (true){
+            long current = time();
+            long elapsed = current-previous;
+            previous = current;
+            lag+= elapsed;
+            while (lag >= 1000/targetFPS){
+                update();
+                lag-= 1000/targetFPS;
+                TPSticks++;
+            }
+            repaint();
+            newFPSTime = time();
+            if (newFPSTime > oldFPSTime + 1000){
+                oldFPSTime = newFPSTime;
+                currentFPS = FPSticks;
+                currentTPS = TPSticks;
+                FPSticks = 0;
+                TPSticks = 0;
+            }
+        }
+    }
+     public long time(){
+        return System.currentTimeMillis();
+    }
+    
 }
