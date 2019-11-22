@@ -25,6 +25,7 @@ public class GAMEapp extends JPanel implements KeyListener {
     private double speedx = 0, speedy = 0;
     private int mapwidth = 800, mapheight = 800;
     private int camX;
+    private BufferedImage buffer;
     private int camY, select = 70;
     private double zoom = 3.0;
     int maxspeed = 5, vet, chadis = 0;
@@ -44,7 +45,7 @@ public class GAMEapp extends JPanel implements KeyListener {
     Image imgleft = new ImageIcon("asset/left.png").getImage();
     Image imgright = new ImageIcon("asset/right.png").getImage();
     int checksameposition;
-    boolean checksameposition1 = false;
+    boolean checksameposition1 = false, sleepcheck;
 
     private BufferedImage[] walkingLeft = {Sprite.getSprite(0, 1), Sprite.getSprite(2, 1)};
     private BufferedImage[] walkingRight = {Sprite.getSprite(0, 2), Sprite.getSprite(2, 2)};
@@ -61,9 +62,9 @@ public class GAMEapp extends JPanel implements KeyListener {
     private Animation walkDown = new Animation(walkingDown, 20);
     private Animation walkUp = new Animation(walkingUp, 20);
     private Animation standing1 = new Animation(standing, 20);
-     private Animation standing2 = new Animation(standingl, 20);
-      private Animation standing3 = new Animation(standingr, 20);
-       private Animation standing4 = new Animation(standingu, 20);
+    private Animation standing2 = new Animation(standingl, 20);
+    private Animation standing3 = new Animation(standingr, 20);
+    private Animation standing4 = new Animation(standingu, 20);
 
 // This is the actual animation
     private Animation animation = standing1;
@@ -156,16 +157,13 @@ public class GAMEapp extends JPanel implements KeyListener {
 
         if (sleep == 1) {
             g.fillRect(0, 0, 9999, 9999);
+            wait(2000);
+
             Din.grow();
             sleep = 0;
-            try {
-                TimeUnit.SECONDS.sleep(1);
-
-            } catch (InterruptedException ex) {
-                Logger.getLogger(GAMEapp.class.getName()).log(Level.SEVERE, null, ex);
-            }
 
         }
+        
         if (((px >= 512) && (px <= 528)) && ((py >= 448) && (py <= 484))) {
             g1.setColor(Color.orange);
             g1.fillRect(this.px + -20, this.py - 160, 75, 15);
@@ -176,7 +174,8 @@ public class GAMEapp extends JPanel implements KeyListener {
         update();
     }
 
-    public void keyTyped(KeyEvent ke) { }
+    public void keyTyped(KeyEvent ke) {
+    }
 
     public void keyPressed(KeyEvent ke) {
         int key = ke.getKeyCode();
@@ -184,13 +183,7 @@ public class GAMEapp extends JPanel implements KeyListener {
             if (((px >= 512) && (px <= 528)) && ((py >= 448) && (py <= 484))) {
                 daycount += 1;
                 sleep = 1;
-
-                try {
-                    TimeUnit.SECONDS.sleep(1);
-
-                } catch (InterruptedException ex) {
-                    Logger.getLogger(GAMEapp.class.getName()).log(Level.SEVERE, null, ex);
-                }
+                sleepcheck = true;
             }
         }
         if (key == KeyEvent.VK_S) {
@@ -411,5 +404,15 @@ public class GAMEapp extends JPanel implements KeyListener {
     public long time() {
         return System.currentTimeMillis();
     }
+
+    public void wait(int n) {
+        long t0, t1;
+        t0 = System.currentTimeMillis();
+
+        do {
+            t1 = System.currentTimeMillis();
+        } while ((t1 - t0) < n);
+    }
+
 
 }
