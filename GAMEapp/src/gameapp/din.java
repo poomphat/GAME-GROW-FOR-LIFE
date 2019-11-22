@@ -231,8 +231,9 @@ public class din {
                 dx[j] = dx[j + 1];
                 dy[j] = dy[j + 1];
                 chanid[j] = chanid[j + 1];
-                money[j] =  money[j+1];
+                money[j] =  money[j + 1];
                 setmoney(j);
+                remove = 99999;
             }
 
         }
