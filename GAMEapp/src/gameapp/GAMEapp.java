@@ -51,6 +51,9 @@ public class GAMEapp extends JPanel implements KeyListener {
     private BufferedImage[] walkingUp = {Sprite.getSprite(0, 3), Sprite.getSprite(2, 3)};
     private BufferedImage[] walkingDown = {Sprite.getSprite(0, 0), Sprite.getSprite(2, 0)};
     private BufferedImage[] standing = {Sprite.getSprite(1, 0)};
+    private BufferedImage[] standingl = {Sprite.getSprite(1, 1)};
+    private BufferedImage[] standingr = {Sprite.getSprite(1, 2)};
+    private BufferedImage[] standingu = {Sprite.getSprite(1, 3)};
 
 // These are animation states
     private Animation walkLeft = new Animation(walkingLeft, 20);
@@ -58,6 +61,9 @@ public class GAMEapp extends JPanel implements KeyListener {
     private Animation walkDown = new Animation(walkingDown, 20);
     private Animation walkUp = new Animation(walkingUp, 20);
     private Animation standing1 = new Animation(standing, 20);
+     private Animation standing2 = new Animation(standingl, 20);
+      private Animation standing3 = new Animation(standingr, 20);
+       private Animation standing4 = new Animation(standingu, 20);
 
 // This is the actual animation
     private Animation animation = standing1;
@@ -73,7 +79,6 @@ public class GAMEapp extends JPanel implements KeyListener {
     }
 
     public Graphics renderFrame(Graphics g) {
-
         return g;
 
     }
@@ -171,8 +176,7 @@ public class GAMEapp extends JPanel implements KeyListener {
         update();
     }
 
-    public void keyTyped(KeyEvent ke) {
-    }
+    public void keyTyped(KeyEvent ke) { }
 
     public void keyPressed(KeyEvent ke) {
         int key = ke.getKeyCode();
@@ -339,20 +343,20 @@ public class GAMEapp extends JPanel implements KeyListener {
         if (key == KeyEvent.VK_LEFT) {
             animation.stop();
             animation.reset();
-            animation = standing1;
+            animation = standing2;
             setspeedx(0);
         }
         if (key == KeyEvent.VK_RIGHT) {
             animation.stop();
             animation.reset();
-            animation = standing1;
+            animation = standing3;
             setspeedx(0);
         }
         if (key == KeyEvent.VK_UP) {
             setspeedy(0);
             animation.stop();
             animation.reset();
-            animation = standing1;
+            animation = standing4;
         }
         if (key == KeyEvent.VK_DOWN) {
             setspeedy(0);
