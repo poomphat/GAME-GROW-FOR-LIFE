@@ -87,7 +87,7 @@ public class GAMEapp extends JPanel implements KeyListener {
 
         if (havedin) {
             for (int i = 0; indexdin > i; i++) {
-                g2D.drawImage(Din.getimage(carrot, i), Din.getX(i), Din.getY(i), 16, 16, null);
+                g2D.drawImage(Din.getimage(indexdin, carrot, i), Din.getX(i), Din.getY(i), 16, 16, null);
             }
             indexdins += 1;
         }
@@ -227,7 +227,7 @@ public class GAMEapp extends JPanel implements KeyListener {
             }
         }
         if (key == KeyEvent.VK_X) {
-            Din.removedin((int) this.px - (this.px % 16) + 16, (int) this.py - (this.py % 16) + 16);
+            Din.removedin(indexdin, (int) this.px - (this.px % 16) + 16, (int) this.py - (this.py % 16) + 16);
             havedin = true;
         }
         if (key == KeyEvent.VK_LEFT) {
