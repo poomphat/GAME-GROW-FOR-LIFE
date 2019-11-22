@@ -234,6 +234,7 @@ public class din {
                 money[j] =  money[j + 1];
                 setmoney(j);
                 remove = 99999;
+                System.out.println(money[j]);
             }
 
         }

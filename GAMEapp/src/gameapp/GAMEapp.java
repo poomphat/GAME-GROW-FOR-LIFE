@@ -163,7 +163,7 @@ public class GAMEapp extends JPanel implements KeyListener {
             sleep = 0;
 
         }
-        
+
         if (((px >= 512) && (px <= 528)) && ((py >= 448) && (py <= 484))) {
             g1.setColor(Color.orange);
             g1.fillRect(this.px + -20, this.py - 160, 75, 15);
@@ -250,32 +250,32 @@ public class GAMEapp extends JPanel implements KeyListener {
         if (key == KeyEvent.VK_LEFT) {
             animation = walkLeft;
             animation.start();
-                setspeedx(-1);
-            
+            setspeedx(-1);
+
             currentImage = imgleft;
 
         } else if (key == KeyEvent.VK_RIGHT) {
             animation = walkRight;
             animation.start();
 
-                setspeedx(1);
-            
+            setspeedx(1);
+
             currentImage = imgright;
 
         } else if (key == KeyEvent.VK_UP) {
             animation = walkUp;
             animation.start();
 
-                setspeedy(-1);
-            
+            setspeedy(-1);
+
             currentImage = imgup;
 
         } else if (key == KeyEvent.VK_DOWN) {
             animation = walkDown;
             animation.start();
 
-                setspeedy(1);
-            
+            setspeedy(1);
+
             currentImage = imgdown;
 
         }
@@ -360,17 +360,20 @@ public class GAMEapp extends JPanel implements KeyListener {
             if (px <= 432) {
                 speedx = 0;
                 px = 433;
-            }if (py <= 464) {
+            }
+            if (py <= 464) {
                 speedy = 0;
                 py = 465;
-            }if (py >= 1184) {
+            }
+            if (py >= 1184) {
                 speedy = 0;
                 py = 1183;
-            }if (px >= 1168) {
+            }
+            if (px >= 1168) {
                 speedx = 0;
                 px = 1167;
             }
-            System.out.println(speedx);
+   
         }
     }
 
@@ -386,6 +389,5 @@ public class GAMEapp extends JPanel implements KeyListener {
             t1 = System.currentTimeMillis();
         } while ((t1 - t0) < n);
     }
-
 
 }
