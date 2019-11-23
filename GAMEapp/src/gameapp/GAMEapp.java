@@ -47,7 +47,7 @@ public class GAMEapp extends JPanel implements KeyListener {
     Image imgright = new ImageIcon("asset/right.png").getImage();
     
     Image end = new ImageIcon("asset/end.png").getImage();
- 
+    Playsound pl = new Playsound();
     int checksameposition;
     boolean checksameposition1 = false, sleepcheck;
 
@@ -199,6 +199,7 @@ public class GAMEapp extends JPanel implements KeyListener {
             }
         }
         if (key == KeyEvent.VK_S) {
+            pl.playSoundDig();
             System.out.println(indexdin);
             Din.setpositiondin(indexdin, (int) this.px - (this.px % 16) + 16, (int) this.py - (this.py % 16) + 16);
             Din.setvet(indexdin);
@@ -256,8 +257,11 @@ public class GAMEapp extends JPanel implements KeyListener {
             }
         }
         if (key == KeyEvent.VK_X) {
+            
             Din.removedin(indexdin, (int) this.px - (this.px % 16) + 16, (int) this.py - (this.py % 16) + 16);
             havedin = true;
+            if(Din.removecheck())
+                pl.playSoundSell();
         }
         if (key == KeyEvent.VK_LEFT) {
             animation = walkLeft;
