@@ -173,11 +173,11 @@ public class GAMEapp extends JPanel implements KeyListener {
             sleep = 0;
 
         }
-         if (Din.getmoney(indexdin) >= 1){
+         if (Din.getmoney(indexdin) >= 10000){
             g1.drawImage(end, this.px -260, this.py -175,535,300, null);          
         }
-         if (daycount >= 2){
-            g1.drawImage(end, this.px -260, this.py -175,535,300, null);  
+         if (daycount >= 10){
+            g1.drawImage(over, this.px -260, this.py -175,535,300, null);  
         }
        
 
