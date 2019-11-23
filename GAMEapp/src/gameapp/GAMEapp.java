@@ -44,6 +44,9 @@ public class GAMEapp extends JPanel implements KeyListener {
     Image imgdown = new ImageIcon("asset/char1.png").getImage();
     Image imgleft = new ImageIcon("asset/left.png").getImage();
     Image imgright = new ImageIcon("asset/right.png").getImage();
+    
+    Image end = new ImageIcon("asset/end.png").getImage();
+ 
     int checksameposition;
     boolean checksameposition1 = false, sleepcheck;
 
@@ -93,7 +96,6 @@ public class GAMEapp extends JPanel implements KeyListener {
         fr.addKeyListener(p);
         fr.setVisible(true);
         fr.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
     }
 
     public void paintComponent(Graphics g) {
@@ -109,6 +111,7 @@ public class GAMEapp extends JPanel implements KeyListener {
         g1.setColor(Color.orange);
         Font myFont = new Font("Courier New", 1, 10);
         Image img1 = new ImageIcon("asset/Holetown.png").getImage();
+        
         camX = (int) (mapwidth / 2) - (px);
         camY = (int) (mapheight / 2) - (py);
 
@@ -116,6 +119,7 @@ public class GAMEapp extends JPanel implements KeyListener {
         g2D.scale(zoom, zoom);
         g.translate(camX - 140, camY - 230);
         g.drawImage(img1, 0, 0, null);
+        
 
         if (havedin) {
             for (int i = 0; indexdin > i; i++) {
@@ -154,7 +158,7 @@ public class GAMEapp extends JPanel implements KeyListener {
         g.drawString("Day " + daycount, this.px + 220, this.py - 150);
         g.drawString("Money " + Din.getmoney(indexdin), this.px - 220, this.py - 150);
         g.drawString(cha.getchaniddis(chadis), this.px - 5, this.py + 110);
-
+        
         if (sleep == 1) {
             g.fillRect(0, 0, 9999, 9999);
             wait(2000);
@@ -163,6 +167,12 @@ public class GAMEapp extends JPanel implements KeyListener {
             sleep = 0;
 
         }
+         if (Din.getmoney(indexdin) >= 1000){
+            g1.drawImage(end, this.px -260, this.py -175,535,300, null);
+
+           
+        }
+       
 
         if (((px >= 512) && (px <= 528)) && ((py >= 448) && (py <= 484))) {
             g1.setColor(Color.orange);
@@ -336,6 +346,7 @@ public class GAMEapp extends JPanel implements KeyListener {
     long newFPSTime = oldFPSTime;
 
     public void gameLoop() {
+        
         long previous = time();
         long lag = 0;
         while (true) {
