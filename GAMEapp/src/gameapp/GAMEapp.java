@@ -24,10 +24,10 @@ public class GAMEapp extends JPanel implements KeyListener {
 
     private int px = 800, py = 800, width = 24, height = 24;
     private double speedx = 0, speedy = 0;
-    private int mapwidth = 800, mapheight = 800;
+    private int mapwidth = 800, mapheight = 800, selectinmenu = -10;
     private int camX;
     private BufferedImage buffer;
-    private int camY, select = 70;
+    private int camY, select = 70, select1 = 1;
     private double zoom = 3.0;
     int maxspeed = 5, vet, chadis = 0;
     int speed = 1, sleep = 0;
@@ -42,10 +42,14 @@ public class GAMEapp extends JPanel implements KeyListener {
     Image currentImage = new ImageIcon("asset/char1.png").getImage();
     Image point = new ImageIcon("asset/pointer.png").getImage();
     Image rain = new ImageIcon("asset/rain.gif").getImage();
+    Image mainmenu = new ImageIcon("asset/menu-bg.png").getImage();
+    Image selectmenu = new ImageIcon("asset/border-texrt.png").getImage();
+    Image start = new ImageIcon("asset/st.png").getImage();
+    Image quit = new ImageIcon("asset/Qu.png").getImage();
 
     Image end = new ImageIcon("asset/end.png").getImage();
     Image over = new ImageIcon("asset/over.png").getImage();
-
+    boolean gamestart = false;
     Playsound pl = new Playsound();
     int checksameposition;
     boolean checksameposition1 = false, sleepcheck;
@@ -116,188 +120,232 @@ public class GAMEapp extends JPanel implements KeyListener {
         g.fillRect(0, 0, 9999, 9999);
         g1.setColor(Color.orange);
         Font myFont = new Font("Courier New", 1, 10);
-        Image img1 = new ImageIcon("asset/Holetown.png").getImage();
-
         camX = (int) (mapwidth / 2) - (px);
         camY = (int) (mapheight / 2) - (py);
 
         g.setFont(myFont);
         g2D.scale(zoom, zoom);
         g.translate(camX - 140, camY - 230);
-        g.drawImage(img1, 0, 0, null);
+        g1.drawImage(mainmenu, this.px - 260, this.py - 175, 535, 300, null);
+        g1.drawImage(start, this.px - 40, this.py - 10, 90, 40, null);
+        g1.drawImage(quit, this.px - 40, this.py + 50, 90, 40, null);
+        g1.drawImage(selectmenu, this.px - 40, this.py + selectinmenu, 90, 40, null);
 
-        if (havedin) {
-            for (int i = 0; indexdin > i; i++) {
-                g2D.drawImage(Din.getimage(indexdin, carrot, i), Din.getX(i), Din.getY(i), 16, 16, null);
+        if (gamestart == true) {
+            Image img1 = new ImageIcon("asset/Holetown.png").getImage();
+
+            g.drawImage(img1, 0, 0, null);
+
+            if (havedin) {
+                for (int i = 0; indexdin > i; i++) {
+                    g2D.drawImage(Din.getimage(indexdin, carrot, i), Din.getX(i), Din.getY(i), 16, 16, null);
+                }
+                indexdins += 1;
             }
-            indexdins += 1;
-        }
-        g1.fillRect(this.px + 205, this.py - 165, 60, 25);
-        g1.setColor(customColor);
-        g.drawImage(point, this.px - (this.px % 16) + 16, (int) this.py - (this.py % 16) + 16, 16, 16, null);
-        g2D.drawImage(sleepimage, 33 * 16, 30 * 16, 16, 16, null);
-        g.drawRect(this.px + 205, this.py - 165, 60, 25);
-        g1.setColor(Color.orange);
-        g1.fillRect(this.px - 230, this.py - 165, 60, 25);
-        g1.setColor(customColor);
-        g.drawRect(this.px - 230, this.py - 165, 60, 25);
-        g.drawRect(this.px - 70, this.py + 80, 160, 16);
-
-        g.drawImage(animation.getSprite(), px, py, 24, 24, null);
-
-        g.drawImage(cha.getimage(1), this.px - 70, this.py + 80, 16, 16, null);
-        g.drawImage(cha.getimage(2), this.px - 54, this.py + 80, 16, 16, null);
-        g.drawImage(cha.getimage(3), this.px - 38, this.py + 80, 16, 16, null);
-        g.drawImage(cha.getimage(4), this.px - 22, this.py + 80, 16, 16, null);
-        g.drawImage(cha.getimage(5), this.px - 6, this.py + 80, 16, 16, null);
-        g.drawImage(cha.getimage(6), this.px + 10, this.py + 80, 16, 16, null);
-        g.drawImage(cha.getimage(7), this.px + 26, this.py + 80, 16, 16, null);
-        g.drawImage(cha.getimage(8), this.px + 42, this.py + 80, 16, 16, null);
-        g.drawImage(cha.getimage(9), this.px + 58, this.py + 80, 16, 16, null);
-        g.drawImage(cha.getimage(10), this.px + 74, this.py + 80, 16, 16, null);
-
-        g1.setColor(Color.orange);
-        g.drawRect(this.px - select, this.py + 80, 16, 16);
-        g1.setColor(customColor);
-
-        g.drawString("Day " + daycount, this.px + 220, this.py - 150);
-        g.drawString("Money " + Din.getmoney(indexdin), this.px - 220, this.py - 150);
-        g.drawString(cha.getchaniddis(chadis), this.px - 5, this.py + 110);
-
-        if (sleep == 1) {
-            g.fillRect(0, 0, 9999, 9999);
-            wait(2000);
-
-            Din.grow();
-            sleep = 0;
-
-        }
-        if (Din.getmoney(indexdin) >= 10000) {
-            g1.drawImage(end, this.px - 260, this.py - 175, 535, 300, null);
-        }
-        if (daycount >= 10) {
-            g1.drawImage(over, this.px - 260, this.py - 175, 535, 300, null);
-        }
-
-        if (((px >= 512) && (px <= 528)) && ((py >= 448) && (py <= 484))) {
-            g1.setColor(Color.orange);
-            g1.fillRect(this.px + -20, this.py - 160, 75, 15);
+            g1.fillRect(this.px + 205, this.py - 165, 60, 25);
             g1.setColor(customColor);
-            g.drawRect(this.px + -20, this.py - 160, 75, 15);
-            g.drawString("SLEEP HERE", this.px - 13, this.py - 150);
-            if ((daycount % 5) == 0) {
-                g1.setColor(rainc);
-                g1.fillRect(0, 0, 9999, 9999);
-                g1.drawImage(rain, this.px - 260, this.py - 175, 535, 300, null);
-                g1.setColor(customColor);
+            g.drawImage(point, this.px - (this.px % 16) + 16, (int) this.py - (this.py % 16) + 16, 16, 16, null);
+            g2D.drawImage(sleepimage, 33 * 16, 30 * 16, 16, 16, null);
+            g.drawRect(this.px + 205, this.py - 165, 60, 25);
+            g1.setColor(Color.orange);
+            g1.fillRect(this.px - 230, this.py - 165, 60, 25);
+            g1.setColor(customColor);
+            g.drawRect(this.px - 230, this.py - 165, 60, 25);
+            g.drawRect(this.px - 70, this.py + 80, 160, 16);
 
-                update();
+            g.drawImage(animation.getSprite(), px, py, 24, 24, null);
+
+            g.drawImage(cha.getimage(1), this.px - 70, this.py + 80, 16, 16, null);
+            g.drawImage(cha.getimage(2), this.px - 54, this.py + 80, 16, 16, null);
+            g.drawImage(cha.getimage(3), this.px - 38, this.py + 80, 16, 16, null);
+            g.drawImage(cha.getimage(4), this.px - 22, this.py + 80, 16, 16, null);
+            g.drawImage(cha.getimage(5), this.px - 6, this.py + 80, 16, 16, null);
+            g.drawImage(cha.getimage(6), this.px + 10, this.py + 80, 16, 16, null);
+            g.drawImage(cha.getimage(7), this.px + 26, this.py + 80, 16, 16, null);
+            g.drawImage(cha.getimage(8), this.px + 42, this.py + 80, 16, 16, null);
+            g.drawImage(cha.getimage(9), this.px + 58, this.py + 80, 16, 16, null);
+            g.drawImage(cha.getimage(10), this.px + 74, this.py + 80, 16, 16, null);
+
+            g1.setColor(Color.orange);
+            g.drawRect(this.px - select, this.py + 80, 16, 16);
+            g1.setColor(customColor);
+
+            g.drawString("Day " + daycount, this.px + 220, this.py - 150);
+            g.drawString("Money " + Din.getmoney(indexdin), this.px - 220, this.py - 150);
+            g.drawString(cha.getchaniddis(chadis), this.px - 5, this.py + 110);
+
+            if (sleep == 1) {
+                g.fillRect(0, 0, 9999, 9999);
+                wait(2000);
+
+                Din.grow();
+                sleep = 0;
+
+            }
+            if (Din.getmoney(indexdin) >= 10000) {
+                g1.drawImage(end, this.px - 260, this.py - 175, 535, 300, null);
+            }
+            if (daycount >= 10) {
+                g1.drawImage(over, this.px - 260, this.py - 175, 535, 300, null);
+            }
+
+            if (((px >= 512) && (px <= 528)) && ((py >= 448) && (py <= 484))) {
+                g1.setColor(Color.orange);
+                g1.fillRect(this.px + -20, this.py - 160, 75, 15);
+                g1.setColor(customColor);
+                g.drawRect(this.px + -20, this.py - 160, 75, 15);
+                g.drawString("SLEEP HERE", this.px - 13, this.py - 150);
+                if ((daycount % 5) == 0) {
+                    g1.setColor(rainc);
+                    g1.fillRect(0, 0, 9999, 9999);
+                    g1.drawImage(rain, this.px - 260, this.py - 175, 535, 300, null);
+                    g1.setColor(customColor);
+
+                    update();
+                }
             }
         }
     }
-    
 
     public void keyTyped(KeyEvent ke) {
     }
 
     public void keyPressed(KeyEvent ke) {
         int key = ke.getKeyCode();
+        if (key == KeyEvent.VK_ENTER) {
+                if (select1 == 1) {
+                    gamestart = true;
+                }
+                if (select1 == 2) {
+                    System.exit(0);
+                }
+        }
         if (key == KeyEvent.VK_A) {
-            if (((px >= 512) && (px <= 528)) && ((py >= 448) && (py <= 484))) {
-                daycount += 1;
-                sleep = 1;
-                sleepcheck = true;
+            if (gamestart) {
+                if (((px >= 512) && (px <= 528)) && ((py >= 448) && (py <= 484))) {
+                    daycount += 1;
+                    sleep = 1;
+                    sleepcheck = true;
+                }
             }
         }
+
         if (key == KeyEvent.VK_S) {
-            pl.playSoundDig();
-            System.out.println(indexdin);
-            Din.setpositiondin(indexdin, (int) this.px - (this.px % 16) + 16, (int) this.py - (this.py % 16) + 16);
-            Din.setvet(indexdin);
-            havedin = true;
-            if (chadis == 0) {
-                carrot[indexdin] = 1;
-            } else if (chadis == 1) {
-                carrot[indexdin] = 2;
-            } else if (chadis == 2) {
-                carrot[indexdin] = 3;
-            } else if (chadis == 3) {
-                carrot[indexdin] = 4;
-            } else if (chadis == 4) {
-                carrot[indexdin] = 5;
-            } else if (chadis == 5) {
-                carrot[indexdin] = 6;
-            } else if (chadis == 6) {
-                carrot[indexdin] = 7;
-            } else if (chadis == 7) {
-                carrot[indexdin] = 8;
-            } else if (chadis == 8) {
-                carrot[indexdin] = 9;
-            } else if (chadis == 9) {
-                carrot[indexdin] = 10;
-            }
-            for (int l = 0; Din.getindexxy() > l; l++) {
-                if (indexdin != l) {
-                    if (this.px - (this.px % 16) + 16 == Din.getarrayx(l) && (int) this.py - (this.py % 16) + 16 == Din.getarrayy(l)) {
-                        checksameposition += 1;
-
-                    }
+            if (gamestart) {
+                pl.playSoundDig();
+                System.out.println(indexdin);
+                Din.setpositiondin(indexdin, (int) this.px - (this.px % 16) + 16, (int) this.py - (this.py % 16) + 16);
+                Din.setvet(indexdin);
+                havedin = true;
+                if (chadis == 0) {
+                    carrot[indexdin] = 1;
+                } else if (chadis == 1) {
+                    carrot[indexdin] = 2;
+                } else if (chadis == 2) {
+                    carrot[indexdin] = 3;
+                } else if (chadis == 3) {
+                    carrot[indexdin] = 4;
+                } else if (chadis == 4) {
+                    carrot[indexdin] = 5;
+                } else if (chadis == 5) {
+                    carrot[indexdin] = 6;
+                } else if (chadis == 6) {
+                    carrot[indexdin] = 7;
+                } else if (chadis == 7) {
+                    carrot[indexdin] = 8;
+                } else if (chadis == 8) {
+                    carrot[indexdin] = 9;
+                } else if (chadis == 9) {
+                    carrot[indexdin] = 10;
                 }
+                for (int l = 0; Din.getindexxy() > l; l++) {
+                    if (indexdin != l) {
+                        if (this.px - (this.px % 16) + 16 == Din.getarrayx(l) && (int) this.py - (this.py % 16) + 16 == Din.getarrayy(l)) {
+                            checksameposition += 1;
 
-            }
-            if (checksameposition == 0) {
-                checksameposition1 = true;
-            }
-            if (checksameposition1) {
-                indexdin += 1;
+                        }
+                    }
+
+                }
+                if (checksameposition == 0) {
+                    checksameposition1 = true;
+                }
+                if (checksameposition1) {
+                    indexdin += 1;
+                    checksameposition = 0;
+                    checksameposition1 = false;
+                }
                 checksameposition = 0;
-                checksameposition1 = false;
             }
-            checksameposition = 0;
         }
         if (key == KeyEvent.VK_Z) {
-            chadis++;
-            if (chadis == 10) {
-                chadis = 0;
-            }
+            if (gamestart) {
+                chadis++;
+                if (chadis == 10) {
+                    chadis = 0;
+                }
 
-            if (select <= -74) {
-                select = 70;
-            } else {
-                select -= 16;
+                if (select <= -74) {
+                    select = 70;
+                } else {
+                    select -= 16;
+                }
             }
         }
         if (key == KeyEvent.VK_X) {
-
-            Din.removedin(indexdin, (int) this.px - (this.px % 16) + 16, (int) this.py - (this.py % 16) + 16);
-            havedin = true;
-            if (Din.removecheck()) {
-                pl.playSoundSell();
+            if (gamestart) {
+                Din.removedin(indexdin, (int) this.px - (this.px % 16) + 16, (int) this.py - (this.py % 16) + 16);
+                havedin = true;
+                if (Din.removecheck()) {
+                    pl.playSoundSell();
+                }
             }
         }
         if (key == KeyEvent.VK_LEFT) {
-            animation = walkLeft;
-            animation.start();
-            setspeedx(-1);
+            if (gamestart) {
+                animation = walkLeft;
+                animation.start();
+                setspeedx(-1);
+            }
 
         } else if (key == KeyEvent.VK_RIGHT) {
-            animation = walkRight;
-            animation.start();
+            if (gamestart) {
+                animation = walkRight;
+                animation.start();
 
-            setspeedx(1);
+                setspeedx(1);
+            }
 
         } else if (key == KeyEvent.VK_UP) {
-            animation = walkUp;
-            animation.start();
+            if (!gamestart) {
+                selectinmenu = -10;
+                
+                if (select1 == 1) {
+                    selectinmenu = 50;
+                    select1 = 2;
+                }else
+                    select1 = 1;
+            } else {
+                animation = walkUp;
+                animation.start();
 
-            setspeedy(-1);
+                setspeedy(-1);
+            }
 
         } else if (key == KeyEvent.VK_DOWN) {
-            animation = walkDown;
+            if (!gamestart) {
+                selectinmenu = 50;
+                
+                if (select1 == 2) {
+                    selectinmenu = -10;
+                    select1 = 1;
+                }else
+                    select1 = 2;
+            } else {
+                animation = walkDown;
             animation.start();
-
-            setspeedy(1);
-
+                setspeedy(1);
+            }
         }
 
     }
