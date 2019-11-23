@@ -42,10 +42,10 @@ public class GAMEapp extends JPanel implements KeyListener {
     Image currentImage = new ImageIcon("asset/char1.png").getImage();
     Image point = new ImageIcon("asset/pointer.png").getImage();
     Image rain = new ImageIcon("asset/rain.gif").getImage();
-    
+
     Image end = new ImageIcon("asset/end.png").getImage();
     Image over = new ImageIcon("asset/over.png").getImage();
-    
+
     Playsound pl = new Playsound();
     int checksameposition;
     boolean checksameposition1 = false, sleepcheck;
@@ -71,10 +71,10 @@ public class GAMEapp extends JPanel implements KeyListener {
 
 // This is the actual animation
     private Animation animation = standing1;
-    
+
     JFrame jr;
     JPanel p1, p2;
-    JButton b1, b2; 
+    JButton b1, b2;
 
     public GAMEapp() {
         Thread thread = new Thread(new Runnable() {
@@ -109,7 +109,7 @@ public class GAMEapp extends JPanel implements KeyListener {
         Graphics2D g1 = (Graphics2D) g;
         super.paintComponent(g);
         Color customColor = new Color(29, 29, 29);
-        Color rainc = new Color(65, 120, 157,100);
+        Color rainc = new Color(65, 120, 157, 100);
         renderFrame(g);
         g2D.setColor(customColor);
         g.setColor(customColor);
@@ -117,7 +117,7 @@ public class GAMEapp extends JPanel implements KeyListener {
         g1.setColor(Color.orange);
         Font myFont = new Font("Courier New", 1, 10);
         Image img1 = new ImageIcon("asset/Holetown.png").getImage();
-        
+
         camX = (int) (mapwidth / 2) - (px);
         camY = (int) (mapheight / 2) - (py);
 
@@ -125,7 +125,6 @@ public class GAMEapp extends JPanel implements KeyListener {
         g2D.scale(zoom, zoom);
         g.translate(camX - 140, camY - 230);
         g.drawImage(img1, 0, 0, null);
-        
 
         if (havedin) {
             for (int i = 0; indexdin > i; i++) {
@@ -164,7 +163,7 @@ public class GAMEapp extends JPanel implements KeyListener {
         g.drawString("Day " + daycount, this.px + 220, this.py - 150);
         g.drawString("Money " + Din.getmoney(indexdin), this.px - 220, this.py - 150);
         g.drawString(cha.getchaniddis(chadis), this.px - 5, this.py + 110);
-        
+
         if (sleep == 1) {
             g.fillRect(0, 0, 9999, 9999);
             wait(2000);
@@ -173,13 +172,12 @@ public class GAMEapp extends JPanel implements KeyListener {
             sleep = 0;
 
         }
-         if (Din.getmoney(indexdin) >= 10000){
-            g1.drawImage(end, this.px -260, this.py -175,535,300, null);          
+        if (Din.getmoney(indexdin) >= 10000) {
+            g1.drawImage(end, this.px - 260, this.py - 175, 535, 300, null);
         }
-         if (daycount >= 10){
-            g1.drawImage(over, this.px -260, this.py -175,535,300, null);  
+        if (daycount >= 10) {
+            g1.drawImage(over, this.px - 260, this.py - 175, 535, 300, null);
         }
-       
 
         if (((px >= 512) && (px <= 528)) && ((py >= 448) && (py <= 484))) {
             g1.setColor(Color.orange);
@@ -187,13 +185,17 @@ public class GAMEapp extends JPanel implements KeyListener {
             g1.setColor(customColor);
             g.drawRect(this.px + -20, this.py - 160, 75, 15);
             g.drawString("SLEEP HERE", this.px - 13, this.py - 150);
+            if ((daycount % 5) == 0) {
+                g1.setColor(rainc);
+                g1.fillRect(0, 0, 9999, 9999);
+                g1.drawImage(rain, this.px - 260, this.py - 175, 535, 300, null);
+                g1.setColor(customColor);
+
+                update();
+            }
         }
-        g1.setColor(rainc);
-        g1.fillRect(0, 0, 9999, 9999);
-        g1.drawImage(rain, this.px -260, this.py -175,535,300, null);
-        g1.setColor(customColor);
-        update();
     }
+    
 
     public void keyTyped(KeyEvent ke) {
     }
@@ -266,25 +268,23 @@ public class GAMEapp extends JPanel implements KeyListener {
             }
         }
         if (key == KeyEvent.VK_X) {
-            
+
             Din.removedin(indexdin, (int) this.px - (this.px % 16) + 16, (int) this.py - (this.py % 16) + 16);
             havedin = true;
-            if(Din.removecheck())
+            if (Din.removecheck()) {
                 pl.playSoundSell();
+            }
         }
         if (key == KeyEvent.VK_LEFT) {
             animation = walkLeft;
             animation.start();
             setspeedx(-1);
 
-
         } else if (key == KeyEvent.VK_RIGHT) {
             animation = walkRight;
             animation.start();
 
             setspeedx(1);
-
-
 
         } else if (key == KeyEvent.VK_UP) {
             animation = walkUp;
@@ -297,7 +297,6 @@ public class GAMEapp extends JPanel implements KeyListener {
             animation.start();
 
             setspeedy(1);
-
 
         }
 
@@ -357,7 +356,7 @@ public class GAMEapp extends JPanel implements KeyListener {
     long newFPSTime = oldFPSTime;
 
     public void gameLoop() {
-        
+
         long previous = time();
         long lag = 0;
         while (true) {
@@ -395,7 +394,7 @@ public class GAMEapp extends JPanel implements KeyListener {
                 speedx = 0;
                 px = 1167;
             }
-   
+
         }
     }
 
@@ -411,6 +410,7 @@ public class GAMEapp extends JPanel implements KeyListener {
             t1 = System.currentTimeMillis();
         } while ((t1 - t0) < n);
     }
+
     public void playSound() {
         try {
             AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("asset/bg.wav").getAbsoluteFile());
@@ -418,25 +418,25 @@ public class GAMEapp extends JPanel implements KeyListener {
             clip.open(audioInputStream);
             clip.loop(Clip.LOOP_CONTINUOUSLY);
             clip.start();
-        } catch(Exception ex) {
+        } catch (Exception ex) {
             System.out.println("Error with playing sound.");
             ex.printStackTrace();
         }
     }
-    public void menu(){
+
+    public void menu() {
         b1 = new JButton("Start");
         b2 = new JButton("Quit");
-        
+
         p1.add(b1);
         p2.add(b2);
-        
+
         p1.setLayout(new FlowLayout());
         p2.setLayout(new FlowLayout());
-        
-        jr.setLayout(new GridLayout(2,0));
-        
+
+        jr.setLayout(new GridLayout(2, 0));
+
         jr.add(p1);
         jr.add(p2);
     }
 }
-
