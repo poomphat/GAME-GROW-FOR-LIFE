@@ -44,6 +44,8 @@ public class GAMEapp extends JPanel implements KeyListener {
     Image rain = new ImageIcon("asset/rain.gif").getImage();
     
     Image end = new ImageIcon("asset/end.png").getImage();
+    Image over = new ImageIcon("asset/over.png").getImage();
+    
     Playsound pl = new Playsound();
     int checksameposition;
     boolean checksameposition1 = false, sleepcheck;
@@ -171,10 +173,11 @@ public class GAMEapp extends JPanel implements KeyListener {
             sleep = 0;
 
         }
-         if (Din.getmoney(indexdin) >= 1000){
-            g1.drawImage(end, this.px -260, this.py -175,535,300, null);
-
-           
+         if (Din.getmoney(indexdin) >= 1){
+            g1.drawImage(end, this.px -260, this.py -175,535,300, null);          
+        }
+         if (daycount >= 2){
+            g1.drawImage(end, this.px -260, this.py -175,535,300, null);  
         }
        
 
