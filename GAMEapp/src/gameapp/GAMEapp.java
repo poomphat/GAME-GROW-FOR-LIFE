@@ -13,11 +13,12 @@ package gameapp;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
+import java.io.File;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.AudioInputStream;
 
-import java.util.concurrent.TimeUnit;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import java.awt.image.BufferedImage;
+import javax.sound.sampled.Clip;
 
 public class GAMEapp extends JPanel implements KeyListener {
 
@@ -90,6 +91,7 @@ public class GAMEapp extends JPanel implements KeyListener {
     public static void main(String[] args) {
         GAMEapp p = new GAMEapp();
         JFrame fr = new JFrame("Stradew 69");
+        p.playSound();
         fr.setSize(1600, 900);
         fr.setResizable(false);
         fr.add(p);
@@ -400,5 +402,15 @@ public class GAMEapp extends JPanel implements KeyListener {
             t1 = System.currentTimeMillis();
         } while ((t1 - t0) < n);
     }
-
+public void playSound() {
+    try {
+        AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("asset/bg.wav").getAbsoluteFile());
+        Clip clip = AudioSystem.getClip();
+        clip.open(audioInputStream);
+        clip.start();
+    } catch(Exception ex) {
+        System.out.println("Error with playing sound.");
+        ex.printStackTrace();
+    }
+}
 }
