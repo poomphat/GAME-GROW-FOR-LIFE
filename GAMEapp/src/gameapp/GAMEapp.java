@@ -22,7 +22,7 @@ import javax.sound.sampled.Clip;
 
 public class GAMEapp extends JPanel implements KeyListener {
 
-    private int px = 800, py = 800, width = 24, height = 24;
+    private int px = 524, py = 500, width = 24, height = 24;
     private double speedx = 0, speedy = 0;
     private int mapwidth = 800, mapheight = 800, selectinmenu = -10;
     private int camX;
@@ -302,17 +302,12 @@ public class GAMEapp extends JPanel implements KeyListener {
             }
         }
         if (key == KeyEvent.VK_LEFT) {
-            if (gamestart) {
-                animation = walkLeft;
-                animation.start();
+            if (gamestart) {             
                 setspeedx(-1);
             }
 
         } else if (key == KeyEvent.VK_RIGHT) {
             if (gamestart) {
-                animation = walkRight;
-                animation.start();
-
                 setspeedx(1);
             }
 
@@ -325,12 +320,9 @@ public class GAMEapp extends JPanel implements KeyListener {
                     select1 = 2;
                 }else
                     select1 = 1;
-            } else {
-                animation = walkUp;
-                animation.start();
-
+            } 
                 setspeedy(-1);
-            }
+            
 
         } else if (key == KeyEvent.VK_DOWN) {
             if (!gamestart) {
@@ -341,11 +333,9 @@ public class GAMEapp extends JPanel implements KeyListener {
                     select1 = 1;
                 }else
                     select1 = 2;
-            } else {
-                animation = walkDown;
-            animation.start();
+            } 
                 setspeedy(1);
-            }
+            
         }
 
     }
@@ -361,16 +351,18 @@ public class GAMEapp extends JPanel implements KeyListener {
     public void keyReleased(KeyEvent ke) {
         int key = ke.getKeyCode();
         if (key == KeyEvent.VK_LEFT) {
+            setspeedx(0);
             animation.stop();
             animation.reset();
             animation = standing2;
-            setspeedx(0);
+            
         }
         if (key == KeyEvent.VK_RIGHT) {
+            setspeedx(0);
             animation.stop();
             animation.reset();
             animation = standing3;
-            setspeedx(0);
+            
         }
         if (key == KeyEvent.VK_UP) {
             setspeedy(0);
@@ -442,7 +434,24 @@ public class GAMEapp extends JPanel implements KeyListener {
                 speedx = 0;
                 px = 1167;
             }
-
+            
+     
+            if (speedx < 0) {              
+                animation = walkLeft;
+                animation.start();             
+            }
+            else if (speedx > 0) {              
+                animation = walkRight;
+                animation.start();             
+            }
+            else if (speedy < 0) {              
+                animation = walkUp;
+                animation.start();             
+            }
+            else if (speedy > 0) {              
+                animation = walkDown;
+                animation.start();             
+            }             
         }
     }
 
