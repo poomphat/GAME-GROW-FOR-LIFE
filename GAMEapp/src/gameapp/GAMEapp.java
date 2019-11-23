@@ -41,13 +41,10 @@ public class GAMEapp extends JPanel implements KeyListener {
     Image sleepimage = new ImageIcon("asset/sleep.png").getImage();
     Image currentImage = new ImageIcon("asset/char1.png").getImage();
     Image point = new ImageIcon("asset/pointer.png").getImage();
-    Image imgup = new ImageIcon("asset/up.png").getImage();
-    Image imgdown = new ImageIcon("asset/char1.png").getImage();
-    Image imgleft = new ImageIcon("asset/left.png").getImage();
-    Image imgright = new ImageIcon("asset/right.png").getImage();
+    Image rain = new ImageIcon("asset/rain.gif").getImage();
     
     Image end = new ImageIcon("asset/end.png").getImage();
- 
+    Playsound pl = new Playsound();
     int checksameposition;
     boolean checksameposition1 = false, sleepcheck;
 
@@ -110,6 +107,7 @@ public class GAMEapp extends JPanel implements KeyListener {
         Graphics2D g1 = (Graphics2D) g;
         super.paintComponent(g);
         Color customColor = new Color(29, 29, 29);
+        Color rainc = new Color(65, 120, 157,100);
         renderFrame(g);
         g2D.setColor(customColor);
         g.setColor(customColor);
@@ -187,6 +185,10 @@ public class GAMEapp extends JPanel implements KeyListener {
             g.drawRect(this.px + -20, this.py - 160, 75, 15);
             g.drawString("SLEEP HERE", this.px - 13, this.py - 150);
         }
+        g1.setColor(rainc);
+        g1.fillRect(0, 0, 9999, 9999);
+        g1.drawImage(rain, this.px -260, this.py -175,535,300, null);
+        g1.setColor(customColor);
         update();
     }
 
@@ -203,6 +205,7 @@ public class GAMEapp extends JPanel implements KeyListener {
             }
         }
         if (key == KeyEvent.VK_S) {
+            pl.playSoundDig();
             System.out.println(indexdin);
             Din.setpositiondin(indexdin, (int) this.px - (this.px % 16) + 16, (int) this.py - (this.py % 16) + 16);
             Din.setvet(indexdin);
@@ -260,15 +263,17 @@ public class GAMEapp extends JPanel implements KeyListener {
             }
         }
         if (key == KeyEvent.VK_X) {
+            
             Din.removedin(indexdin, (int) this.px - (this.px % 16) + 16, (int) this.py - (this.py % 16) + 16);
             havedin = true;
+            if(Din.removecheck())
+                pl.playSoundSell();
         }
         if (key == KeyEvent.VK_LEFT) {
             animation = walkLeft;
             animation.start();
             setspeedx(-1);
 
-            currentImage = imgleft;
 
         } else if (key == KeyEvent.VK_RIGHT) {
             animation = walkRight;
@@ -276,7 +281,7 @@ public class GAMEapp extends JPanel implements KeyListener {
 
             setspeedx(1);
 
-            currentImage = imgright;
+
 
         } else if (key == KeyEvent.VK_UP) {
             animation = walkUp;
@@ -284,15 +289,12 @@ public class GAMEapp extends JPanel implements KeyListener {
 
             setspeedy(-1);
 
-            currentImage = imgup;
-
         } else if (key == KeyEvent.VK_DOWN) {
             animation = walkDown;
             animation.start();
 
             setspeedy(1);
 
-            currentImage = imgdown;
 
         }
 

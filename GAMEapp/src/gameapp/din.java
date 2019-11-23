@@ -44,6 +44,7 @@ public class din {
     Image current;
     int[] dx = new int[9999], dy = new int[9999], ddx = new int[10000], ddy = new int[10000], vetstage = new int[10000], countday = new int[10000], chanid = new int[10000], money = new int[10000];
     int remove = 99999, count, money1;
+    boolean removecheck = false; 
    
     public Image getimage(int index, int[] vet, int i) {
         chanid = vet;
@@ -222,9 +223,11 @@ public class din {
     }
 
     public void removedin(int index ,int posX, int posY) {
+        removecheck = false; 
         for (int j = index;  j >= 0; j--) {
             if (posX == dx[j] && posY == dy[j]) {
                 remove = j;
+                removecheck = true;
                 
             }
             if (j == remove) {
@@ -235,8 +238,9 @@ public class din {
                 setmoney(j);
                 remove = 99999;
                 System.out.println(money[j]);
+                removecheck = true;
             }
-
+            
         }
         
     }
@@ -255,5 +259,7 @@ public class din {
    public int getindexxy(){
        return dx.length;
    }
-
+   public boolean removecheck(){
+       return removecheck;
+   }
 }
