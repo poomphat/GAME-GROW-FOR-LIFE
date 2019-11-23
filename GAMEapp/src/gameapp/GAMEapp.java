@@ -72,6 +72,10 @@ public class GAMEapp extends JPanel implements KeyListener {
 
 // This is the actual animation
     private Animation animation = standing1;
+    
+    JFrame jr;
+    JPanel p1, p2;
+    JButton b1, b2; 
 
     public GAMEapp() {
         Thread thread = new Thread(new Runnable() {
@@ -402,16 +406,32 @@ public class GAMEapp extends JPanel implements KeyListener {
             t1 = System.currentTimeMillis();
         } while ((t1 - t0) < n);
     }
-public void playSound() {
-    try {
-        AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("asset/bg.wav").getAbsoluteFile());
-        Clip clip = AudioSystem.getClip();
-        clip.open(audioInputStream);
-        clip.loop(Clip.LOOP_CONTINUOUSLY);
-        clip.start();
-    } catch(Exception ex) {
-        System.out.println("Error with playing sound.");
-        ex.printStackTrace();
+    public void playSound() {
+        try {
+            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("asset/bg.wav").getAbsoluteFile());
+            Clip clip = AudioSystem.getClip();
+            clip.open(audioInputStream);
+            clip.loop(Clip.LOOP_CONTINUOUSLY);
+            clip.start();
+        } catch(Exception ex) {
+            System.out.println("Error with playing sound.");
+            ex.printStackTrace();
+        }
+    }
+    public void menu(){
+        b1 = new JButton("Start");
+        b2 = new JButton("Quit");
+        
+        p1.add(b1);
+        p2.add(b2);
+        
+        p1.setLayout(new FlowLayout());
+        p2.setLayout(new FlowLayout());
+        
+        jr.setLayout(new GridLayout(2,0));
+        
+        jr.add(p1);
+        jr.add(p2);
     }
 }
-}
+
