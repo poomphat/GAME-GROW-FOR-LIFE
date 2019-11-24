@@ -42,10 +42,10 @@ public class din {
     Image potato2 = new ImageIcon("asset/crop/potato2.png").getImage();
     Image potato3 = new ImageIcon("asset/crop/potato3.png").getImage();
     Image current;
-    int[] dx = new int[9999], dy = new int[9999], ddx = new int[10000], ddy = new int[10000], vetstage = new int[10000], countday = new int[10000], chanid = new int[10000], money = new int[10000];
+    int[] dx = new int[9999], dy = new int[9999], ddx = new int[10000], ddy = new int[10000], vetstage = new int[10000], countday = new int[10000], chanid = new int[10000], money = new int[10000], water = new int[10000];
     int remove = 99999, count, money1;
-    boolean removecheck = false; 
-   
+    boolean removecheck = false;
+
     public Image getimage(int index, int[] vet, int i) {
         chanid = vet;
         if (chanid[i] == 0) {
@@ -53,120 +53,120 @@ public class din {
         }
         if (chanid[i] == 1 && vetstage[i] == 1) {
             current = carrot1;
-            money[index] = 1; 
-            
+            money[index] = 1;
+
         }
         if (chanid[i] == 1 && vetstage[i] == 2) {
             current = carrot2;
-            money[index] = 3; 
+            money[index] = 3;
         }
         if (chanid[i] == 1 && vetstage[i] == 3) {
             current = carrot3;
-            money[index] = 10; 
+            money[index] = 10;
         }
         if (chanid[i] == 1 && vetstage[i] > 3) {
             current = carrot3;
-            money[index] = 10; 
+            money[index] = 10;
         }
         if (chanid[i] == 2 && vetstage[i] == 1) {
             current = kalum1;
-            money[index] = 1; 
+            money[index] = 1;
         }
         if (chanid[i] == 2 && vetstage[i] == 2) {
             current = kalum2;
-            money[index] = 3; 
+            money[index] = 3;
         }
         if (chanid[i] == 2 && vetstage[i] == 3) {
             current = kalum3;
-            money[index] = 10; 
+            money[index] = 10;
         }
         if (chanid[i] == 2 && vetstage[i] > 3) {
             current = kalum3;
-            money[index] = 10; 
+            money[index] = 10;
         }
         if (chanid[i] == 3 && (vetstage[i] == 1 || vetstage[i] == 2)) {
             current = melon1;
-            money[index] = 1; 
+            money[index] = 1;
         }
         if (chanid[i] == 3 && (vetstage[i] == 3 || vetstage[i] == 4)) {
             current = melon2;
-            money[index] = 3; 
+            money[index] = 3;
         }
         if (chanid[i] == 3 && vetstage[i] == 5) {
             current = melon3;
-            money[index] = 10; 
+            money[index] = 10;
         }
         if (chanid[i] == 3 && vetstage[i] > 5) {
             current = melon3;
-            money[index] = 10; 
+            money[index] = 10;
         }
         if (chanid[i] == 4 && (vetstage[i] == 1)) {
             current = staw1;
-            money[index] = 1; 
+            money[index] = 1;
         }
         if (chanid[i] == 4 && (vetstage[i] == 3 || vetstage[i] == 4 || vetstage[i] == 2)) {
             current = staw2;
-            money[index] = 3; 
+            money[index] = 3;
         }
         if (chanid[i] == 4 && vetstage[i] == 5) {
             current = staw3;
-            money[index] = 10; 
+            money[index] = 10;
         }
         if (chanid[i] == 4 && vetstage[i] > 5) {
             current = staw3;
-            money[index] = 10; 
+            money[index] = 10;
         }
         if (chanid[i] == 5 && vetstage[i] == 1) {
             current = beet1;
-            money[index] = 1; 
+            money[index] = 1;
         }
         if (chanid[i] == 5 && vetstage[i] == 2) {
             current = beet2;
-            money[index] = 3; 
+            money[index] = 3;
         }
         if (chanid[i] == 5 && vetstage[i] >= 3) {
             current = beet3;
-            money[index] = 10; 
+            money[index] = 10;
         }
         if (chanid[i] == 6 && (vetstage[i] == 1 || vetstage[i] == 2)) {
             current = sweet1;
-            money[index] = 1; 
+            money[index] = 1;
         }
         if (chanid[i] == 6 && (vetstage[i] == 3 || vetstage[i] == 4 || vetstage[i] == 5)) {
             current = sweet2;
-            money[index] = 3; 
+            money[index] = 3;
         }
         if (chanid[i] == 6 && vetstage[i] >= 6) {
             current = sweet3;
-            money[index] = 10; 
+            money[index] = 10;
         }
         if (chanid[i] == 7 && vetstage[i] == 1) {
             current = radish1;
-            money[index] = 1; 
+            money[index] = 1;
         }
         if (chanid[i] == 7 && vetstage[i] == 2) {
             current = radish2;
-            money[index] = 3; 
+            money[index] = 3;
         }
         if (chanid[i] == 7 && vetstage[i] >= 3) {
             current = radish3;
-            money[index] = 10; 
+            money[index] = 10;
         }
         if (chanid[i] == 8 && (vetstage[i] == 1 || vetstage[i] == 2)) {
             current = cran1;
-             money[index] = 1; 
+            money[index] = 1;
         }
         if (chanid[i] == 8 && (vetstage[i] == 3 || vetstage[i] == 4)) {
             current = cran2;
-             money[index] = 3; 
+            money[index] = 3;
         }
         if (chanid[i] == 8 && vetstage[i] >= 5) {
             current = cran3;
-             money[index] = 10; 
+            money[index] = 10;
         }
         if (chanid[i] == 9 && (vetstage[i] == 1 || vetstage[i] == 2)) {
             current = gar1;
-             money[index] = 1; 
+            money[index] = 1;
         }
         if (chanid[i] == 9 && (vetstage[i] == 3 || vetstage[i] == 4)) {
             current = gar2;
@@ -194,6 +194,10 @@ public class din {
     public void grow() {
         for (int j = 0; vetstage.length - 1 > j; j++) {
             vetstage[j] += 1;
+            water[j] -= 1;
+            if (water[j] == -2) {
+                remove(9900, dx[j], dy[j]);
+            }
         }
     }
 
@@ -209,7 +213,7 @@ public class din {
         return dy[i];
     }
 
-    public void setpositiondin(int index, int posX,int posY) {
+    public void setpositiondin(int index, int posX, int posY) {
         dx[0] = 1;
         dy[0] = 1;
         this.dx[index] = posX;
@@ -217,49 +221,93 @@ public class din {
 
     }
 
-
     public void setvet(int vet) {
         this.vetstage[vet] = 1;
     }
 
-    public void removedin(int index ,int posX, int posY) {
-        removecheck = false; 
-        for (int j = index;  j >= 0; j--) {
+    public void removedin(int index, int posX, int posY) {
+        removecheck = false;
+        for (int j = index; j >= 0; j--) {
             if (posX == dx[j] && posY == dy[j]) {
                 remove = j;
                 removecheck = true;
-                
+
             }
             if (j == remove) {
                 dx[j] = dx[j + 1];
                 dy[j] = dy[j + 1];
                 chanid[j] = chanid[j + 1];
-                money[j] =  money[j + 1];
+                money[j] = money[j + 1];
                 setmoney(j);
                 remove = 99999;
-                System.out.println(money[j]);
                 removecheck = true;
             }
-            
+
         }
-        
+
     }
-    public void setmoney(int i){
-            money1 += money[i];
+
+    public void remove(int index, int posX, int posY) {
+        removecheck = false;
+        for (int j = index; j >= 0; j--) {
+            if (posX == dx[j] && posY == dy[j]) {
+                remove = j;
+                removecheck = true;
+
+            }
+            if (j == remove) {
+                dx[j] = dx[j + 1];
+                dy[j] = dy[j + 1];
+                chanid[j] = chanid[j + 1];
+                money[j] = money[j + 1];
+                remove = 99999;
+                removecheck = true;
+            }
+
         }
-    public int getmoney(int i){
+
+    }
+
+    public void setmoney(int i) {
+        money1 += money[i];
+    }
+
+    public int getmoney(int i) {
         return money1;
     }
-   public int getarrayx(int i){
-       return dx[i];
-   }
-   public int getarrayy(int i){
-       return dy[i];
-   }
-   public int getindexxy(){
-       return dx.length;
-   }
-   public boolean removecheck(){
-       return removecheck;
-   }
+
+    public int getarrayx(int i) {
+        return dx[i];
+    }
+
+    public int getarrayy(int i) {
+        return dy[i];
+    }
+
+    public int getindexxy() {
+        return dx.length;
+    }
+
+    public boolean removecheck() {
+        return removecheck;
+    }
+
+    public void water(int index, int x, int y) {
+        for (int j = index; j >= 0; j--) {
+            if (x == dx[j] && y == dy[j]) {
+                water[j] = 1;
+            }
+        }
+
+    }
+
+    public int getwater(int index) {
+        return water[index];
+    }
+
+    public void whenrain(int index) {
+        for (int j = index; j >= 0; j--) {
+            water[j] = 1;
+        }
+    }
 }

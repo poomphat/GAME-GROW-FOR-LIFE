@@ -114,6 +114,7 @@ public class GAMEapp extends JPanel implements KeyListener {
         super.paintComponent(g);
         Color customColor = new Color(29, 29, 29);
         Color rainc = new Color(65, 120, 157, 100);
+        Color water = new Color(65, 120, 157, 130);
         renderFrame(g);
         g2D.setColor(customColor);
         g.setColor(customColor);
@@ -137,8 +138,16 @@ public class GAMEapp extends JPanel implements KeyListener {
             g.drawImage(img1, 0, 0, null);
 
             if (havedin) {
-                for (int i = 0; indexdin > i; i++) {
+                for (int i = 0; indexdin > i; i++) { 
                     g2D.drawImage(Din.getimage(indexdin, carrot, i), Din.getX(i), Din.getY(i), 16, 16, null);
+                    if(Din.getwater(i) == 1){
+                        g.setColor(water);
+                        g.fillRect(Din.getX(i),Din.getY(i), 16, 16);
+                        g.setColor(Color.orange);
+                      
+                        
+                    }
+                   
                 }
                 indexdins += 1;
             }
@@ -198,6 +207,7 @@ public class GAMEapp extends JPanel implements KeyListener {
 
             }
             if ((daycount % 5) == 0) {
+                Din.whenrain(indexdin);
                 g1.setColor(rainc);
                 g1.fillRect(0, 0, 9999, 9999);
                 g1.drawImage(rain, this.px - 260, this.py - 175, 535, 300, null);
@@ -208,11 +218,18 @@ public class GAMEapp extends JPanel implements KeyListener {
         }
     }
 
+    public int getIndexdin() {
+        return indexdin;
+    }
+
     public void keyTyped(KeyEvent ke) {
     }
 
     public void keyPressed(KeyEvent ke) {
         int key = ke.getKeyCode();
+        if (key == KeyEvent.VK_D) {
+            Din.water(indexdin,(int) this.px - (this.px % 16) + 16,(int) this.py - (this.py % 16) + 16);
+        }
         if (key == KeyEvent.VK_ENTER) {
             if (select1 == 1) {
                 gamestart = true;
