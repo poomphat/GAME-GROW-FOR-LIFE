@@ -24,7 +24,7 @@ public class GAMEapp extends JPanel implements KeyListener {
 
     private int px = 524, py = 500, width = 24, height = 24;
     private double speedx = 0, speedy = 0;
-    private int mapwidth = 800, mapheight = 800, selectinmenu = -10;
+    private int mapwidth = 800, mapheight = 800, selectinmenu = -50;
     private int camX;
     private BufferedImage buffer;
     private int camY, select = 70, select1 = 1;
@@ -34,7 +34,7 @@ public class GAMEapp extends JPanel implements KeyListener {
     int[] dx, dy, carrot = new int[9999];
     int indexdin = 1, indexdins = 0;
     int acceleration = 1;
-    boolean havedin = false;
+    boolean havedin = false, checkhowto = false;
     int daycount = 1;
     din Din = new din();
     chanidvet cha = new chanidvet();
@@ -46,7 +46,8 @@ public class GAMEapp extends JPanel implements KeyListener {
     Image selectmenu = new ImageIcon("asset/border-texrt.png").getImage();
     Image start = new ImageIcon("asset/st.png").getImage();
     Image quit = new ImageIcon("asset/Qu.png").getImage();
-
+    Image howto = new ImageIcon("asset/howto.png").getImage();
+    Image how = new ImageIcon("asset/how.png").getImage();
     Image end = new ImageIcon("asset/end.png").getImage();
     Image over = new ImageIcon("asset/over.png").getImage();
     boolean gamestart = false;
@@ -127,26 +128,28 @@ public class GAMEapp extends JPanel implements KeyListener {
         g2D.scale(zoom, zoom);
         g.translate(camX - 140, camY - 230);
         g1.drawImage(mainmenu, this.px - 260, this.py - 175, 535, 300, null);
-        g1.drawImage(start, this.px - 40, this.py - 10, 90, 40, null);
+        g1.drawImage(start, this.px - 40, this.py - 50, 90, 40, null);
+        g1.drawImage(howto, this.px - 40, this.py, 90, 40, null);
         g1.drawImage(quit, this.px - 40, this.py + 50, 90, 40, null);
         g1.drawImage(selectmenu, this.px - 40, this.py + selectinmenu, 90, 40, null);
-
+        if (checkhowto) {
+            g1.drawImage(how, this.px - 260, this.py - 175, 535, 300, null);
+        }
         if (gamestart == true) {
             Image img1 = new ImageIcon("asset/Holetown.png").getImage();
 
             g.drawImage(img1, 0, 0, null);
 
             if (havedin) {
-                for (int i = 0; indexdin > i; i++) { 
+                for (int i = 0; indexdin > i; i++) {
                     g2D.drawImage(Din.getimage(indexdin, carrot, i), Din.getX(i), Din.getY(i), 16, 16, null);
-                    if(Din.getwater(i) == 1){
+                    if (Din.getwater(i) == 1) {
                         g.setColor(water);
-                        g.fillRect(Din.getX(i),Din.getY(i), 16, 16);
+                        g.fillRect(Din.getX(i), Din.getY(i), 16, 16);
                         g.setColor(Color.orange);
-                      
-                        
+
                     }
-                   
+
                 }
                 indexdins += 1;
             }
@@ -213,7 +216,7 @@ public class GAMEapp extends JPanel implements KeyListener {
                 g1.setColor(customColor);
 
             }
-          
+
         }
     }
 
@@ -227,15 +230,19 @@ public class GAMEapp extends JPanel implements KeyListener {
     public void keyPressed(KeyEvent ke) {
         int key = ke.getKeyCode();
         if (key == KeyEvent.VK_D) {
-            Din.water(indexdin,(int) this.px - (this.px % 16) + 16,(int) this.py - (this.py % 16) + 16);
+            Din.water(indexdin, (int) this.px - (this.px % 16) + 16, (int) this.py - (this.py % 16) + 16);
         }
         if (key == KeyEvent.VK_ENTER) {
-            if (select1 == 1) {
+            if (checkhowto) {
+                checkhowto = false;
+            } else if (select1 == 1) {
                 gamestart = true;
-            }
-            if (select1 == 2) {
+            } else if (select1 == 2) {
+                checkhowto = true;
+            } else if (select1 == 3) {
                 System.exit(0);
             }
+
         }
         if (key == KeyEvent.VK_A) {
             if (gamestart) {
@@ -330,10 +337,13 @@ public class GAMEapp extends JPanel implements KeyListener {
 
         } else if (key == KeyEvent.VK_UP) {
             if (!gamestart) {
-                selectinmenu = -10;
-
+                selectinmenu = -50;
                 if (select1 == 1) {
                     selectinmenu = 50;
+                    select1 = 3;
+
+                } else if (select1 == 3) {
+                    selectinmenu = 0;
                     select1 = 2;
                 } else {
                     select1 = 1;
@@ -343,13 +353,15 @@ public class GAMEapp extends JPanel implements KeyListener {
 
         } else if (key == KeyEvent.VK_DOWN) {
             if (!gamestart) {
-                selectinmenu = 50;
-
-                if (select1 == 2) {
-                    selectinmenu = -10;
-                    select1 = 1;
-                } else {
+                selectinmenu = -50;
+                if (select1 == 1) {
+                    selectinmenu = 0;
                     select1 = 2;
+                } else if (select1 == 2) {
+                    selectinmenu = 50;
+                    select1 = 3;
+                } else {
+                    select1 = 1;
                 }
             }
             setspeedy(1);

@@ -53,7 +53,7 @@ public class din {
         }
         if (chanid[i] == 1 && vetstage[i] == 1) {
             current = carrot1;
-            money[index] = 1;
+            money[index] = 0;
 
         }
         if (chanid[i] == 1 && vetstage[i] == 2) {
@@ -70,7 +70,7 @@ public class din {
         }
         if (chanid[i] == 2 && vetstage[i] == 1) {
             current = kalum1;
-            money[index] = 1;
+            money[index] = 0;
         }
         if (chanid[i] == 2 && vetstage[i] == 2) {
             current = kalum2;
@@ -86,7 +86,7 @@ public class din {
         }
         if (chanid[i] == 3 && (vetstage[i] == 1 || vetstage[i] == 2)) {
             current = melon1;
-            money[index] = 1;
+            money[index] = 0;
         }
         if (chanid[i] == 3 && (vetstage[i] == 3 || vetstage[i] == 4)) {
             current = melon2;
@@ -102,7 +102,7 @@ public class din {
         }
         if (chanid[i] == 4 && (vetstage[i] == 1)) {
             current = staw1;
-            money[index] = 1;
+            money[index] = 0;
         }
         if (chanid[i] == 4 && (vetstage[i] == 3 || vetstage[i] == 4 || vetstage[i] == 2)) {
             current = staw2;
@@ -118,7 +118,7 @@ public class din {
         }
         if (chanid[i] == 5 && vetstage[i] == 1) {
             current = beet1;
-            money[index] = 1;
+            money[index] = 0;
         }
         if (chanid[i] == 5 && vetstage[i] == 2) {
             current = beet2;
@@ -130,7 +130,7 @@ public class din {
         }
         if (chanid[i] == 6 && (vetstage[i] == 1 || vetstage[i] == 2)) {
             current = sweet1;
-            money[index] = 1;
+            money[index] = 0;
         }
         if (chanid[i] == 6 && (vetstage[i] == 3 || vetstage[i] == 4 || vetstage[i] == 5)) {
             current = sweet2;
@@ -142,7 +142,7 @@ public class din {
         }
         if (chanid[i] == 7 && vetstage[i] == 1) {
             current = radish1;
-            money[index] = 1;
+            money[index] = 0;
         }
         if (chanid[i] == 7 && vetstage[i] == 2) {
             current = radish2;
@@ -154,7 +154,7 @@ public class din {
         }
         if (chanid[i] == 8 && (vetstage[i] == 1 || vetstage[i] == 2)) {
             current = cran1;
-            money[index] = 1;
+            money[index] = 0;
         }
         if (chanid[i] == 8 && (vetstage[i] == 3 || vetstage[i] == 4)) {
             current = cran2;
@@ -166,7 +166,7 @@ public class din {
         }
         if (chanid[i] == 9 && (vetstage[i] == 1 || vetstage[i] == 2)) {
             current = gar1;
-            money[index] = 1;
+            money[index] = 0;
         }
         if (chanid[i] == 9 && (vetstage[i] == 3 || vetstage[i] == 4)) {
             current = gar2;
@@ -178,7 +178,7 @@ public class din {
         }
         if (chanid[i] == 10 && vetstage[i] == 1) {
             current = potato1;
-            money[index] = 1;
+            money[index] = 0;
         }
         if (chanid[i] == 10 && (vetstage[i] == 2 || vetstage[i] == 3)) {
             current = potato2;
