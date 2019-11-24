@@ -195,15 +195,16 @@ public class GAMEapp extends JPanel implements KeyListener {
                 g1.setColor(customColor);
                 g.drawRect(this.px + -20, this.py - 160, 75, 15);
                 g.drawString("SLEEP HERE", this.px - 13, this.py - 150);
-                if ((daycount % 5) == 0) {
-                    g1.setColor(rainc);
-                    g1.fillRect(0, 0, 9999, 9999);
-                    g1.drawImage(rain, this.px - 260, this.py - 175, 535, 300, null);
-                    g1.setColor(customColor);
 
-                    update();
-                }
             }
+            if ((daycount % 5) == 0) {
+                g1.setColor(rainc);
+                g1.fillRect(0, 0, 9999, 9999);
+                g1.drawImage(rain, this.px - 260, this.py - 175, 535, 300, null);
+                g1.setColor(customColor);
+
+            }
+          
         }
     }
 
@@ -213,12 +214,12 @@ public class GAMEapp extends JPanel implements KeyListener {
     public void keyPressed(KeyEvent ke) {
         int key = ke.getKeyCode();
         if (key == KeyEvent.VK_ENTER) {
-                if (select1 == 1) {
-                    gamestart = true;
-                }
-                if (select1 == 2) {
-                    System.exit(0);
-                }
+            if (select1 == 1) {
+                gamestart = true;
+            }
+            if (select1 == 2) {
+                System.exit(0);
+            }
         }
         if (key == KeyEvent.VK_A) {
             if (gamestart) {
@@ -302,7 +303,7 @@ public class GAMEapp extends JPanel implements KeyListener {
             }
         }
         if (key == KeyEvent.VK_LEFT) {
-            if (gamestart) {             
+            if (gamestart) {
                 setspeedx(-1);
             }
 
@@ -314,28 +315,29 @@ public class GAMEapp extends JPanel implements KeyListener {
         } else if (key == KeyEvent.VK_UP) {
             if (!gamestart) {
                 selectinmenu = -10;
-                
+
                 if (select1 == 1) {
                     selectinmenu = 50;
                     select1 = 2;
-                }else
+                } else {
                     select1 = 1;
-            } 
-                setspeedy(-1);
-            
+                }
+            }
+            setspeedy(-1);
 
         } else if (key == KeyEvent.VK_DOWN) {
             if (!gamestart) {
                 selectinmenu = 50;
-                
+
                 if (select1 == 2) {
                     selectinmenu = -10;
                     select1 = 1;
-                }else
+                } else {
                     select1 = 2;
-            } 
-                setspeedy(1);
-            
+                }
+            }
+            setspeedy(1);
+
         }
 
     }
@@ -355,14 +357,14 @@ public class GAMEapp extends JPanel implements KeyListener {
             animation.stop();
             animation.reset();
             animation = standing2;
-            
+
         }
         if (key == KeyEvent.VK_RIGHT) {
             setspeedx(0);
             animation.stop();
             animation.reset();
             animation = standing3;
-            
+
         }
         if (key == KeyEvent.VK_UP) {
             setspeedy(0);
@@ -434,24 +436,20 @@ public class GAMEapp extends JPanel implements KeyListener {
                 speedx = 0;
                 px = 1167;
             }
-            
-     
-            if (speedx < 0) {              
+
+            if (speedx < 0) {
                 animation = walkLeft;
-                animation.start();             
-            }
-            else if (speedx > 0) {              
+                animation.start();
+            } else if (speedx > 0) {
                 animation = walkRight;
-                animation.start();             
-            }
-            else if (speedy < 0) {              
+                animation.start();
+            } else if (speedy < 0) {
                 animation = walkUp;
-                animation.start();             
-            }
-            else if (speedy > 0) {              
+                animation.start();
+            } else if (speedy > 0) {
                 animation = walkDown;
-                animation.start();             
-            }             
+                animation.start();
+            }
         }
     }
 
