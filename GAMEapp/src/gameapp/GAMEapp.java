@@ -183,12 +183,12 @@ public class GAMEapp extends JPanel implements KeyListener {
             g.drawString(cha.getchaniddis(chadis), this.px - 5, this.py + 110);
 
             if (sleep == 1) {
-                g.fillRect(0, 0, 9999, 9999);
+                
+                g.fillRect(0, 0, 9999, 9999);  
                 wait(2000);
-
                 Din.grow();
                 sleep = 0;
-
+                
             }
             if (Din.getmoney(indexdin) >= 10000) {
                 g1.drawImage(end, this.px - 260, this.py - 175, 535, 300, null);
@@ -412,6 +412,7 @@ public class GAMEapp extends JPanel implements KeyListener {
     long TPSticks = 0;
     long oldFPSTime = time();
     long newFPSTime = oldFPSTime;
+    int sec = 0;
 
     public void gameLoop() {
 
@@ -426,6 +427,7 @@ public class GAMEapp extends JPanel implements KeyListener {
                 update();
                 lag -= 1000 / targetFPS;
                 TPSticks++;
+               
             }
             repaint();
             newFPSTime = time();
@@ -433,8 +435,19 @@ public class GAMEapp extends JPanel implements KeyListener {
                 oldFPSTime = newFPSTime;
                 currentFPS = FPSticks;
                 currentTPS = TPSticks;
+                sec++;                     
+                System.out.println(sec);
                 FPSticks = 0;
                 TPSticks = 0;
+               
+            }
+            if(sleep == 1){
+                sec=0;
+            }
+            if(sec==10){
+                sleep = 1;
+                sleepcheck = true;
+                daycount += 1;
             }
             if (px <= 432) {
                 speedx = 0;
