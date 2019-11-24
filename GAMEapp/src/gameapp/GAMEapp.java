@@ -97,7 +97,7 @@ public class GAMEapp extends JPanel implements KeyListener {
 
     public static void main(String[] args) {
         GAMEapp p = new GAMEapp();
-        JFrame fr = new JFrame("Stradew 69");
+        JFrame fr = new JFrame("FARM IN ABYSS");
         p.playSound();
         fr.setSize(1600, 900);
         fr.setResizable(false);
@@ -108,7 +108,6 @@ public class GAMEapp extends JPanel implements KeyListener {
     }
 
     public void paintComponent(Graphics g) {
-
         Graphics2D g2D = (Graphics2D) g;
         Graphics2D g1 = (Graphics2D) g;
         super.paintComponent(g);
@@ -194,7 +193,7 @@ public class GAMEapp extends JPanel implements KeyListener {
             if (Din.getmoney(indexdin) >= 10000) {
                 g1.drawImage(end, this.px - 260, this.py - 175, 535, 300, null);
             }
-            if (daycount >= 10) {
+            if (daycount >= 100) {
                 g1.drawImage(over, this.px - 260, this.py - 175, 535, 300, null);
             }
 
@@ -494,21 +493,5 @@ public class GAMEapp extends JPanel implements KeyListener {
             System.out.println("Error with playing sound.");
             ex.printStackTrace();
         }
-    }
-
-    public void menu() {
-        b1 = new JButton("Start");
-        b2 = new JButton("Quit");
-
-        p1.add(b1);
-        p2.add(b2);
-
-        p1.setLayout(new FlowLayout());
-        p2.setLayout(new FlowLayout());
-
-        jr.setLayout(new GridLayout(2, 0));
-
-        jr.add(p1);
-        jr.add(p2);
     }
 }
