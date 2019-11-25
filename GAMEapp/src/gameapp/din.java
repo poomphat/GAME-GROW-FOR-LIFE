@@ -295,7 +295,7 @@ public class din {
     public void water(int index, int x, int y) {
         for (int j = index; j >= 0; j--) {
             if (x == dx[j] && y == dy[j]) {
-                water[j] = 1;
+                water[j] = 1;            
             }
         }
 
@@ -303,6 +303,9 @@ public class din {
 
     public int getwater(int index) {
         return water[index];
+    }
+    public void setwater(int i){
+        water[i] = 0;
     }
 
     public void whenrain(int index) {
