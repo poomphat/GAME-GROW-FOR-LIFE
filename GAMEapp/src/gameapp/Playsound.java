@@ -39,4 +39,26 @@ public class Playsound {
             ex.printStackTrace();
         }
     }
+    public void playSoundmorning() {
+        try {
+            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("asset/morning.wav").getAbsoluteFile());
+            Clip clip = AudioSystem.getClip();
+            clip.open(audioInputStream);
+            clip.start();
+        } catch (Exception ex) {
+            System.out.println("Error with playing sound.");
+            ex.printStackTrace();
+        }
+    }
+    public void playSoundwater() {
+        try {
+            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("asset/water.wav").getAbsoluteFile());
+            Clip clip = AudioSystem.getClip();
+            clip.open(audioInputStream);
+            clip.start();
+        } catch (Exception ex) {
+            System.out.println("Error with playing sound.");
+            ex.printStackTrace();
+        }
+    }
 }

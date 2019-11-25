@@ -44,7 +44,7 @@ public class din {
     Image current;
     int[] dx = new int[9999], dy = new int[9999], ddx = new int[10000], ddy = new int[10000], vetstage = new int[10000], countday = new int[10000], chanid = new int[10000], money = new int[10000], water = new int[10000];
     int remove = 99999, count, money1;
-    boolean removecheck = false;
+    boolean removecheck = false,watercheck = false;
 
     public Image getimage(int index, int[] vet, int i) {
         chanid = vet;
@@ -293,14 +293,18 @@ public class din {
     }
 
     public void water(int index, int x, int y) {
+        watercheck = false;
         for (int j = index; j >= 0; j--) {
             if (x == dx[j] && y == dy[j]) {
-                water[j] = 1;            
+                water[j] = 1;       
+                watercheck = true;
             }
         }
 
     }
-
+     public boolean getwatercheck() {
+        return watercheck;
+    }
     public int getwater(int index) {
         return water[index];
     }
