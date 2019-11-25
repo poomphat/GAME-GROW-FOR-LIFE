@@ -18,6 +18,8 @@ import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.AudioInputStream;
 
 import java.awt.image.BufferedImage;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.sound.sampled.Clip;
 
 public class GAMEapp extends JPanel implements KeyListener {
@@ -36,6 +38,7 @@ public class GAMEapp extends JPanel implements KeyListener {
     int acceleration = 1;
     boolean havedin = false, checkhowto = false;
     int daycount = 1;
+    
     din Din = new din();
     chanidvet cha = new chanidvet();
     Image sleepimage = new ImageIcon("asset/sleep.png").getImage();
@@ -182,23 +185,23 @@ public class GAMEapp extends JPanel implements KeyListener {
             g1.setColor(customColor);
 
             g.drawString("Day " + daycount, this.px + 220, this.py - 150);
-            g.drawString("Money " + Din.getmoney(indexdin), this.px - 220, this.py - 150);
+            
+            g.drawString("Money " + Din.getmoney(indexdin-30), this.px - 220, this.py - 150);
             g.drawString(cha.getchaniddis(chadis), this.px - 5, this.py + 110);
-
-            if (sleep == 1) {
-                
-                g.fillRect(0, 0, 9999, 9999);  
-                wait(2000);
+          
+            if (sleep == 1) {              
+                g.fillRect(0, 0, 9999, 9999);
                 Din.grow();
-                sleep = 0;
-                
+                daycount += 1;
             }
+            
             if (Din.getmoney(indexdin) >= 10000) {
                 g1.drawImage(end, this.px - 260, this.py - 175, 535, 300, null);
             }
             if (daycount >= 100) {
                 g1.drawImage(over, this.px - 260, this.py - 175, 535, 300, null);
             }
+    
 
             if (((px >= 512) && (px <= 528)) && ((py >= 448) && (py <= 484))) {
                 g1.setColor(Color.orange);
@@ -247,7 +250,7 @@ public class GAMEapp extends JPanel implements KeyListener {
         if (key == KeyEvent.VK_A) {
             if (gamestart) {
                 if (((px >= 512) && (px <= 528)) && ((py >= 448) && (py <= 484))) {
-                    daycount += 1;
+                    
                     sleep = 1;
                     sleepcheck = true;
                 }
@@ -439,28 +442,38 @@ public class GAMEapp extends JPanel implements KeyListener {
                 update();
                 lag -= 1000 / targetFPS;
                 TPSticks++;
-               
+
             }
+            if (sec == 10) {  
+                sleep = 1;
+              
+               
+                
+            }
+            if (sleep == 1) {
+                try {
+                    Thread.sleep(2000);
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(GAMEapp.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                
+                sleep = 0;
+                sec = 0;
+            }
+
             repaint();
             newFPSTime = time();
             if (newFPSTime > oldFPSTime + 1000) {
                 oldFPSTime = newFPSTime;
                 currentFPS = FPSticks;
                 currentTPS = TPSticks;
-                sec++;                     
+                sec++;
                 System.out.println(sec);
                 FPSticks = 0;
                 TPSticks = 0;
-               
+
             }
-            if(sleep == 1){
-                sec=0;
-            }
-            if(sec==10){
-                sleep = 1;
-                sleepcheck = true;
-                daycount += 1;
-            }
+
             if (px <= 432) {
                 speedx = 0;
                 px = 433;
