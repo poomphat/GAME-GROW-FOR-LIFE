@@ -191,11 +191,8 @@ public class GAMEapp extends JPanel implements KeyListener {
           
             if (sleep == 1) {              
                 g.fillRect(0, 0, 9999, 9999);
-                
-                   Din.grow();
-                     daycount += 1;
-                  
-                sleep = 0;
+                Din.grow();
+                daycount += 1;
             }
             
             if (Din.getmoney(indexdin) >= 10000) {
@@ -255,15 +252,15 @@ public class GAMEapp extends JPanel implements KeyListener {
                 if (((px >= 512) && (px <= 528)) && ((py >= 448) && (py <= 484))) {
                     
                     sleep = 1;
-  sleepcheck = true;                  
-                    
+                    sleepcheck = true;
                 }
             }
         }
 
         if (key == KeyEvent.VK_S) {
             if (gamestart) {
-                pl.playSoundDig();              
+                pl.playSoundDig();
+                System.out.println(indexdin);
                 Din.setpositiondin(indexdin, (int) this.px - (this.px % 16) + 16, (int) this.py - (this.py % 16) + 16);
                 Din.setvet(indexdin);
                 havedin = true;
@@ -450,8 +447,7 @@ public class GAMEapp extends JPanel implements KeyListener {
             if (sec == 10) {  
                 sleep = 1;
               
-              
-                 sleepcheck = true;
+               
                 
             }
             if (sleep == 1) {
@@ -461,7 +457,7 @@ public class GAMEapp extends JPanel implements KeyListener {
                     Logger.getLogger(GAMEapp.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 
-               
+                sleep = 0;
                 sec = 0;
             }
 
