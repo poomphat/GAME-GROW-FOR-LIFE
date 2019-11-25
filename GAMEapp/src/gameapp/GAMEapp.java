@@ -20,7 +20,7 @@ import javax.sound.sampled.AudioInputStream;
 import java.awt.image.BufferedImage;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.sound.sampled.Clip;
+import javax.sound.sampled.*;
 
 public class GAMEapp extends JPanel implements KeyListener {
 
@@ -232,6 +232,8 @@ public class GAMEapp extends JPanel implements KeyListener {
         int key = ke.getKeyCode();
         if (key == KeyEvent.VK_D) {
             Din.water(indexdin, (int) this.px - (this.px % 16) + 16, (int) this.py - (this.py % 16) + 16);
+            if(Din.watercheck)
+                pl.playSoundwater();
         }
         if (key == KeyEvent.VK_ENTER) {
             if (checkhowto) {
@@ -452,12 +454,12 @@ public class GAMEapp extends JPanel implements KeyListener {
                 }
                 Din.grow();
                 daycount += 1;
-
+                pl.playSoundmorning();
                 sec = 0;
                 sleep = 0;
                 
             }
-            if (sec == 10) {
+            if (sec == 300) {
                 sleep = 1;
 
             }
@@ -527,6 +529,9 @@ public class GAMEapp extends JPanel implements KeyListener {
             Clip clip = AudioSystem.getClip();
             clip.open(audioInputStream);
             clip.loop(Clip.LOOP_CONTINUOUSLY);
+            FloatControl gainControl = 
+            (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
+                gainControl.setValue(-10.0f);
             clip.start();
         } catch (Exception ex) {
             System.out.println("Error with playing sound.");
