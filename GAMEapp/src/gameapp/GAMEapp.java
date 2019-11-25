@@ -162,9 +162,9 @@ public class GAMEapp extends JPanel implements KeyListener {
             g2D.drawImage(sleepimage, 33 * 16, 30 * 16, 16, 16, null);
             g.drawRect(this.px + 205, this.py - 165, 60, 25);
             g1.setColor(Color.orange);
-            g1.fillRect(this.px - 230, this.py - 165, 60, 25);
+            g1.fillRect(this.px - 230, this.py - 165, 80, 25);
             g1.setColor(customColor);
-            g.drawRect(this.px - 230, this.py - 165, 60, 25);
+            g.drawRect(this.px - 230, this.py - 165, 80, 25);
             g.drawRect(this.px - 70, this.py + 80, 160, 16);
 
             g.drawImage(animation.getSprite(), px, py, 24, 24, null);
