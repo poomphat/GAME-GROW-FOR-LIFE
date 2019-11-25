@@ -38,7 +38,7 @@ public class GAMEapp extends JPanel implements KeyListener {
     int acceleration = 1;
     boolean havedin = false, checkhowto = false;
     int daycount = 1;
-    
+
     din Din = new din();
     chanidvet cha = new chanidvet();
     Image sleepimage = new ImageIcon("asset/sleep.png").getImage();
@@ -185,23 +185,25 @@ public class GAMEapp extends JPanel implements KeyListener {
             g1.setColor(customColor);
 
             g.drawString("Day " + daycount, this.px + 220, this.py - 150);
-            
-            g.drawString("Money " + Din.getmoney(indexdin-30), this.px - 220, this.py - 150);
+
+            g.drawString("Money " + Din.getmoney(indexdin - 30), this.px - 220, this.py - 150);
             g.drawString(cha.getchaniddis(chadis), this.px - 5, this.py + 110);
-          
-            if (sleep == 1) {              
+
+            if (sleep == 1) {
                 g.fillRect(0, 0, 9999, 9999);
                 Din.grow();
                 daycount += 1;
+
+                sec = 0;
+                sleep = 0;
             }
-            
+
             if (Din.getmoney(indexdin) >= 10000) {
                 g1.drawImage(end, this.px - 260, this.py - 175, 535, 300, null);
             }
             if (daycount >= 100) {
                 g1.drawImage(over, this.px - 260, this.py - 175, 535, 300, null);
             }
-    
 
             if (((px >= 512) && (px <= 528)) && ((py >= 448) && (py <= 484))) {
                 g1.setColor(Color.orange);
@@ -250,7 +252,7 @@ public class GAMEapp extends JPanel implements KeyListener {
         if (key == KeyEvent.VK_A) {
             if (gamestart) {
                 if (((px >= 512) && (px <= 528)) && ((py >= 448) && (py <= 484))) {
-                    
+
                     sleep = 1;
                     sleepcheck = true;
                 }
@@ -444,21 +446,18 @@ public class GAMEapp extends JPanel implements KeyListener {
                 TPSticks++;
 
             }
-            if (sec == 10) {  
-                sleep = 1;
-              
-               
-                
-            }
+
             if (sleep == 1) {
                 try {
                     Thread.sleep(2000);
                 } catch (InterruptedException ex) {
                     Logger.getLogger(GAMEapp.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                
-                sleep = 0;
-                sec = 0;
+
+            }
+            if (sec == 10) {
+                sleep = 1;
+
             }
 
             repaint();
