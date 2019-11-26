@@ -33,7 +33,7 @@ public class GAMEapp extends JPanel implements KeyListener {
     private double zoom = 3.0;
     int maxspeed = 5, vet, chadis = 0;
     int speed = 1, sleep = 0;
-    int[] dx, dy, carrot = new int[9999];
+    int[] carrot = new int[9999];
     int indexdin = 1, indexdins = 0;
     int acceleration = 1;
     boolean havedin = false, checkhowto = false;
@@ -343,7 +343,7 @@ public class GAMEapp extends JPanel implements KeyListener {
                     } else if (chadis == 9) {
                         carrot[indexdin] = 10;
                     }
-                    for (int l = 0; Din.getindexxy() > l; l++) {
+                    for (int l = 0; indexdin+1 > l; l++) {
                         if (indexdin != l) {
                             if (this.px - (this.px % 16) + 16 == Din.getarrayx(l) && (int) this.py - (this.py % 16) + 16 == Din.getarrayy(l)) {
                                 checksameposition += 1;
@@ -388,12 +388,12 @@ public class GAMEapp extends JPanel implements KeyListener {
             }
             if (key == KeyEvent.VK_LEFT) {
                 if (gamestart) {
-                    setspeedx(-1);
+                    setspeedx(-2);
                 }
 
             } else if (key == KeyEvent.VK_RIGHT) {
                 if (gamestart) {
-                    setspeedx(1);
+                    setspeedx(2);
                 }
 
             } else if (key == KeyEvent.VK_UP) {
@@ -411,7 +411,7 @@ public class GAMEapp extends JPanel implements KeyListener {
                         select1 = 1;
                     }
                 }
-                setspeedy(-1);
+                setspeedy(-2);
 
             } else if (key == KeyEvent.VK_DOWN) {
                 if (!gamestart) {
@@ -427,7 +427,7 @@ public class GAMEapp extends JPanel implements KeyListener {
                         select1 = 1;
                     }
                 }
-                setspeedy(1);
+                setspeedy(2);
 
             }
 
@@ -481,7 +481,7 @@ public class GAMEapp extends JPanel implements KeyListener {
         this.speedy = speedy;
     }
 
-    long targetFPS = 60;
+    long targetFPS = 45;
     long currentFPS = targetFPS;
     long currentTPS = targetFPS;
     long FPSticks = 0;
@@ -512,7 +512,7 @@ public class GAMEapp extends JPanel implements KeyListener {
                 } catch (InterruptedException ex) {
                     Logger.getLogger(GAMEapp.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                Din.grow();
+                Din.grow(indexdin+1);
                 daycount += 1;
                 pl.playSoundmorning();
                 sec = 0;
@@ -527,7 +527,7 @@ public class GAMEapp extends JPanel implements KeyListener {
 
             repaint();
             newFPSTime = time();
-            if (newFPSTime > oldFPSTime + 25) {
+            if (newFPSTime > oldFPSTime + 1000) {
                 oldFPSTime = newFPSTime;
                 currentFPS = FPSticks;
                 currentTPS = TPSticks;

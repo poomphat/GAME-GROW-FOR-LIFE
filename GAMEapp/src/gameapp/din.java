@@ -42,7 +42,7 @@ public class din {
     Image potato2 = new ImageIcon("asset/crop/potato2.png").getImage();
     Image potato3 = new ImageIcon("asset/crop/potato3.png").getImage();
     Image current;
-    int[] dx = new int[9999], dy = new int[9999], ddx = new int[10000], ddy = new int[10000], vetstage = new int[10000], countday = new int[10000], chanid = new int[10000], money = new int[10000], water = new int[10000], stage = new int[10000];
+    int[] dx = new int[99999], dy = new int[99999], vetstage = new int[100000], countday = new int[10000], chanid = new int[10000], money = new int[100000], water = new int[100000], stage = new int[100000];
     int remove = 99999, count, money1;
 
     boolean removecheck = false, watercheck = false;
@@ -219,8 +219,8 @@ public class din {
         return current;
     }
 
-    public void grow() {
-        for (int j = 0; vetstage.length - 1 > j; j++) {
+    public void grow(int i) {
+        for (int j = 0; i - 1 > j; j++) {
             vetstage[j] += 1;
             water[j] -= 1;
             if (water[j] == -2) {
