@@ -388,6 +388,7 @@ public class GAMEapp extends JPanel implements KeyListener {
             } else if (key == KeyEvent.VK_UP) {
                 if (!gamestart) {
                     selectinmenu = -50;
+                    pl.playSoundselect();
                     if (select1 == 1) {
                         selectinmenu = 50;
                         select1 = 3;
@@ -404,6 +405,7 @@ public class GAMEapp extends JPanel implements KeyListener {
             } else if (key == KeyEvent.VK_DOWN) {
                 if (!gamestart) {
                     selectinmenu = -50;
+                    pl.playSoundselect();
                     if (select1 == 1) {
                         selectinmenu = 0;
                         select1 = 2;
