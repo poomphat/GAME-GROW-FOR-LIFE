@@ -39,6 +39,7 @@ public class GAMEapp extends JPanel implements KeyListener {
     boolean havedin = false, checkhowto = false;
     int daycount = 1;
     int hos = 0, opa = 0;
+    String ses = "Spring";
 
     din Din = new din();
     chanidvet cha = new chanidvet();
@@ -145,15 +146,19 @@ public class GAMEapp extends JPanel implements KeyListener {
             Image img1 = new ImageIcon("asset/Holetown.png").getImage();
             if(daycount <= 25){
                 img1 = new ImageIcon("asset/Holetown.png").getImage();
+                ses = "Spring";
             }
             else if(daycount <= 50){
                 img1 = new ImageIcon("asset/HoletownSu.png").getImage();
+                ses = "Summer";
             }
             else if(daycount <= 75){
                 img1 = new ImageIcon("asset/HoletownFa.png").getImage();
+                ses="Autumn";
             }
             else{
                 img1 = new ImageIcon("asset/HoletownWi.png").getImage();
+                ses="Winter";
             }
             g.drawImage(img1, 0, 0, null);
 
@@ -170,11 +175,11 @@ public class GAMEapp extends JPanel implements KeyListener {
                 }
                 indexdins += 1;
             }
-            g1.fillRect(this.px + 205, this.py - 165, 60, 25);
+            g1.fillRect(this.px + 205, this.py - 165, 60, 35);
             g1.setColor(customColor);
             g.drawImage(point, this.px - (this.px % 16) + 16, (int) this.py - (this.py % 16) + 16, 16, 16, null);
             g2D.drawImage(sleepimage, 33 * 16, 30 * 16, 16, 16, null);
-            g.drawRect(this.px + 205, this.py - 165, 60, 25);
+            g.drawRect(this.px + 205, this.py - 165, 60, 35);
             g1.setColor(Color.orange);
             g1.fillRect(this.px + 198, this.py + 85, 67, 25);
             g1.fillRect(this.px - 230, this.py - 165, 80, 25);
@@ -201,7 +206,8 @@ public class GAMEapp extends JPanel implements KeyListener {
 
             g1.setColor(customColor);
 
-            g.drawString("Day " + daycount, this.px + 220, this.py - 150);
+            g.drawString("Day " + daycount, this.px + 215, this.py - 150);
+            g.drawString(ses, this.px + 215, this.py - 140);
             String soon = "0";
             if (sec >= 360) {
                 soon = "";
@@ -259,7 +265,7 @@ public class GAMEapp extends JPanel implements KeyListener {
             if (Din.getmoney(indexdin) >= 10000) {
                 g1.drawImage(end, this.px - 260, this.py - 175, 535, 300, null);
             }
-            if (daycount >= 100) {
+            if (daycount > 100) {
                 g1.drawImage(over, this.px - 260, this.py - 175, 535, 300, null);
             }
 
@@ -508,7 +514,7 @@ public class GAMEapp extends JPanel implements KeyListener {
             if (sleep == 1) {
 
                 try {
-                    Thread.sleep(3000);
+                    Thread.sleep(0);
                 } catch (InterruptedException ex) {
                     Logger.getLogger(GAMEapp.class.getName()).log(Level.SEVERE, null, ex);
                 }
