@@ -61,4 +61,15 @@ public class Playsound {
             ex.printStackTrace();
         }
     }
+    public void playSoundselect() {
+        try {
+            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("asset/select.wav").getAbsoluteFile());
+            Clip clip = AudioSystem.getClip();
+            clip.open(audioInputStream);
+            clip.start();
+        } catch (Exception ex) {
+            System.out.println("Error with playing sound.");
+            ex.printStackTrace();
+        }
+    }
 }
