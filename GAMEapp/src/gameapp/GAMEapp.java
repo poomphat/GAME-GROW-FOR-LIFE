@@ -202,13 +202,14 @@ public class GAMEapp extends JPanel implements KeyListener {
                 opa = 0;
             }
 
-            if (sec > 480) {
-                if (sec % 120 == 0) {
+            if (sec >= 480) {
+                if (sec % 3 == 0) {
                     opa++;
                 }
                 g.setColor(night);
                 g.fillRect(0, 0, 9999, 9999);
                 g.setColor(Color.orange);
+
             }
 
             if (Din.getmoney(indexdin) >= 10000) {
@@ -487,7 +488,7 @@ public class GAMEapp extends JPanel implements KeyListener {
 
             repaint();
             newFPSTime = time();
-            if (newFPSTime > oldFPSTime + 1000) {
+            if (newFPSTime > oldFPSTime + 10) {
                 oldFPSTime = newFPSTime;
                 currentFPS = FPSticks;
                 currentTPS = TPSticks;
