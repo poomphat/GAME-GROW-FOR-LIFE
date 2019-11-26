@@ -69,14 +69,14 @@ public class GAMEapp extends JPanel implements KeyListener {
     private BufferedImage[] standingu = {Sprite.getSprite(1, 3)};
 
 // These are animation states
-    private Animation walkLeft = new Animation(walkingLeft, 20);
-    private Animation walkRight = new Animation(walkingRight, 20);
-    private Animation walkDown = new Animation(walkingDown, 20);
-    private Animation walkUp = new Animation(walkingUp, 20);
-    private Animation standing1 = new Animation(standing, 20);
-    private Animation standing2 = new Animation(standingl, 20);
-    private Animation standing3 = new Animation(standingr, 20);
-    private Animation standing4 = new Animation(standingu, 20);
+    private Animation walkLeft = new Animation(walkingLeft, 10);
+    private Animation walkRight = new Animation(walkingRight, 10);
+    private Animation walkDown = new Animation(walkingDown, 10);
+    private Animation walkUp = new Animation(walkingUp, 10);
+    private Animation standing1 = new Animation(standing, 10);
+    private Animation standing2 = new Animation(standingl, 10);
+    private Animation standing3 = new Animation(standingr, 10);
+    private Animation standing4 = new Animation(standingu, 10);
 
 // This is the actual animation
     private Animation animation = standing1;
@@ -191,24 +191,58 @@ public class GAMEapp extends JPanel implements KeyListener {
             g1.setColor(customColor);
 
             g.drawString("Day " + daycount, this.px + 220, this.py - 150);
-
-            g.drawString("Time " + (((sec - (sec % 60)) / 60) + 4) + ":00", this.px + 201, this.py + 101);
-
+            String soon = "0";
+            if (sec >= 360) {
+                soon = "";
+            }
+            String jood = ":";
+            if(sec%2==0){
+            jood = " ";}
+            g.drawString("Time " + soon + (((sec - (sec % 60)) / 60) + 4) + jood+"00", this.px + 201, this.py + 101);
             g.drawString("Money " + (Din.getmoney(indexdin) + hos), this.px - 220, this.py - 150);
             g.drawString(cha.getchaniddis(chadis), this.px - 5, this.py + 110);
 
             if (sleep == 1) {
+                g.setColor(Color.BLACK);
                 g.fillRect(0, 0, 9999, 9999);
-                opa = 0;
+                
+            }
+            if ((daycount % 5) == 0) {
+                Din.whenrain(indexdin);
+                g1.setColor(rainc);
+                g1.fillRect(0, 0, 9999, 9999);
+                g1.drawImage(rain, this.px - 260, this.py - 175, 535, 300, null);
+                g1.setColor(customColor);
+
             }
 
-            if (sec > 480) {
-                if (sec % 120 == 0) {
-                    opa++;
-                }
+            if (sec >= 560) {
+                opa = 10;
                 g.setColor(night);
                 g.fillRect(0, 0, 9999, 9999);
                 g.setColor(Color.orange);
+
+            }
+            if (sec >= 760) {
+                opa = 40;
+                g.setColor(night);
+                g.fillRect(0, 0, 9999, 9999);
+                g.setColor(Color.orange);
+
+            }
+            if (sec >= 880) {
+                opa = 60;
+                g.setColor(night);
+                g.fillRect(0, 0, 9999, 9999);
+                g.setColor(Color.orange);
+
+            }
+            if (sec >= 1000) {
+                opa = 80;
+                g.setColor(night);
+                g.fillRect(0, 0, 9999, 9999);
+                g.setColor(Color.orange);
+
             }
 
             if (Din.getmoney(indexdin) >= 10000) {
@@ -226,14 +260,7 @@ public class GAMEapp extends JPanel implements KeyListener {
                 g.drawString("SLEEP HERE", this.px - 13, this.py - 150);
 
             }
-            if ((daycount % 5) == 0) {
-                Din.whenrain(indexdin);
-                g1.setColor(rainc);
-                g1.fillRect(0, 0, 9999, 9999);
-                g1.drawImage(rain, this.px - 260, this.py - 175, 535, 300, null);
-                g1.setColor(customColor);
-
-            }
+            
 
         }
     }
@@ -468,7 +495,7 @@ public class GAMEapp extends JPanel implements KeyListener {
             if (sleep == 1) {
 
                 try {
-                    Thread.sleep(2000);
+                    Thread.sleep(3000);
                 } catch (InterruptedException ex) {
                     Logger.getLogger(GAMEapp.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -481,13 +508,13 @@ public class GAMEapp extends JPanel implements KeyListener {
             }
             if (sec == 1200) {
                 sleep = 1;
-                hos = -30;
-
+                opa = 0;
+                hos -= 30;
             }
 
             repaint();
             newFPSTime = time();
-            if (newFPSTime > oldFPSTime + 1000) {
+            if (newFPSTime > oldFPSTime + 25) {
                 oldFPSTime = newFPSTime;
                 currentFPS = FPSticks;
                 currentTPS = TPSticks;
