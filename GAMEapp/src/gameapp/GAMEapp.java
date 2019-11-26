@@ -40,6 +40,8 @@ public class GAMEapp extends JPanel implements KeyListener {
     int daycount = 1;
     int hos = 0, opa = 0;
     String ses = "Spring";
+    String bgs = "asset/bg.wav";
+    int s = 1;
 
     din Din = new din();
     chanidvet cha = new chanidvet();
@@ -82,6 +84,8 @@ public class GAMEapp extends JPanel implements KeyListener {
     private Animation standing2 = new Animation(standingl, 10);
     private Animation standing3 = new Animation(standingr, 10);
     private Animation standing4 = new Animation(standingu, 10);
+
+    private Clip clip;
 
 // This is the actual animation
     private Animation animation = standing1;
@@ -154,17 +158,48 @@ public class GAMEapp extends JPanel implements KeyListener {
             if (daycount <= 25) {
                 img1 = new ImageIcon("asset/Holetown.png").getImage();
                 ses = "Spring";
+                bgs = "asset/bg.wav";
+                if (s == 1) {
+                    s++;
+                    stopSound();
+                    playSound();
+
+                }              
             } else if (daycount <= 50) {
                 img1 = new ImageIcon("asset/HoletownSu.png").getImage();
                 ses = "Summer";
+                bgs = "asset/bgsum.wav";
+                if (s == 2) {
+                    s++;
+                    stopSound();
+                    playSound();
+
+                }              
             } else if (daycount <= 75) {
                 img1 = new ImageIcon("asset/HoletownFa.png").getImage();
                 ses = "Autumn";
-            } else {
+                bgs = "asset/bgfall.wav";
+                if (s == 3) {
+                    s++;
+                    stopSound();
+                    playSound();
+                    System.out.println(s);
+   
+                }              
+            } else if (daycount <= 100) {
                 img1 = new ImageIcon("asset/HoletownWi.png").getImage();
                 ses = "Winter";
+                bgs = "asset/bgwin.wav";
+                if (s == 4) {
+                    s++;
+                    stopSound();
+                    playSound();
+
+                }              
             }
             g.drawImage(img1, 0, 0, null);
+
+
 
             if (havedin) {
                 for (int i = 0; indexdin > i; i++) {
@@ -179,18 +214,13 @@ public class GAMEapp extends JPanel implements KeyListener {
                 }
                 indexdins += 1;
             }
-            
+
             g1.setColor(customColor);
             g.drawImage(point, this.px - (this.px % 16) + 16, (int) this.py - (this.py % 16) + 16, 16, 16, null);
             g2D.drawImage(sleepimage, 33 * 16, 30 * 16, 16, 16, null);
-            
-            
 
             g.drawImage(animation.getSprite(), px, py, 24, 24, null);
 
-           
-
-           
             String soon = "0";
             if (sec >= 360) {
                 soon = "";
@@ -199,42 +229,40 @@ public class GAMEapp extends JPanel implements KeyListener {
             if (sec % 2 == 0) {
                 jood = " ";
             }
-           
-            
-        
-             g.drawImage(esc,this.px - 260, this.py - 180, 535, 300, null);
-             
-             if(!pause){
-                  g.drawImage(cha.getimage(1), this.px - 70, this.py + 80, 16, 16, null);
-            g.drawImage(cha.getimage(2), this.px - 54, this.py + 80, 16, 16, null);
-            g.drawImage(cha.getimage(3), this.px - 38, this.py + 80, 16, 16, null);
-            g.drawImage(cha.getimage(4), this.px - 22, this.py + 80, 16, 16, null);
-            g.drawImage(cha.getimage(5), this.px - 6, this.py + 80, 16, 16, null);
-            g.drawImage(cha.getimage(6), this.px + 10, this.py + 80, 16, 16, null);
-            g.drawImage(cha.getimage(7), this.px + 26, this.py + 80, 16, 16, null);
-            g.drawImage(cha.getimage(8), this.px + 42, this.py + 80, 16, 16, null);
-            g.drawImage(cha.getimage(9), this.px + 58, this.py + 80, 16, 16, null);
-            g.drawImage(cha.getimage(10), this.px + 74, this.py + 80, 16, 16, null);
-           
-            g1.setColor(Color.orange);
-            g1.fillRect(this.px + 205, this.py - 165, 60, 35);
-            g1.fillRect(this.px + 198, this.py + 85, 67, 25);
-            g1.fillRect(this.px - 230, this.py - 165, 80, 25);
-            g1.setColor(customColor);
-            g.drawRect(this.px + 198, this.py + 85, 67, 25);
-            g.drawRect(this.px - 230, this.py - 165, 80, 25);
-            g.drawRect(this.px - 70, this.py + 80, 160, 16);
-             g.drawRect(this.px + 205, this.py - 165, 60, 35);
-             g1.setColor(Color.orange);
-            g.drawRect(this.px - select, this.py + 80, 16, 16);
 
-            g1.setColor(customColor);
+            g.drawImage(esc, this.px - 260, this.py - 180, 535, 300, null);
 
-            g.drawString("Day " + daycount, this.px + 215, this.py - 150);
-            g.drawString(ses, this.px + 215, this.py - 140);
-             g.drawString("Time " + soon + (((sec - (sec % 60)) / 60) + 4) + jood + "00", this.px + 201, this.py + 101);
-            g.drawString("Money " + (Din.getmoney(indexdin) + hos), this.px - 220, this.py - 150);
-            g.drawString(cha.getchaniddis(chadis), this.px - 5, this.py + 110);
+            if (!pause) {
+                g.drawImage(cha.getimage(1), this.px - 70, this.py + 80, 16, 16, null);
+                g.drawImage(cha.getimage(2), this.px - 54, this.py + 80, 16, 16, null);
+                g.drawImage(cha.getimage(3), this.px - 38, this.py + 80, 16, 16, null);
+                g.drawImage(cha.getimage(4), this.px - 22, this.py + 80, 16, 16, null);
+                g.drawImage(cha.getimage(5), this.px - 6, this.py + 80, 16, 16, null);
+                g.drawImage(cha.getimage(6), this.px + 10, this.py + 80, 16, 16, null);
+                g.drawImage(cha.getimage(7), this.px + 26, this.py + 80, 16, 16, null);
+                g.drawImage(cha.getimage(8), this.px + 42, this.py + 80, 16, 16, null);
+                g.drawImage(cha.getimage(9), this.px + 58, this.py + 80, 16, 16, null);
+                g.drawImage(cha.getimage(10), this.px + 74, this.py + 80, 16, 16, null);
+
+                g1.setColor(Color.orange);
+                g1.fillRect(this.px + 205, this.py - 165, 60, 35);
+                g1.fillRect(this.px + 198, this.py + 85, 67, 25);
+                g1.fillRect(this.px - 230, this.py - 165, 80, 25);
+                g1.setColor(customColor);
+                g.drawRect(this.px + 198, this.py + 85, 67, 25);
+                g.drawRect(this.px - 230, this.py - 165, 80, 25);
+                g.drawRect(this.px - 70, this.py + 80, 160, 16);
+                g.drawRect(this.px + 205, this.py - 165, 60, 35);
+                g1.setColor(Color.orange);
+                g.drawRect(this.px - select, this.py + 80, 16, 16);
+
+                g1.setColor(customColor);
+
+                g.drawString("Day " + daycount, this.px + 215, this.py - 150);
+                g.drawString(ses, this.px + 215, this.py - 140);
+                g.drawString("Time " + soon + (((sec - (sec % 60)) / 60) + 4) + jood + "00", this.px + 201, this.py + 101);
+                g.drawString("Money " + (Din.getmoney(indexdin) + hos), this.px - 220, this.py - 150);
+                g.drawString(cha.getchaniddis(chadis), this.px - 5, this.py + 110);
             }
             if (sleep == 1) {
                 g.setColor(Color.BLACK);
@@ -299,9 +327,8 @@ public class GAMEapp extends JPanel implements KeyListener {
                 g1.drawImage(res, this.px - 40, this.py - 20, 90, 40, null);
                 g1.drawImage(me, this.px - 40, this.py + 30, 90, 40, null);
                 g1.drawImage(selectmenu, this.px - 40, this.py + selectinmenupause, 90, 40, null);
-                g.drawImage(esc,this.px - 260, this.py - 180, 535, 300, null);
+                g.drawImage(esc, this.px - 260, this.py - 180, 535, 300, null);
             }
-            
 
         }
     }
@@ -593,7 +620,7 @@ public class GAMEapp extends JPanel implements KeyListener {
             if (sleep == 1) {
 
                 try {
-                    Thread.sleep(3000);
+                    Thread.sleep(0);
                 } catch (InterruptedException ex) {
                     Logger.getLogger(GAMEapp.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -620,7 +647,7 @@ public class GAMEapp extends JPanel implements KeyListener {
                     sec++;
 
                 }
-                System.out.println(sec);
+              //  System.out.println(sec);
                 FPSticks = 0;
                 TPSticks = 0;
 
@@ -656,6 +683,7 @@ public class GAMEapp extends JPanel implements KeyListener {
                 animation = walkDown;
                 animation.start();
             }
+
         }
     }
 
@@ -671,17 +699,24 @@ public class GAMEapp extends JPanel implements KeyListener {
             t1 = System.currentTimeMillis();
         } while ((t1 - t0) < n);
     }
+    public void stopSound(){
+        clip.stop();}
 
     public void playSound() {
+
         try {
-            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("asset/bg.wav").getAbsoluteFile());
-            Clip clip = AudioSystem.getClip();
+
+            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File(bgs).getAbsoluteFile());
+            clip = AudioSystem.getClip();
             clip.open(audioInputStream);
             clip.loop(Clip.LOOP_CONTINUOUSLY);
             FloatControl gainControl
                     = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
             gainControl.setValue(-10.0f);
+
+            clip.stop();
             clip.start();
+
         } catch (Exception ex) {
             System.out.println("Error with playing sound.");
             ex.printStackTrace();
