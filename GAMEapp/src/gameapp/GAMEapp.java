@@ -69,14 +69,14 @@ public class GAMEapp extends JPanel implements KeyListener {
     private BufferedImage[] standingu = {Sprite.getSprite(1, 3)};
 
 // These are animation states
-    private Animation walkLeft = new Animation(walkingLeft, 20);
-    private Animation walkRight = new Animation(walkingRight, 20);
-    private Animation walkDown = new Animation(walkingDown, 20);
-    private Animation walkUp = new Animation(walkingUp, 20);
-    private Animation standing1 = new Animation(standing, 20);
-    private Animation standing2 = new Animation(standingl, 20);
-    private Animation standing3 = new Animation(standingr, 20);
-    private Animation standing4 = new Animation(standingu, 20);
+    private Animation walkLeft = new Animation(walkingLeft, 10);
+    private Animation walkRight = new Animation(walkingRight, 10);
+    private Animation walkDown = new Animation(walkingDown, 10);
+    private Animation walkUp = new Animation(walkingUp, 10);
+    private Animation standing1 = new Animation(standing, 10);
+    private Animation standing2 = new Animation(standingl, 10);
+    private Animation standing3 = new Animation(standingr, 10);
+    private Animation standing4 = new Animation(standingu, 10);
 
 // This is the actual animation
     private Animation animation = standing1;
