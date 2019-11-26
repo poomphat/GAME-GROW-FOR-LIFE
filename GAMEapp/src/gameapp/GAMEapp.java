@@ -44,7 +44,7 @@ public class GAMEapp extends JPanel implements KeyListener {
     chanidvet cha = new chanidvet();
     Image sleepimage = new ImageIcon("asset/sleep.png").getImage();
     Image currentImage = new ImageIcon("asset/char1.png").getImage();
-    Image point = new ImageIcon("asset/pointer.png").getImage();
+    Image point = new ImageIcon("asset/pointer.png").getImage();    
     Image rain = new ImageIcon("asset/rain.gif").getImage();
     Image mainmenu = new ImageIcon("asset/menu-bg.png").getImage();
     Image selectmenu = new ImageIcon("asset/border-texrt.png").getImage();
@@ -143,7 +143,18 @@ public class GAMEapp extends JPanel implements KeyListener {
         }
         if (gamestart == true) {
             Image img1 = new ImageIcon("asset/Holetown.png").getImage();
-
+            if(daycount <= 25){
+                img1 = new ImageIcon("asset/Holetown.png").getImage();
+            }
+            else if(daycount <= 50){
+                img1 = new ImageIcon("asset/HoletownSu.png").getImage();
+            }
+            else if(daycount <= 75){
+                img1 = new ImageIcon("asset/HoletownFa.png").getImage();
+            }
+            else{
+                img1 = new ImageIcon("asset/HoletownWi.png").getImage();
+            }
             g.drawImage(img1, 0, 0, null);
 
             if (havedin) {
@@ -207,7 +218,7 @@ public class GAMEapp extends JPanel implements KeyListener {
                 g.fillRect(0, 0, 9999, 9999);
                 
             }
-            if ((daycount % 5) == 0) {
+            if ((daycount % 5) == 0 && daycount <= 75) {
                 Din.whenrain(indexdin);
                 g1.setColor(rainc);
                 g1.fillRect(0, 0, 9999, 9999);
