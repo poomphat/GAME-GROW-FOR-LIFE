@@ -183,7 +183,7 @@ public class GAMEapp extends JPanel implements KeyListener {
                     s++;
                     stopSound();
                     playSound();
-                    System.out.println(s);
+                    
    
                 }              
             } else if (daycount <= 100) {
@@ -195,7 +195,7 @@ public class GAMEapp extends JPanel implements KeyListener {
                     stopSound();
                     playSound();
 
-                }              
+                }           
             }
             g.drawImage(img1, 0, 0, null);
 
@@ -269,7 +269,7 @@ public class GAMEapp extends JPanel implements KeyListener {
                 g.fillRect(0, 0, 9999, 9999);
 
             }
-            if ((daycount % 5) == 0 && daycount <= 75) {
+            if (((daycount % 3) == 0 && (daycount > 0 && daycount <= 25))||((daycount % 5) == 0 && (daycount > 25 && daycount <= 50))||((daycount % 7) == 0 && (daycount > 50 && daycount <= 75))) {
                 Din.whenrain(indexdin);
                 g1.setColor(rainc);
                 g1.fillRect(0, 0, 9999, 9999);
