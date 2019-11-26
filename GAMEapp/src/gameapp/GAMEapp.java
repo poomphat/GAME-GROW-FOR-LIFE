@@ -26,17 +26,17 @@ public class GAMEapp extends JPanel implements KeyListener {
 
     private int px = 524, py = 500, width = 24, height = 24;
     private double speedx = 0, speedy = 0;
-    private int mapwidth = 800, mapheight = 800, selectinmenu = -50;
+    private int mapwidth = 800, mapheight = 800, selectinmenu = -50,selectinmenupause = -20;
     private int camX;
     private BufferedImage buffer;
-    private int camY, select = 70, select1 = 1;
+    private int camY, select = 70, select1 = 1,select2 = 1;
     private double zoom = 3.0;
     int maxspeed = 5, vet, chadis = 0;
     int speed = 1, sleep = 0;
     int[] carrot = new int[9999];
     int indexdin = 1, indexdins = 0;
     int acceleration = 1;
-    boolean havedin = false, checkhowto = false;
+    boolean havedin = false, checkhowto = false,pause;
     int daycount = 1;
     int hos = 0, opa = 0;
 
@@ -54,6 +54,9 @@ public class GAMEapp extends JPanel implements KeyListener {
     Image how = new ImageIcon("asset/how.png").getImage();
     Image end = new ImageIcon("asset/end.png").getImage();
     Image over = new ImageIcon("asset/over.png").getImage();
+    Image pause1 = new ImageIcon("asset/pause.png").getImage();
+    Image res = new ImageIcon("asset/res.png").getImage();
+    Image me = new ImageIcon("asset/me.png").getImage();
     boolean gamestart = false;
     Playsound pl = new Playsound();
     int checksameposition;
@@ -89,10 +92,12 @@ public class GAMEapp extends JPanel implements KeyListener {
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
-                gameLoop();
+                gameLoop();if(pause){
+            }
             }
         });
         thread.start();
+        
     }
 
     public Graphics renderFrame(Graphics g) {
@@ -271,7 +276,12 @@ public class GAMEapp extends JPanel implements KeyListener {
                 g.drawString("SLEEP HERE", this.px - 13, this.py - 150);
 
             }
-            
+            if(pause){
+                g1.drawImage(pause1, this.px - 260, this.py - 175, 535, 300, null);
+                g1.drawImage(res, this.px - 40, this.py - 20, 90, 40, null);
+                g1.drawImage(me, this.px - 40, this.py+30, 90, 40, null);
+                g1.drawImage(selectmenu, this.px - 40, this.py + selectinmenupause, 90, 40, null);
+            }
 
         }
     }
@@ -286,6 +296,10 @@ public class GAMEapp extends JPanel implements KeyListener {
     public void keyPressed(KeyEvent ke) {
         int key = ke.getKeyCode();
         if (sleep == 0) {
+            if (key == KeyEvent.VK_ESCAPE) {
+                pause  = true;
+                
+            }
             if (key == KeyEvent.VK_D) {
                 Din.water(indexdin, (int) this.px - (this.px % 16) + 16, (int) this.py - (this.py % 16) + 16);
                 if (Din.watercheck) {
@@ -297,15 +311,29 @@ public class GAMEapp extends JPanel implements KeyListener {
                     checkhowto = false;
                 } else if (select1 == 1) {
                     gamestart = true;
+                    select1 = 1;
                 } else if (select1 == 2) {
                     checkhowto = true;
                 } else if (select1 == 3) {
                     System.exit(0);
                 }
-
+                if(pause){
+                    if(select1 == 1){
+                        gamestart = true;
+                    }
+                    if(select2 == 1){
+                        pause = false;
+                    }
+                    if(select2 == 2){
+                        select1 = 1;
+                        gamestart = false;
+                        pause = false;
+                        
+                    }
+                }
             }
             if (key == KeyEvent.VK_A) {
-                if (gamestart) {
+                if (gamestart && !pause) {
                     if (((px >= 512) && (px <= 528)) && ((py >= 448) && (py <= 484))) {
                         hos = 0;
                         sleep = 1;
@@ -315,7 +343,7 @@ public class GAMEapp extends JPanel implements KeyListener {
             }
 
             if (key == KeyEvent.VK_S) {
-                if (gamestart) {
+                if (gamestart && !pause) {
                     pl.playSoundDig();
                     // System.out.println(indexdin);
                     Din.setpositiondin(indexdin, (int) this.px - (this.px % 16) + 16, (int) this.py - (this.py % 16) + 16);
@@ -364,7 +392,7 @@ public class GAMEapp extends JPanel implements KeyListener {
                 }
             }
             if (key == KeyEvent.VK_Z) {
-                if (gamestart) {
+                if (gamestart && !pause) {
                     chadis++;
                     if (chadis == 10) {
                         chadis = 0;
@@ -378,7 +406,7 @@ public class GAMEapp extends JPanel implements KeyListener {
                 }
             }
             if (key == KeyEvent.VK_X) {
-                if (gamestart) {
+                if (gamestart && !pause) {
                     Din.removedin(indexdin, (int) this.px - (this.px % 16) + 16, (int) this.py - (this.py % 16) + 16);
                     havedin = true;
                     if (Din.removecheck()) {
@@ -387,12 +415,12 @@ public class GAMEapp extends JPanel implements KeyListener {
                 }
             }
             if (key == KeyEvent.VK_LEFT) {
-                if (gamestart) {
+                if (gamestart && !pause) {
                     setspeedx(-2);
                 }
 
             } else if (key == KeyEvent.VK_RIGHT) {
-                if (gamestart) {
+                if (gamestart && !pause) {
                     setspeedx(2);
                 }
 
@@ -411,7 +439,19 @@ public class GAMEapp extends JPanel implements KeyListener {
                         select1 = 1;
                     }
                 }
+                if(!pause){
                 setspeedy(-2);
+                }
+                if(pause){
+                    selectinmenupause = 30;
+                    if(select2 == 2){
+                        selectinmenupause = -20;
+                        select2 = 1;
+                    }else{
+                    select2 = 2;
+                    }
+                    
+                }
 
             } else if (key == KeyEvent.VK_DOWN) {
                 if (!gamestart) {
@@ -427,7 +467,19 @@ public class GAMEapp extends JPanel implements KeyListener {
                         select1 = 1;
                     }
                 }
+                if(!pause){
                 setspeedy(2);
+                }
+                if(pause){
+                    selectinmenupause = -20;
+                    if(select2 == 1){
+                        selectinmenupause = 30;
+                        select2 = 2;
+                    }else{
+                    select2 = 1;
+                    }
+                    
+                }
 
             }
 
@@ -439,11 +491,17 @@ public class GAMEapp extends JPanel implements KeyListener {
         px += speedx;
         py += speedy;
         animation.update();
+        if(pause){
+            speedx = 0;
+            speedy = 0;
+            animation.stop();
+        }
 
     }
 
     public void keyReleased(KeyEvent ke) {
         int key = ke.getKeyCode();
+        if(!pause){
         if (key == KeyEvent.VK_LEFT) {
             setspeedx(0);
             animation.stop();
@@ -470,7 +528,7 @@ public class GAMEapp extends JPanel implements KeyListener {
             animation.reset();
             animation = standing1;
         }
-
+        }
     }
 
     public void setspeedx(double speedx) {
@@ -505,6 +563,7 @@ public class GAMEapp extends JPanel implements KeyListener {
                 TPSticks++;
 
             }
+            
             if (sleep == 1) {
 
                 try {
@@ -531,8 +590,9 @@ public class GAMEapp extends JPanel implements KeyListener {
                 oldFPSTime = newFPSTime;
                 currentFPS = FPSticks;
                 currentTPS = TPSticks;
-                if (gamestart) {
+                if (gamestart && !pause) {
                     sec++;
+                    
                 }
                 System.out.println(sec);
                 FPSticks = 0;
