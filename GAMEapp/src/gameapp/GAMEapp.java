@@ -263,6 +263,14 @@ public class GAMEapp extends JPanel implements KeyListener {
                 g.drawString("Time " + soon + (((sec - (sec % 60)) / 60) + 4) + jood + "00", this.px + 201, this.py + 101);
                 g.drawString("Money " + (Din.getmoney(indexdin) + hos), this.px - 220, this.py - 150);
                 g.drawString(cha.getchaniddis(chadis), this.px - 5, this.py + 110);
+                if (((px >= 512) && (px <= 528)) && ((py >= 448) && (py <= 484))) {
+                g1.setColor(Color.orange);
+                g1.fillRect(this.px + -20, this.py - 160, 75, 15);
+                g1.setColor(customColor);
+                g.drawRect(this.px + -20, this.py - 160, 75, 15);
+                g.drawString("SLEEP HERE", this.px - 13, this.py - 150);
+
+            }
             }
             if (sleep == 1) {
                 g.setColor(Color.BLACK);
@@ -314,14 +322,7 @@ public class GAMEapp extends JPanel implements KeyListener {
                 g1.drawImage(over, this.px - 260, this.py - 175, 535, 300, null);
             }
 
-            if (((px >= 512) && (px <= 528)) && ((py >= 448) && (py <= 484))) {
-                g1.setColor(Color.orange);
-                g1.fillRect(this.px + -20, this.py - 160, 75, 15);
-                g1.setColor(customColor);
-                g.drawRect(this.px + -20, this.py - 160, 75, 15);
-                g.drawString("SLEEP HERE", this.px - 13, this.py - 150);
-
-            }
+            
             if (pause) {
                 g1.drawImage(pause1, this.px - 260, this.py - 175, 535, 300, null);
                 g1.drawImage(res, this.px - 40, this.py - 20, 90, 40, null);
@@ -620,7 +621,7 @@ public class GAMEapp extends JPanel implements KeyListener {
             if (sleep == 1) {
 
                 try {
-                    Thread.sleep(0);
+                    Thread.sleep(3000);
                 } catch (InterruptedException ex) {
                     Logger.getLogger(GAMEapp.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -647,7 +648,7 @@ public class GAMEapp extends JPanel implements KeyListener {
                     sec++;
 
                 }
-              //  System.out.println(sec);
+               System.out.println(sec);
                 FPSticks = 0;
                 TPSticks = 0;
 
