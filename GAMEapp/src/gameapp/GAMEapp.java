@@ -495,6 +495,7 @@ public class GAMEapp extends JPanel implements KeyListener {
                 }
                 if (pause) {
                     selectinmenupause = 30;
+                    pl.playSoundselect();
                     if (select2 == 2) {
                         selectinmenupause = -20;
                         select2 = 1;
@@ -523,6 +524,7 @@ public class GAMEapp extends JPanel implements KeyListener {
                 }
                 if (pause) {
                     selectinmenupause = -20;
+                    pl.playSoundselect();
                     if (select2 == 1) {
                         selectinmenupause = 30;
                         select2 = 2;
