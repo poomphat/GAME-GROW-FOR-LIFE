@@ -33,7 +33,7 @@ public class GAMEapp extends JPanel implements KeyListener {
     private double zoom = 3.0;
     int maxspeed = 5, vet, chadis = 0;
     int speed = 1, sleep = 0;
-    int[] carrot = new int[9999];
+    int[] carrot = new int[99999];
     int indexdin = 1, indexdins = 0;
     int acceleration = 1;
     boolean havedin = false, checkhowto = false, pause;

@@ -264,8 +264,8 @@ public class din {
             if (j == remove) {
                 dx[j] = 0;
                 dy[j] = 0;
-                chanid[j] = 999;
                 if (stage[j] == 3) {
+                    System.out.println(chanid[j]);
                     if(chanid[j] == 1){
                     money[j] = 10;
                     }
@@ -297,6 +297,7 @@ public class din {
                     money[j] = 13;
                     }
                 }
+                chanid[j] = 999;
                 setmoney(j);
                 remove = 99999;
                 removecheck = true;
