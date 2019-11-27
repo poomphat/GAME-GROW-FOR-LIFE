@@ -164,7 +164,7 @@ public class GAMEapp extends JPanel implements KeyListener {
                     stopSound();
                     playSound();
 
-                }              
+                }
             } else if (daycount <= 50) {
                 img1 = new ImageIcon("asset/HoletownSu.png").getImage();
                 ses = "Summer";
@@ -174,7 +174,7 @@ public class GAMEapp extends JPanel implements KeyListener {
                     stopSound();
                     playSound();
 
-                }              
+                }
             } else if (daycount <= 75) {
                 img1 = new ImageIcon("asset/HoletownFa.png").getImage();
                 ses = "Autumn";
@@ -183,9 +183,8 @@ public class GAMEapp extends JPanel implements KeyListener {
                     s++;
                     stopSound();
                     playSound();
-                    
-   
-                }              
+
+                }
             } else if (daycount <= 100) {
                 img1 = new ImageIcon("asset/HoletownWi.png").getImage();
                 ses = "Winter";
@@ -195,11 +194,9 @@ public class GAMEapp extends JPanel implements KeyListener {
                     stopSound();
                     playSound();
 
-                }           
+                }
             }
             g.drawImage(img1, 0, 0, null);
-
-
 
             if (havedin) {
                 for (int i = 0; indexdin > i; i++) {
@@ -264,20 +261,20 @@ public class GAMEapp extends JPanel implements KeyListener {
                 g.drawString("Money " + (Din.getmoney(indexdin) + hos), this.px - 220, this.py - 150);
                 g.drawString(cha.getchaniddis(chadis), this.px - 5, this.py + 110);
                 if (((px >= 512) && (px <= 528)) && ((py >= 448) && (py <= 484))) {
-                g1.setColor(Color.orange);
-                g1.fillRect(this.px + -20, this.py - 160, 75, 15);
-                g1.setColor(customColor);
-                g.drawRect(this.px + -20, this.py - 160, 75, 15);
-                g.drawString("SLEEP HERE", this.px - 13, this.py - 150);
+                    g1.setColor(Color.orange);
+                    g1.fillRect(this.px + -20, this.py - 160, 75, 15);
+                    g1.setColor(customColor);
+                    g.drawRect(this.px + -20, this.py - 160, 75, 15);
+                    g.drawString("SLEEP HERE", this.px - 13, this.py - 150);
 
-            }
+                }
             }
             if (sleep == 1) {
                 g.setColor(Color.BLACK);
                 g.fillRect(0, 0, 9999, 9999);
 
             }
-            if (((daycount % 3) == 0 && (daycount > 0 && daycount <= 25))||((daycount % 5) == 0 && (daycount > 25 && daycount <= 50))||((daycount % 7) == 0 && (daycount > 50 && daycount <= 75))) {
+            if (((daycount % 3) == 0 && (daycount > 0 && daycount <= 25)) || ((daycount % 5) == 0 && (daycount > 25 && daycount <= 50)) || ((daycount % 7) == 0 && (daycount > 50 && daycount <= 75))) {
                 Din.whenrain(indexdin);
                 g1.setColor(rainc);
                 g1.fillRect(0, 0, 9999, 9999);
@@ -322,7 +319,6 @@ public class GAMEapp extends JPanel implements KeyListener {
                 g1.drawImage(over, this.px - 260, this.py - 175, 535, 300, null);
             }
 
-            
             if (pause) {
                 g1.drawImage(pause1, this.px - 260, this.py - 175, 535, 300, null);
                 g1.drawImage(res, this.px - 40, this.py - 20, 90, 40, null);
@@ -648,7 +644,7 @@ public class GAMEapp extends JPanel implements KeyListener {
                     sec++;
 
                 }
-               System.out.println(sec);
+                System.out.println(sec);
                 FPSticks = 0;
                 TPSticks = 0;
 
@@ -700,8 +696,10 @@ public class GAMEapp extends JPanel implements KeyListener {
             t1 = System.currentTimeMillis();
         } while ((t1 - t0) < n);
     }
-    public void stopSound(){
-        clip.stop();}
+
+    public void stopSound() {
+        clip.stop();
+    }
 
     public void playSound() {
 
