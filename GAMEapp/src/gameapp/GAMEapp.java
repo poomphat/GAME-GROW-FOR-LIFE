@@ -269,17 +269,18 @@ public class GAMEapp extends JPanel implements KeyListener {
 
                 }
             }
-            if (sleep == 1) {
-                g.setColor(Color.BLACK);
-                g.fillRect(0, 0, 9999, 9999);
-
-            }
+            
             if (((daycount % 3) == 0 && (daycount > 0 && daycount <= 25)) || ((daycount % 5) == 0 && (daycount > 25 && daycount <= 50)) || ((daycount % 7) == 0 && (daycount > 50 && daycount <= 75))) {
                 Din.whenrain(indexdin);
                 g1.setColor(rainc);
                 g1.fillRect(0, 0, 9999, 9999);
                 g1.drawImage(rain, this.px - 260, this.py - 175, 535, 300, null);
                 g1.setColor(customColor);
+
+            }
+            if (sleep == 1) {
+                g.setColor(Color.BLACK);
+                g.fillRect(0, 0, 9999, 9999);
 
             }
 
