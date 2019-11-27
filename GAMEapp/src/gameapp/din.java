@@ -266,7 +266,36 @@ public class din {
                 dy[j] = 0;
                 chanid[j] = 999;
                 if (stage[j] == 3) {
+                    if(chanid[j] == 1){
                     money[j] = 10;
+                    }
+                    else if(chanid[j] == 2){
+                    money[j] = 9;
+                    }
+                    else if(chanid[j] == 3){
+                    money[j] = 17;
+                    }
+                    else if(chanid[j] == 4){
+                    money[j] = 20;
+                    }
+                    else if(chanid[j] == 5){
+                    money[j] = 5;
+                    }
+                    else if(chanid[j] == 6){
+                    money[j] = 20;
+                    }
+                    else if(chanid[j] == 7){
+                    money[j] = 5;
+                    }
+                    else if(chanid[j] == 8){
+                    money[j] = 15;
+                    }
+                    else if(chanid[j] == 9){
+                    money[j] = 12;
+                    }
+                    else if(chanid[j] == 10){
+                    money[j] = 13;
+                    }
                 }
                 setmoney(j);
                 remove = 99999;
